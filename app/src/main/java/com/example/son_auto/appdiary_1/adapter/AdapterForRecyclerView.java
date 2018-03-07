@@ -43,8 +43,8 @@ public class AdapterForRecyclerView extends RecyclerView.Adapter<AdapterForRecyc
     public void onBindViewHolder(DataViewHolder holder, int position) {
         PageDiary p = listPage.get(position);
         holder.tvContent.setText(p.getContent());
+        holder.tvContent.setBackgroundColor(ContextCompat.getColor(context,Integer.parseInt(p.getBackground())));
         holder.imageViewEmotion.setImageResource(context.getResources().getIdentifier(p.getEmotion(), "drawable", context.getPackageName()));
-        holder.linearLayout.setBackgroundColor(ContextCompat.getColor(context, Integer.parseInt(p.getBackground())));
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,7 +71,6 @@ public class AdapterForRecyclerView extends RecyclerView.Adapter<AdapterForRecyc
         private TextView tvContent;
         private ImageView imageViewEmotion;
         private LinearLayout linearLayout;
-        int selected_position = 0;
 
         public DataViewHolder(View itemView) {
             super(itemView);

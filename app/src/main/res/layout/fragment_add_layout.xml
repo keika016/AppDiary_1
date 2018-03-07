@@ -1,25 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorAccent"
-    android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/textView"
+   >
+    <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="10">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="0.95"
+            >
+
+            <ImageView
+                android:id="@+id/fragment_add_imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/pic1"
+                />
+
+            <TextView
+                android:id="@+id/fragment_add_textView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center|right"
+                android:text="Date_Time_FragmentAdd" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="9">
+            <EditText
+                android:id="@+id/fragment_add_edittextContent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textMultiLine"
+                android:gravity="top|left"
+                android:background="@color/colorTim"
+                android:scrollbars="vertical|horizontal"
+
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="0.05">
+
+            <Button
+                android:id="@+id/fragment_add_buttonsave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Save" />
+
+            <Button
+                android:id="@+id/fragment_add_buttoncancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Cancel" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Fragment1" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_keyboard_arrow_up_white_24dp"
+        app:backgroundTint="@color/colorXanh"
+        app:fabSize="normal"/>
 
-    <EditText
-        android:id="@+id/fragment_add_edittextContent"
-        android:layout_width="match_parent"
-        android:layout_height="191dp"
-        android:inputType="textMultiLine"
-        android:gravity="top|left"
-        android:background="@color/colorTim"
-        android:scrollbars="vertical|horizontal"
-        />
 
-</LinearLayout>
+</RelativeLayout>

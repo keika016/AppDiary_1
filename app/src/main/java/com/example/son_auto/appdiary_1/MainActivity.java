@@ -29,8 +29,8 @@ public class MainActivity extends AppCompatActivity {
     private static final String KEY_FRAGMENT = "KEY_FRAGMENT";
     private static final String FRAGMENT_ADD = "FRAGMENT_ADD";
     private static final String COMMAND_SHOW_FRAGMENT_ADD = "showFragmentAdd";
-    private static final String COMMAND_FLOATBUTTON_ARROW_UP = "arrowup";
-    private static final String COMMAND_FLOATBUTTON_ADD = "add";
+    private static final String COMMAND_FLOATBUTTON_SHOW = "show";
+    private static final String COMMAND_FLOATBUTTON_HIDE = "hide";
 
 
 
@@ -45,8 +45,8 @@ public class MainActivity extends AppCompatActivity {
             case COMMAND_SHOW_FRAGMENT_ADD:
                 showFragmentAdd();
                 break;
-            case COMMAND_FLOATBUTTON_ADD:
-                changeImageOfFloatButton(COMMAND_FLOATBUTTON_ADD);
+            case COMMAND_FLOATBUTTON_SHOW:
+                changeOfFloatButton(COMMAND_FLOATBUTTON_SHOW);
                 break;
         }
     }
@@ -64,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showFragmentAdd();
-                changeImageOfFloatButton(COMMAND_FLOATBUTTON_ARROW_UP);
             }
         });
     }
@@ -101,27 +100,17 @@ public class MainActivity extends AppCompatActivity {
             fragmentAdd = new FragmentAdd();
         if (!fragmentAdd.isVisible()) {
             replaceFragment(fragmentAdd, true);
+            changeOfFloatButton(COMMAND_FLOATBUTTON_HIDE);
         }
     }
-    private void changeImageOfFloatButton(String command){
+    private void changeOfFloatButton(String command){
         switch (command){
-            case COMMAND_FLOATBUTTON_ARROW_UP:
-                fabAdd.setImageResource(R.drawable.ic_keyboard_arrow_up_white_24dp);
+            case COMMAND_FLOATBUTTON_HIDE:
+                fabAdd.setVisibility(View.GONE);
                 break;
-            case COMMAND_FLOATBUTTON_ADD:
-                fabAdd.setImageResource(R.drawable.ic_fab_add2);
+            case COMMAND_FLOATBUTTON_SHOW:
+                fabAdd.setVisibility(View.VISIBLE);
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.e("Mainactivity","onResume");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
     }
 
     @Override

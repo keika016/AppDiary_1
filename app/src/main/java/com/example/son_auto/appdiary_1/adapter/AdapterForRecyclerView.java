@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.son_auto.appdiary_1.MainActivity;
 import com.example.son_auto.appdiary_1.R;
 import com.example.son_auto.appdiary_1.model.PageDiary;
 
@@ -23,6 +24,8 @@ public class AdapterForRecyclerView extends RecyclerView.Adapter<AdapterForRecyc
 
     private ArrayList<PageDiary> listPage;
     private Context context;
+
+    private static final String COMMAND_SHOW_FRAGMENT_ADD = "showFragmentAdd";
 
     public AdapterForRecyclerView(Context context, ArrayList<PageDiary> listPage) {
         this.listPage = listPage;
@@ -42,11 +45,17 @@ public class AdapterForRecyclerView extends RecyclerView.Adapter<AdapterForRecyc
         holder.tvContent.setText(p.getContent());
         holder.imageViewEmotion.setImageResource(context.getResources().getIdentifier(p.getEmotion(), "drawable", context.getPackageName()));
         holder.linearLayout.setBackgroundColor(ContextCompat.getColor(context, Integer.parseInt(p.getBackground())));
+        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity)context).setCommand(COMMAND_SHOW_FRAGMENT_ADD);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        if(listPage == null)
+        if (listPage == null)
             return 0;
         return listPage.size();
     }
@@ -63,6 +72,7 @@ public class AdapterForRecyclerView extends RecyclerView.Adapter<AdapterForRecyc
         private ImageView imageViewEmotion;
         private LinearLayout linearLayout;
         int selected_position = 0;
+
         public DataViewHolder(View itemView) {
             super(itemView);
             tvContent = (TextView) itemView.findViewById(R.id.item_textView);

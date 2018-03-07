@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorAccent"
     android:orientation="vertical">
 
     <TextView
@@ -12,12 +13,12 @@
         android:text="Fragment1" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/fragment_add_edittextContent"
         android:layout_width="match_parent"
         android:layout_height="191dp"
-        android:background="@color/colorAccent"
         android:inputType="textMultiLine"
         android:gravity="top|left"
+        android:background="@color/colorTim"
         android:scrollbars="vertical|horizontal"
         />
 

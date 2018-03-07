@@ -1,18 +1,15 @@
 package com.example.son_auto.appdiary_1;
 
+
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
-import com.example.son_auto.appdiary_1.adapter.AdapterForRecyclerView;
 import com.example.son_auto.appdiary_1.database.DiaryDatabase;
 import com.example.son_auto.appdiary_1.fragment.FragmentAdd;
 import com.example.son_auto.appdiary_1.fragment.FragmentListPageDiary;
@@ -23,9 +20,19 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private FloatingActionButton fabAdd;
-    ;
+
     private FragmentListPageDiary fragmentListPageDiary;
     private FragmentAdd fragmentAdd;
+
+    private static DiaryDatabase diaryDatabase;
+
+    private static final String KEY_FRAGMENT = "KEY_FRAGMENT";
+    private static final String FRAGMENT_ADD = "FRAGMENT_ADD";
+    private static final String COMMAND_SHOW_FRAGMENT_ADD = "showFragmentAdd";
+    private static final String COMMAND_FLOATBUTTON_ARROW_UP = "arrowup";
+    private static final String COMMAND_FLOATBUTTON_ADD = "add";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +40,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         init();
     }
+    public void setCommand(String command) {
+        switch (command) {
+            case COMMAND_SHOW_FRAGMENT_ADD:
+                showFragmentAdd();
+                break;
+            case COMMAND_FLOATBUTTON_ADD:
+                changeImageOfFloatButton(COMMAND_FLOATBUTTON_ADD);
+                break;
+        }
+    }
 
     private void init() {
+        initData();
         initView();
         initFragment();
         replaceFragment(fragmentListPageDiary, false);
@@ -46,13 +64,25 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showFragmentAdd();
-                //fragmentListPageDiary.setCommand("addPage");
+                changeImageOfFloatButton(COMMAND_FLOATBUTTON_ARROW_UP);
             }
         });
     }
 
+    private void initData() {
+        diaryDatabase = new DiaryDatabase(getApplicationContext());
+    }
+
     private void initFragment() {
         fragmentListPageDiary = new FragmentListPageDiary();
+    }
+
+    public static DiaryDatabase getDiaryDatabase() {
+        return diaryDatabase;
+    }
+
+    public static void setDiaryDatabase(DiaryDatabase diaryDatabase) {
+        MainActivity.diaryDatabase = diaryDatabase;
     }
 
     private void replaceFragment(Fragment fragment, boolean backStack) {
@@ -73,10 +103,49 @@ public class MainActivity extends AppCompatActivity {
             replaceFragment(fragmentAdd, true);
         }
     }
-
-    //dành cho Fragment cần nhấn gì đó để hiện thị lên
-    private void showingAFragment(Fragment fragment, String classOfFragment) {
-
+    private void changeImageOfFloatButton(String command){
+        switch (command){
+            case COMMAND_FLOATBUTTON_ARROW_UP:
+                fabAdd.setImageResource(R.drawable.ic_keyboard_arrow_up_white_24dp);
+                break;
+            case COMMAND_FLOATBUTTON_ADD:
+                fabAdd.setImageResource(R.drawable.ic_fab_add2);
+        }
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e("Mainactivity","onResume");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (fragmentAdd != null) {
+            if (fragmentAdd.isVisible())
+                outState.putString(KEY_FRAGMENT, FRAGMENT_ADD);
+        }
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        if (savedInstanceState.containsKey(KEY_FRAGMENT)) {
+            switch (savedInstanceState.getString(KEY_FRAGMENT)) {
+                case FRAGMENT_ADD:
+                    showFragmentAdd();
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
 
 }

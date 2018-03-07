@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.son_auto.appdiary_1.MainActivity;
 import com.example.son_auto.appdiary_1.R;
 import com.example.son_auto.appdiary_1.adapter.AdapterForRecyclerView;
 import com.example.son_auto.appdiary_1.database.DiaryDatabase;
@@ -24,9 +25,8 @@ public class FragmentListPageDiary extends Fragment {
     private View mRootView;
     private RecyclerView recyclerView01;
     private AdapterForRecyclerView adapterForRecyclerView;
-    private DiaryDatabase diaryDatabase;
     private ArrayList<PageDiary> listPage;
-    private static FragmentListPageDiary instance;
+   // private static FragmentListPageDiary instance;
 
     public void setCommand(String command) {
         switch (command) {
@@ -36,11 +36,11 @@ public class FragmentListPageDiary extends Fragment {
         }
     }
 
-    public static FragmentListPageDiary getInstance() {
-        if (instance == null)
-            instance = new FragmentListPageDiary();
-        return instance;
-    }
+//    public static FragmentListPageDiary getInstance() {
+//        if (instance == null)
+//            instance = new FragmentListPageDiary();
+//        return instance;
+//    }
 
     @Nullable
     @Override
@@ -65,18 +65,17 @@ public class FragmentListPageDiary extends Fragment {
     }
 
     private void initData() {
-        diaryDatabase = new DiaryDatabase(getContext());
         listPage = new ArrayList<>();
-        listPage.addAll(diaryDatabase.getAllPageDiary());
+        listPage.addAll(MainActivity.getDiaryDatabase().getAllPageDiary());
     }
 
     private void AddPage() {
         String content1 = "Content 1Content 1Content 1Content 1Content 1Content 1Content 1Content 1Content 1Content 1";
         String emotion1 = "pic1";
         int background1 = R.color.colorAccent;
-        diaryDatabase.addDiary(new PageDiary(content1, emotion1, background1 + ""));
+        MainActivity.getDiaryDatabase().addDiary(new PageDiary(content1, emotion1, background1 + ""));
         listPage.clear();
-        listPage.addAll(diaryDatabase.getAllPageDiary());
+        listPage.addAll(MainActivity.getDiaryDatabase().getAllPageDiary());
         adapterForRecyclerView.notifyDataSetChanged();
         recyclerView01.smoothScrollToPosition(listPage.size() - 1);
 

@@ -31,6 +31,7 @@ public class DiaryDatabase extends SQLiteOpenHelper {
         this.context = context;
     }
 
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         String query = "create table " + TABLE_NAME + " (" +

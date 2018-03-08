@@ -26,21 +26,24 @@ public class FragmentListPageDiary extends Fragment {
     private RecyclerView recyclerView01;
     private AdapterForRecyclerView adapterForRecyclerView;
     private ArrayList<PageDiary> listPage;
-   // private static FragmentListPageDiary instance;
 
-    public void setCommand(String command) {
+    private static FragmentListPageDiary instance;
+
+    private static final String COMMAND_ADD_PAGEDIARY = "addPage";
+
+    public  void setCommand(String command) {
         switch (command) {
-            case "addPage":
-                AddPage();
+            case COMMAND_ADD_PAGEDIARY:
+              //refeshListPageDiary();
                 break;
         }
     }
 
-//    public static FragmentListPageDiary getInstance() {
-//        if (instance == null)
-//            instance = new FragmentListPageDiary();
-//        return instance;
-//    }
+    public static FragmentListPageDiary getInstance() {
+        if (instance == null)
+            instance = new FragmentListPageDiary();
+        return instance;
+    }
 
     @Nullable
     @Override
@@ -68,17 +71,12 @@ public class FragmentListPageDiary extends Fragment {
         listPage = new ArrayList<>();
         listPage.addAll(MainActivity.getDiaryDatabase().getAllPageDiary());
     }
+//    private void refeshListPageDiary(){
+//        listPage.clear();
+//        listPage.addAll(MainActivity.getDiaryDatabase().getAllPageDiary());
+//        adapterForRecyclerView.notifyDataSetChanged();
+//        recyclerView01.smoothScrollToPosition(listPage.size() - 1);
+//    }
 
-    private void AddPage() {
-        String content1 = "Content 1Content 1Content 1Content 1Content 1Content 1Content 1Content 1Content 1Content 1";
-        String emotion1 = "pic1";
-        int background1 = R.color.colorAccent;
-        MainActivity.getDiaryDatabase().addDiary(new PageDiary(content1, emotion1, background1 + ""));
-        listPage.clear();
-        listPage.addAll(MainActivity.getDiaryDatabase().getAllPageDiary());
-        adapterForRecyclerView.notifyDataSetChanged();
-        recyclerView01.smoothScrollToPosition(listPage.size() - 1);
-
-    }
 
 }

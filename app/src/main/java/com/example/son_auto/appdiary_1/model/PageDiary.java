@@ -5,7 +5,7 @@ package com.example.son_auto.appdiary_1.model;
  */
 
 public class PageDiary {
-    private String content, emotion, background;
+    private String content, emotion, background, dateTime;
     private int id;
 
     public String getContent() {
@@ -40,26 +40,38 @@ public class PageDiary {
         this.id = id;
     }
 
+    public String getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(String dateTime) {
+        this.dateTime = dateTime;
+    }
+
     public PageDiary() {
     }
 
-    public PageDiary(String content, String emotion, String background, int id) {
+    public PageDiary(String content, String emotion, String background, String dateTime, int id) {
         this.content = content;
         this.emotion = emotion;
         this.background = background;
+        this.dateTime = dateTime;
         this.id = id;
     }
-    public PageDiary(String content, String emotion, String background) {
+    public PageDiary(String content, String emotion, String background, String dateTime) {
         this.content = content;
         this.emotion = emotion;
         this.background = background;
+        this.dateTime = dateTime;
     }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("PageDiary{");
         sb.append("content='").append(content).append('\'');
         sb.append(", emotion='").append(emotion).append('\'');
         sb.append(", background='").append(background).append('\'');
+        sb.append(", dateTime='").append(dateTime).append('\'');
         sb.append(", id=").append(id);
         sb.append('}');
         return sb.toString();

@@ -23,6 +23,7 @@ public class DiaryDatabase extends SQLiteOpenHelper {
     private static final String DIARY_CONTENT = "tbdiary_content";
     private static final String DIARY_EMOTION = "tbdiary_emotion";
     private static final String DIARY_BACKGROUND = "tbdiary_background";
+    private static final String DIARY_DATETIME = "tbdiary_datetime";
 
     private Context context;
 
@@ -38,7 +39,8 @@ public class DiaryDatabase extends SQLiteOpenHelper {
                 DIARY_ID + " integer primary key autoincrement, " +
                 DIARY_CONTENT + " ntext," +
                 DIARY_EMOTION + " text, " +
-                DIARY_BACKGROUND + " text)";
+                DIARY_BACKGROUND + " text, "+
+                DIARY_DATETIME+" text)";
         db.execSQL(query);
     }
 
@@ -53,6 +55,7 @@ public class DiaryDatabase extends SQLiteOpenHelper {
         values.put(DIARY_CONTENT, pageDiary.getContent());
         values.put(DIARY_EMOTION, pageDiary.getEmotion());
         values.put(DIARY_BACKGROUND, pageDiary.getBackground());
+        values.put(DIARY_DATETIME, pageDiary.getDateTime());
         db.insert(TABLE_NAME, null, values);
         db.close();
     }
@@ -69,7 +72,7 @@ public class DiaryDatabase extends SQLiteOpenHelper {
                 p.setContent(cursor.getString(1));
                 p.setEmotion(cursor.getString(2));
                 p.setBackground(cursor.getString(3));
-
+                p.setDateTime(cursor.getString(4));
                 listPage.add(p);
             } while (cursor.moveToNext());
         }

@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import com.example.son_auto.appdiary_1.MainActivity;
 import com.example.son_auto.appdiary_1.R;
 import com.example.son_auto.appdiary_1.adapter.AdapterForRecyclerView;
-import com.example.son_auto.appdiary_1.database.DiaryDatabase;
 import com.example.son_auto.appdiary_1.model.PageDiary;
 
 import java.util.ArrayList;

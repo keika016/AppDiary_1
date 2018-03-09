@@ -13,9 +13,7 @@ import android.view.View;
 import com.example.son_auto.appdiary_1.database.DiaryDatabase;
 import com.example.son_auto.appdiary_1.fragment.FragmentAdd;
 import com.example.son_auto.appdiary_1.fragment.FragmentListPageDiary;
-import com.example.son_auto.appdiary_1.model.PageDiary;
 
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,10 +26,11 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String KEY_FRAGMENT = "KEY_FRAGMENT";
     private static final String FRAGMENT_ADD = "FRAGMENT_ADD";
+
     private static final String COMMAND_SHOW_FRAGMENT_ADD = "showFragmentAdd";
     private static final String COMMAND_FLOATBUTTON_SHOW = "show";
     private static final String COMMAND_FLOATBUTTON_HIDE = "hide";
-
+    private static final String FRAGMENT_ADD_COMMAND_CONTENT_ZERO = "contentzero";
 
 
     @Override
@@ -40,14 +39,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         init();
     }
+
     public void setCommand(String command) {
         switch (command) {
             case COMMAND_SHOW_FRAGMENT_ADD:
                 showFragmentAdd();
                 break;
-            case COMMAND_FLOATBUTTON_SHOW:
-                changeOfFloatButton(COMMAND_FLOATBUTTON_SHOW);
-                break;
+
         }
     }
 
@@ -101,10 +99,17 @@ public class MainActivity extends AppCompatActivity {
         if (!fragmentAdd.isVisible()) {
             replaceFragment(fragmentAdd, true);
             changeOfFloatButton(COMMAND_FLOATBUTTON_HIDE);
+            try {
+                fragmentAdd.setCommand(FRAGMENT_ADD_COMMAND_CONTENT_ZERO);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
         }
     }
-    private void changeOfFloatButton(String command){
-        switch (command){
+
+    private void changeOfFloatButton(String command) {
+        switch (command) {
             case COMMAND_FLOATBUTTON_HIDE:
                 fabAdd.setVisibility(View.GONE);
                 break;
@@ -136,5 +141,25 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        int count = getFragmentManager().getBackStackEntryCount();
+        switch (count) {
+            case 0:
+                // handle back press of fragment one
+                changeOfFloatButton(COMMAND_FLOATBUTTON_SHOW);
+                fragmentAdd.setCommand(FRAGMENT_ADD_COMMAND_CONTENT_ZERO);
+                break;
+            case 1:
+                // handle back press of fragment two
+                break;
+            case 2:
+                // handle back press of fragment three
+                break;
+            default:
+                getFragmentManager().popBackStack();
+                break;
+        }
+    }
 }

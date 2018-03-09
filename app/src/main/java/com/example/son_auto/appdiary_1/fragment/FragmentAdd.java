@@ -2,7 +2,6 @@ package com.example.son_auto.appdiary_1.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -34,11 +33,19 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
     private ImageView mImageViewEmotion;
     private TextView mTextViewDateAndTime;
     private Button mBtnSave, mBtnCancel, mBtnConfig;
-    private LinearLayout mLnLayout_Config,mLnLayoutContainer_Config;
+    private LinearLayout mLnLayout_Config, mLnLayoutContainer_Config, mLnLayout_main;
 
-    private static final String COMMAND_FLOATBUTTON_SHOW = "show";
-    private static final String COMMAND_ADD_PAGEDIARY = "addPage";
+    private static final String FRAGMENT_ADD_COMMAND_CONTENT_ZERO = "contentzero";
+    private static final String FRAGMENT_LIST_COMMAND_ADD_PAGEDIARY = "addPage";
 
+    public void setCommand(String command){
+        switch (command){
+            case FRAGMENT_ADD_COMMAND_CONTENT_ZERO:
+                //Dành cho khi từ Fragment trở lại Activity thì EditText không hiển thị nổi dung nữa
+                mContent.setText("");
+                break;
+        }
+    }
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -56,7 +63,7 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         mContent = (EditText) mRootView.findViewById(R.id.fragment_add_edittextContent);
         mLnLayout_Config = (LinearLayout) mRootView.findViewById(R.id.fragment_add_layout_config);
         mLnLayoutContainer_Config = (LinearLayout) mRootView.findViewById(R.id.fragment_add_layout_container_config);
-
+        mLnLayout_main = (LinearLayout) mRootView.findViewById(R.id.fragment_add_layout_main);
 
         mLnLayoutContainer_Config.setVisibility(View.INVISIBLE);
         mContent.requestFocus();
@@ -64,12 +71,7 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         mBtnSave.setOnClickListener(this);
         mBtnCancel.setOnClickListener(this);
         mBtnConfig.setOnClickListener(this);
-        mTextViewDateAndTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(), "TextView", Toast.LENGTH_SHORT).show();
-            }
-        });
+        mLnLayoutContainer_Config.setOnClickListener(this);
     }
 
     private String getDateAndTime() {
@@ -90,13 +92,19 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        Log.e("Fragment Add haha", "onResume");
+        //Dành cho khi nhấn nút Add từ ListDiary thì EditText không hiển thị nổi dung nữa
+      //  mContent.setText("");
+    }
+
+    @Override
     public void onStop() {
         super.onStop();
-        //Dành cho khi từ Fragment trở lại Activity thì EditText không hiển thị nổi dung nữa
-        mContent.setText("");
-        //Thay đổi FloatButton thành Add
-        ((MainActivity) getActivity()).setCommand(COMMAND_FLOATBUTTON_SHOW);
+        Log.e("Fragment Add haha", "onStop");
     }
+
 
     @Override
     public void onClick(View v) {
@@ -112,7 +120,7 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
                     mLnLayoutContainer_Config.setVisibility(View.VISIBLE);
                 break;
             case R.id.fragment_add_layout_container_config:
-                if(mLnLayoutContainer_Config.isShown())
+                if (mLnLayoutContainer_Config.isShown())
                     mLnLayoutContainer_Config.setVisibility(View.INVISIBLE);
                 break;
         }

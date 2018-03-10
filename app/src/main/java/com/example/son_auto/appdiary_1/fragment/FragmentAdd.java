@@ -42,7 +42,7 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
     private static final String FRAGMENT_ADD_KEY_MCONTENT = "key_mcontent";
     private static final String DEFAULT_MCONTENT = "default_mcontent";
     private String mCommand;
-
+    private String mGetContentForEditext;
     public FragmentAdd() {
         mCommand = "";
     }
@@ -51,6 +51,9 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         this.mCommand = command;
     }
 
+    public String getmGetContentForEditext() {
+        return mGetContentForEditext;
+    }
 
     private void getCommand() {
         Log.e("Fragment Add haha", " getcommand " + mCommand);
@@ -59,6 +62,8 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
                 clearEditText();
                 break;
             case FRAGMENT_ADD_COMMAND_CONTENT_RESTORE:
+                if(this.getArguments()!=null)
+                    mContent.setText(this.getArguments().getString(FRAGMENT_ADD_KEY_MCONTENT));
                 break;
         }
     }
@@ -90,6 +95,7 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         mRootView = inflater.inflate(R.layout.fragment_add_layout, container, false);
+        Log.e("Fragment Add haha", "onCreateView");
         initView();
         return mRootView;
     }
@@ -150,14 +156,14 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         Log.e("Fragment Add haha", "onSave");
+        mGetContentForEditext = "";
+        mGetContentForEditext = mContent.getText().toString();
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Log.e("Fragment Add haha", "onActivityCreated");
     }
-
 
     @Override
     public void onClick(View v) {

@@ -119,11 +119,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        Log.e("MainActivity", "Main OnSave ");
         if (fragmentAdd != null) {
             if (fragmentAdd.isVisible()) {
                 ArrayList<String> list = new ArrayList<>();
                 list.add(FRAGMENT_ADD);
-                Log.e("MainActiogsgsdg", "Main OnSave");
+
+                //dòng dưới dành cho khi xoay màn hình, EditText trong Fragment không mất text
+                list.add(fragmentAdd.getmGetContentForEditext());
+
                 outState.putStringArrayList(KEY_FRAGMENT, list);
             }
         }
@@ -132,16 +136,27 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        if (savedInstanceState.containsKey(KEY_FRAGMENT)) {
-            String s = savedInstanceState.getStringArrayList(KEY_FRAGMENT).get(0).toString();
-            switch (s) {
-                case FRAGMENT_ADD:
-                    showFragmentAdd();
-                    break;
-                default:
-                    break;
+        Log.e("MainActivity", "Main Retore");
+        if (savedInstanceState != null)
+            if (savedInstanceState.containsKey(KEY_FRAGMENT)) {
+                String s = savedInstanceState.getStringArrayList(KEY_FRAGMENT).get(0).toString();
+                switch (s) {
+                    case FRAGMENT_ADD:
+                        showFragmentAdd();
+                        fragmentAdd.setCommand(FRAGMENT_ADD_COMMAND_CONTENT_RESTORE);
+
+                        //dành cho khi xoay màn hình, EditText trong Fragment không mất text
+                        Bundle b = new Bundle();
+                        String text = savedInstanceState.getStringArrayList(KEY_FRAGMENT).get(1).toString();
+                        b.putString(FRAGMENT_ADD_KEY_MCONTENT, text);
+                        fragmentAdd.setArguments(b);
+                        /////
+
+                        break;
+                    default:
+                        break;
+                }
             }
-        }
     }
 
     @Override

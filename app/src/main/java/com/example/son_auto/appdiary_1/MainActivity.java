@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
                 list.add(FRAGMENT_ADD);
 
                 //dòng dưới dành cho khi xoay màn hình, EditText trong Fragment không mất text
-                list.add(fragmentAdd.getmGetContentForEditext());
+                list.add((String)fragmentAdd.getmObject());
 
                 outState.putStringArrayList(KEY_FRAGMENT, list);
             }

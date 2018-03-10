@@ -38,11 +38,10 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
 
     private static final String FRAGMENT_ADD_COMMAND_CONTENT_ZERO_BACK = "contentzeroback";
     private static final String FRAGMENT_ADD_COMMAND_CONTENT_RESTORE = "contentzerorestore";
-    private static final String FRAGMENT_LIST_COMMAND_ADD_PAGEDIARY = "addPage";
     private static final String FRAGMENT_ADD_KEY_MCONTENT = "key_mcontent";
-    private static final String DEFAULT_MCONTENT = "default_mcontent";
     private String mCommand;
-    private String mGetContentForEditext;
+    private Object mObject;
+
     public FragmentAdd() {
         mCommand = "";
     }
@@ -51,8 +50,8 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         this.mCommand = command;
     }
 
-    public String getmGetContentForEditext() {
-        return mGetContentForEditext;
+    public Object getmObject() {
+        return mObject;
     }
 
     private void getCommand() {
@@ -62,7 +61,7 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
                 clearEditText();
                 break;
             case FRAGMENT_ADD_COMMAND_CONTENT_RESTORE:
-                if(this.getArguments()!=null)
+                if (this.getArguments() != null)
                     mContent.setText(this.getArguments().getString(FRAGMENT_ADD_KEY_MCONTENT));
                 break;
         }
@@ -156,8 +155,8 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         Log.e("Fragment Add haha", "onSave");
-        mGetContentForEditext = "";
-        mGetContentForEditext = mContent.getText().toString();
+        mObject = "";
+        mObject = mContent.getText().toString();
     }
 
     @Override

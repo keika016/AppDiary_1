@@ -28,11 +28,11 @@ public class FragmentListPageDiary extends Fragment {
 
     private static FragmentListPageDiary instance;
 
-    private static final String COMMAND_ADD_PAGEDIARY = "addPage";
+    private static final String FRAGMENT_LIST_COMMAND_ADD_PAGEDIARY = "addPage";
 
     public  void setCommand(String command) {
         switch (command) {
-            case COMMAND_ADD_PAGEDIARY:
+            case FRAGMENT_LIST_COMMAND_ADD_PAGEDIARY:
               //refeshListPageDiary();
                 break;
         }

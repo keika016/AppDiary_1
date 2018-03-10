@@ -1,6 +1,7 @@
 package com.example.son_auto.appdiary_1;
 
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -13,6 +14,8 @@ import android.view.View;
 import com.example.son_auto.appdiary_1.database.DiaryDatabase;
 import com.example.son_auto.appdiary_1.fragment.FragmentAdd;
 import com.example.son_auto.appdiary_1.fragment.FragmentListPageDiary;
+
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -30,8 +33,9 @@ public class MainActivity extends AppCompatActivity {
     private static final String COMMAND_SHOW_FRAGMENT_ADD = "showFragmentAdd";
     private static final String COMMAND_FLOATBUTTON_SHOW = "show";
     private static final String COMMAND_FLOATBUTTON_HIDE = "hide";
-    private static final String FRAGMENT_ADD_COMMAND_CONTENT_ZERO = "contentzero";
-
+    private static final String FRAGMENT_ADD_COMMAND_CONTENT_ZERO_BACK = "contentzeroback";
+    private static final String FRAGMENT_ADD_COMMAND_CONTENT_RESTORE = "contentzerorestore";
+    private static final String FRAGMENT_ADD_KEY_MCONTENT = "key_mcontent";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,12 +103,6 @@ public class MainActivity extends AppCompatActivity {
         if (!fragmentAdd.isVisible()) {
             replaceFragment(fragmentAdd, true);
             changeOfFloatButton(COMMAND_FLOATBUTTON_HIDE);
-            try {
-                fragmentAdd.setCommand(FRAGMENT_ADD_COMMAND_CONTENT_ZERO);
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-
         }
     }
 
@@ -122,8 +120,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         if (fragmentAdd != null) {
-            if (fragmentAdd.isVisible())
-                outState.putString(KEY_FRAGMENT, FRAGMENT_ADD);
+            if (fragmentAdd.isVisible()) {
+                ArrayList<String> list = new ArrayList<>();
+                list.add(FRAGMENT_ADD);
+                Log.e("MainActiogsgsdg", "Main OnSave");
+                outState.putStringArrayList(KEY_FRAGMENT, list);
+            }
         }
     }
 
@@ -131,7 +133,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         if (savedInstanceState.containsKey(KEY_FRAGMENT)) {
-            switch (savedInstanceState.getString(KEY_FRAGMENT)) {
+            String s = savedInstanceState.getStringArrayList(KEY_FRAGMENT).get(0).toString();
+            switch (s) {
                 case FRAGMENT_ADD:
                     showFragmentAdd();
                     break;
@@ -149,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
             case 0:
                 // handle back press of fragment one
                 changeOfFloatButton(COMMAND_FLOATBUTTON_SHOW);
-                fragmentAdd.setCommand(FRAGMENT_ADD_COMMAND_CONTENT_ZERO);
+                fragmentAdd.setCommand(FRAGMENT_ADD_COMMAND_CONTENT_ZERO_BACK);
                 break;
             case 1:
                 // handle back press of fragment two

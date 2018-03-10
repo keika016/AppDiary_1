@@ -1,5 +1,6 @@
 package com.example.son_auto.appdiary_1.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -35,17 +36,56 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
     private Button mBtnSave, mBtnCancel, mBtnConfig;
     private LinearLayout mLnLayout_Config, mLnLayoutContainer_Config, mLnLayout_main;
 
-    private static final String FRAGMENT_ADD_COMMAND_CONTENT_ZERO = "contentzero";
+    private static final String FRAGMENT_ADD_COMMAND_CONTENT_ZERO_BACK = "contentzeroback";
+    private static final String FRAGMENT_ADD_COMMAND_CONTENT_RESTORE = "contentzerorestore";
     private static final String FRAGMENT_LIST_COMMAND_ADD_PAGEDIARY = "addPage";
+    private static final String FRAGMENT_ADD_KEY_MCONTENT = "key_mcontent";
+    private static final String DEFAULT_MCONTENT = "default_mcontent";
+    private String mCommand;
 
-    public void setCommand(String command){
-        switch (command){
-            case FRAGMENT_ADD_COMMAND_CONTENT_ZERO:
-                //Dành cho khi từ Fragment trở lại Activity thì EditText không hiển thị nổi dung nữa
-                mContent.setText("");
+    public FragmentAdd() {
+        mCommand = "";
+    }
+
+    public void setCommand(String command) {
+        this.mCommand = command;
+    }
+
+
+    private void getCommand() {
+        Log.e("Fragment Add haha", " getcommand " + mCommand);
+        switch (this.mCommand) {
+            case FRAGMENT_ADD_COMMAND_CONTENT_ZERO_BACK:
+                clearEditText();
+                break;
+            case FRAGMENT_ADD_COMMAND_CONTENT_RESTORE:
                 break;
         }
     }
+
+    private void clearEditText() {
+        if (mContent != null)
+            mContent.setText("");
+    }
+
+    private String getDateAndTime() {
+        DateFormat df = new SimpleDateFormat("d MMM yyyy, HH:mm a");
+        String date = df.format(Calendar.getInstance().getTime());
+        return date;
+    }
+
+    private void AddPageDiary() {
+        String content1 = mContent.getText().toString();
+        String emotion1 = "pic1";
+        int background1 = R.color.colorAccent;
+        String datetime = mTextViewDateAndTime.getText().toString();
+        PageDiary p = new PageDiary(content1, emotion1, background1 + "", datetime);
+        MainActivity.getDiaryDatabase().addDiary(p);
+        Toast.makeText(getContext(), "Page Added", Toast.LENGTH_SHORT).show();
+        getActivity().onBackPressed();
+    }
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -74,35 +114,48 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         mLnLayoutContainer_Config.setOnClickListener(this);
     }
 
-    private String getDateAndTime() {
-        DateFormat df = new SimpleDateFormat("d MMM yyyy, HH:mm a");
-        String date = df.format(Calendar.getInstance().getTime());
-        return date;
-    }
-
-    private void AddPageDiary() {
-        String content1 = mContent.getText().toString();
-        String emotion1 = "pic1";
-        int background1 = R.color.colorAccent;
-        String datetime = mTextViewDateAndTime.getText().toString();
-        PageDiary p = new PageDiary(content1, emotion1, background1 + "", datetime);
-        MainActivity.getDiaryDatabase().addDiary(p);
-        Toast.makeText(getContext(), "Page Added", Toast.LENGTH_SHORT).show();
-        getActivity().onBackPressed();
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.e("Fragment Add haha", "onStart");
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        Log.e("Fragment Add haha", "onResume");
-        //Dành cho khi nhấn nút Add từ ListDiary thì EditText không hiển thị nổi dung nữa
-      //  mContent.setText("");
+        Log.e("Fragment Add haha", "onResume" + this.mCommand);
+        //Dùng cho EditText = ""
+        getCommand();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.e("Fragment Add haha", "onPause");
     }
 
     @Override
     public void onStop() {
         super.onStop();
         Log.e("Fragment Add haha", "onStop");
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        Log.e("Fragment Add haha", "onDetach");
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Log.e("Fragment Add haha", "onSave");
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        Log.e("Fragment Add haha", "onActivityCreated");
     }
 
 

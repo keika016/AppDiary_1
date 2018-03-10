@@ -43,15 +43,6 @@ public class FragmentListPageDiary extends Fragment {
             instance = new FragmentListPageDiary();
         return instance;
     }
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mRootView = inflater.inflate(R.layout.fragment_listpagediary, container, false);
-        init();
-        return mRootView;
-    }
-
     private void init() {
         initData();
         initView();
@@ -70,6 +61,16 @@ public class FragmentListPageDiary extends Fragment {
         listPage = new ArrayList<>();
         listPage.addAll(MainActivity.getDiaryDatabase().getAllPageDiary());
     }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mRootView = inflater.inflate(R.layout.fragment_listpagediary, container, false);
+        init();
+        return mRootView;
+    }
+
+
 //    private void refeshListPageDiary(){
 //        listPage.clear();
 //        listPage.addAll(MainActivity.getDiaryDatabase().getAllPageDiary());

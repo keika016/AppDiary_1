@@ -1,9 +1,10 @@
 package com.example.son_auto.appdiary_1.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,10 +18,12 @@ import android.widget.Toast;
 
 import com.example.son_auto.appdiary_1.MainActivity;
 import com.example.son_auto.appdiary_1.R;
+import com.example.son_auto.appdiary_1.adapter.AdapterForListEmotion;
 import com.example.son_auto.appdiary_1.model.PageDiary;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 
@@ -29,16 +32,24 @@ import java.util.Calendar;
  */
 
 public class FragmentAdd extends Fragment implements View.OnClickListener {
+
+    //Layout Fragment Add
     private View mRootView;
     private EditText mContent;
     private ImageView mImageViewEmotion;
     private TextView mTextViewDateAndTime;
     private Button mBtnSave, mBtnCancel, mBtnConfig;
-    private LinearLayout mLnLayout_Config, mLnLayoutContainer_Config, mLnLayout_main;
+    private LinearLayout mLnLayoutContainer_Config, mLnLayout_main;
 
+    //Layout Config
+    private LinearLayout mConfig_Lnlayout;
+    private RecyclerView mRecyclerViewEmotion1;
+    //Command and Key
     private static final String FRAGMENT_ADD_COMMAND_CONTENT_ZERO_BACK = "contentzeroback";
     private static final String FRAGMENT_ADD_COMMAND_CONTENT_RESTORE = "contentzerorestore";
     private static final String FRAGMENT_ADD_KEY_MCONTENT = "key_mcontent";
+
+    //thuoc tinh
     private String mCommand;
     private Object mObject;
 
@@ -95,20 +106,19 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         mRootView = inflater.inflate(R.layout.fragment_add_layout, container, false);
         Log.e("Fragment Add haha", "onCreateView");
-        initView();
+        initViewLayoutFragmentAdd();
         return mRootView;
     }
 
-    private void initView() {
+    private void initViewLayoutFragmentAdd() {
         mImageViewEmotion = (ImageView) mRootView.findViewById(R.id.fragment_add_imageView);
         mTextViewDateAndTime = (TextView) mRootView.findViewById(R.id.fragment_add_textView);
         mBtnSave = (Button) mRootView.findViewById(R.id.fragment_add_buttonsave);
         mBtnCancel = (Button) mRootView.findViewById(R.id.fragment_add_buttoncancel);
         mBtnConfig = (Button) mRootView.findViewById(R.id.fragment_add_buttonconfig);
         mContent = (EditText) mRootView.findViewById(R.id.fragment_add_edittextContent);
-        mLnLayout_Config = (LinearLayout) mRootView.findViewById(R.id.fragment_add_layout_config);
         mLnLayoutContainer_Config = (LinearLayout) mRootView.findViewById(R.id.fragment_add_layout_container_config);
-        mLnLayout_main = (LinearLayout) mRootView.findViewById(R.id.fragment_add_layout_main);
+        mLnLayout_main = (LinearLayout) mRootView.findViewById(R.id.fragment_add_lnlayout_main);
 
         mLnLayoutContainer_Config.setVisibility(View.INVISIBLE);
         mContent.requestFocus();
@@ -117,6 +127,37 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         mBtnCancel.setOnClickListener(this);
         mBtnConfig.setOnClickListener(this);
         mLnLayoutContainer_Config.setOnClickListener(this);
+
+        initViewLayoutConfig();
+    }
+
+    private void initViewLayoutConfig() {
+        mConfig_Lnlayout = (LinearLayout) mRootView.findViewById(R.id.fragment_add_layout_config);
+        mRecyclerViewEmotion1 = (RecyclerView) mRootView.findViewById(R.id.fragment_add_config_recyclerviewemotion);
+
+        //không hiểu sao trên app cái này nó lại trượt qua được ??
+        ArrayList<String> listIcon = new ArrayList<>();
+        listIcon.add("pic1");
+        listIcon.add("pic2");
+        listIcon.add("pic3");
+        listIcon.add("pic3");
+        listIcon.add("pic3");
+        listIcon.add("ic_sad");
+        listIcon.add("ic_sleep");
+        listIcon.add("ic_sleep");
+        listIcon.add("ic_sad");
+        listIcon.add("ic_sleep");
+        listIcon.add("ic_sleep");
+        listIcon.add("ic_sad");
+        listIcon.add("ic_sleep");
+        listIcon.add("ic_sleep");
+        listIcon.add("ic_sad");
+        LinearLayoutManager linearLayoutManager_ListEmotion = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        mRecyclerViewEmotion1.setLayoutManager(linearLayoutManager_ListEmotion);
+        mRecyclerViewEmotion1.setHasFixedSize(true);
+        mRecyclerViewEmotion1.setAdapter(new AdapterForListEmotion(getContext(),listIcon));
+
+
     }
 
     @Override

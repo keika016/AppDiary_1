@@ -72,8 +72,19 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
                 clearEditText();
                 break;
             case FRAGMENT_ADD_COMMAND_CONTENT_RESTORE:
-                if (this.getArguments() != null)
-                    mContent.setText(this.getArguments().getString(FRAGMENT_ADD_KEY_MCONTENT));
+                if (this.getArguments() != null) {
+                    if (this.getArguments().getString(FRAGMENT_ADD_KEY_MCONTENT) != null) {
+                        mContent.setText(this.getArguments().getString(FRAGMENT_ADD_KEY_MCONTENT));
+                        mObject = null;
+                        this.getArguments().remove(FRAGMENT_ADD_KEY_MCONTENT);
+                    } else {
+                        if (mObject != null)
+                            mContent.setText(mObject + "");
+                    }
+                }
+                //Cái này dành cho nhấn nút đa nhiệm mà ko nhất text trong EditText
+                //nhưng coi chừng biến mObject, lỡ nó ko phải chữ thì mệt
+
                 break;
         }
     }
@@ -155,7 +166,7 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         LinearLayoutManager linearLayoutManager_ListEmotion = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         mRecyclerViewEmotion1.setLayoutManager(linearLayoutManager_ListEmotion);
         mRecyclerViewEmotion1.setHasFixedSize(true);
-        mRecyclerViewEmotion1.setAdapter(new AdapterForListEmotion(getContext(),listIcon));
+        mRecyclerViewEmotion1.setAdapter(new AdapterForListEmotion(getContext(), listIcon));
 
 
     }
@@ -164,6 +175,7 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
     public void onStart() {
         super.onStart();
         Log.e("Fragment Add haha", "onStart");
+        setCommand(FRAGMENT_ADD_COMMAND_CONTENT_RESTORE);
     }
 
     @Override
@@ -203,6 +215,7 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        Log.e("Fragment Add haha", "onActivityCreated" + mContent.getText());
     }
 
     @Override

@@ -2,26 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/colorTim">
+    android:background="@color/colorTim"
+    android:orientation="vertical">
 
     <!--Dùng layout này đề căng icon vừa với app-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorXanh"
-        android:orientation="vertical"
         android:gravity="center"
+        android:orientation="vertical"
         android:weightSum="10">
+
         <ImageView
             android:id="@+id/item_emotion_imageview"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="5"
-            android:padding="1dp"/>
+            android:padding="1dp" />
     </LinearLayout>
-
-
-
 
 </LinearLayout>

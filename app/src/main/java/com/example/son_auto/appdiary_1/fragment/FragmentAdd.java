@@ -5,6 +5,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -65,33 +67,48 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         return mObject;
     }
 
-    private void getCommand() {
+    public void getCommand() {
         Log.e("Fragment Add haha", " getcommand " + mCommand);
         switch (this.mCommand) {
             case FRAGMENT_ADD_COMMAND_CONTENT_ZERO_BACK:
                 clearEditText();
                 break;
             case FRAGMENT_ADD_COMMAND_CONTENT_RESTORE:
+                clearEditText();
                 if (this.getArguments() != null) {
                     if (this.getArguments().getString(FRAGMENT_ADD_KEY_MCONTENT) != null) {
+                        Log.e("Fragment Add haha", " getcommand Argument " + mCommand);
                         mContent.setText(this.getArguments().getString(FRAGMENT_ADD_KEY_MCONTENT));
-                        mObject = null;
                         this.getArguments().remove(FRAGMENT_ADD_KEY_MCONTENT);
-                    } else {
-                        if (mObject != null)
-                            mContent.setText(mObject + "");
+                    } else if (mObject != null) {
+                        //dùng cho các làn sau lần đầu tiên, từ Fragment Add, edittext có chữ, ra màn hình chính
+                        Log.e("Fragment Add haha", " getcommand Content 2" + mCommand);
+                        mContent.setText(mObject + "");
+                    }
+                } else {
+                    //dùng cho khi làn đầu tiên từ Fragment Add, edittext có chữ, ra màn hình chính
+                    //Cái này dành cho nhấn nút đa nhiệm mà ko nhất text trong EditText
+                    //nhưng coi chừng biến mObject, lỡ nó ko phải chữ thì mệt
+                    if (mObject != null) {
+                        mContent.setText(mObject + "");
+                        Log.e("Fragment Add haha", " getcommand Content " + mObject);
                     }
                 }
-                //Cái này dành cho nhấn nút đa nhiệm mà ko nhất text trong EditText
-                //nhưng coi chừng biến mObject, lỡ nó ko phải chữ thì mệt
-
+                break;
+            default:
                 break;
         }
+        clearCommand();
     }
 
     private void clearEditText() {
         if (mContent != null)
             mContent.setText("");
+    }
+
+    private void clearCommand() {
+        mCommand = "";
+        mObject = null;
     }
 
     private String getDateAndTime() {
@@ -132,13 +149,12 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         mLnLayout_main = (LinearLayout) mRootView.findViewById(R.id.fragment_add_lnlayout_main);
 
         mLnLayoutContainer_Config.setVisibility(View.INVISIBLE);
-        mContent.requestFocus();
         mTextViewDateAndTime.setText(getDateAndTime());
         mBtnSave.setOnClickListener(this);
         mBtnCancel.setOnClickListener(this);
         mBtnConfig.setOnClickListener(this);
         mLnLayoutContainer_Config.setOnClickListener(this);
-
+        mContent.requestFocus();
         initViewLayoutConfig();
     }
 
@@ -175,7 +191,13 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
     public void onStart() {
         super.onStart();
         Log.e("Fragment Add haha", "onStart");
-        setCommand(FRAGMENT_ADD_COMMAND_CONTENT_RESTORE);
+        if (this.getArguments() != null)
+            if (this.getArguments().getString(FRAGMENT_ADD_KEY_MCONTENT) != null){
+                Log.e("Fragment Add haha", "onStart 2"+ this.mCommand) ;
+                setCommand(FRAGMENT_ADD_COMMAND_CONTENT_RESTORE);
+                Log.e("Fragment Add haha", "onStart 2"+ this.mCommand) ;
+            }
+
     }
 
     @Override
@@ -207,9 +229,13 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        Log.e("Fragment Add haha", "onSave");
-        mObject = "";
-        mObject = mContent.getText().toString();
+        Log.e("Fragment Add haha", "onSave " + mObject + " " + mContent.getText().toString());
+        if (mObject == null && mContent.getText().toString().length() != 0) {
+            mObject = "";
+            mObject = mContent.getText().toString();
+        }
+
+        Log.e("Fragment Add haha", "onSave 2" + mObject + " " + mContent.getText().toString());
     }
 
     @Override

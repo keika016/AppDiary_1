@@ -124,10 +124,11 @@ public class MainActivity extends AppCompatActivity {
             if (fragmentAdd.isVisible()) {
                 ArrayList<String> list = new ArrayList<>();
                 list.add(FRAGMENT_ADD);
-
+                // dòng dưới dành cho lần đầu tiên đang ở Fragment Add, ra màn hình chính, trở lại app, text còn chữ
+                fragmentAdd.setCommand(FRAGMENT_ADD_COMMAND_CONTENT_RESTORE);
                 //dòng dưới dành cho khi xoay màn hình, EditText trong Fragment không mất text
-                list.add((String)fragmentAdd.getmObject());
-
+                list.add(fragmentAdd.getmObject().toString());
+                Log.e("MainActivity", "Main OnSave 2 ");
                 outState.putStringArrayList(KEY_FRAGMENT, list);
             }
         }
@@ -143,15 +144,13 @@ public class MainActivity extends AppCompatActivity {
                 switch (s) {
                     case FRAGMENT_ADD:
                         showFragmentAdd();
-                        fragmentAdd.setCommand(FRAGMENT_ADD_COMMAND_CONTENT_RESTORE);
-
                         //dành cho khi xoay màn hình, EditText trong Fragment không mất text
                         Bundle b = new Bundle();
                         String text = savedInstanceState.getStringArrayList(KEY_FRAGMENT).get(1).toString();
                         b.putString(FRAGMENT_ADD_KEY_MCONTENT, text);
                         fragmentAdd.setArguments(b);
                         /////
-
+                        Log.e("MainActivity", "Main Retore 2");
                         break;
                     default:
                         break;
@@ -168,6 +167,7 @@ public class MainActivity extends AppCompatActivity {
                 // handle back press of fragment one
                 changeOfFloatButton(COMMAND_FLOATBUTTON_SHOW);
                 fragmentAdd.setCommand(FRAGMENT_ADD_COMMAND_CONTENT_ZERO_BACK);
+                Log.e("MainActivity","onBack");
                 break;
             case 1:
                 // handle back press of fragment two

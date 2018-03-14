@@ -192,10 +192,10 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         super.onStart();
         Log.e("Fragment Add haha", "onStart");
         if (this.getArguments() != null)
-            if (this.getArguments().getString(FRAGMENT_ADD_KEY_MCONTENT) != null){
-                Log.e("Fragment Add haha", "onStart 2"+ this.mCommand) ;
+            if (this.getArguments().getString(FRAGMENT_ADD_KEY_MCONTENT) != null) {
+                Log.e("Fragment Add haha", "onStart 2" + this.mCommand);
                 setCommand(FRAGMENT_ADD_COMMAND_CONTENT_RESTORE);
-                Log.e("Fragment Add haha", "onStart 2"+ this.mCommand) ;
+                Log.e("Fragment Add haha", "onStart 2" + this.mCommand);
             }
 
     }
@@ -230,9 +230,10 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         Log.e("Fragment Add haha", "onSave " + mObject + " " + mContent.getText().toString());
-        if (mObject == null && mContent.getText().toString().length() != 0) {
+        if (mObject == null) {
             mObject = "";
-            mObject = mContent.getText().toString();
+            if (mContent.getText().toString().length() != 0)
+                mObject = mContent.getText().toString();
         }
 
         Log.e("Fragment Add haha", "onSave 2" + mObject + " " + mContent.getText().toString());

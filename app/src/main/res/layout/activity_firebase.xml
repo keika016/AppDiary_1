@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.son_auto.appdiary_1.FirebaseActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tai Khoan"
+        android:textColor="@color/colorDen"/>
+
+    <EditText
+        android:id="@+id/activity_firebase_editTextName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Name phai co @" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mat khau"
+        android:textColor="@color/colorDen"/>
+
+    <EditText
+        android:id="@+id/activity_firebase_editTextPass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Pass phai toi thieu 6 ky tu Firebase moi add vao" />
+
+    <Button
+        android:id="@+id/activity_firebase_buttonDangKy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dang ky" />
+    <Button
+        android:id="@+id/activity_firebase_buttonDangNhap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dang nhap" />
+</LinearLayout>

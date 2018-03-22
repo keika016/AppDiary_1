@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">App Nhat ky Main</string>
+    <string name="title_activity_main2">Fire base</string>
+    <string name="navigation_drawer_open">open</string>
+    <string name="navigation_drawer_close">close</string>
+
+    <string name="firebase_account_weakpass">Tối thiểu 6 ký tự</string>
+
+</resources>

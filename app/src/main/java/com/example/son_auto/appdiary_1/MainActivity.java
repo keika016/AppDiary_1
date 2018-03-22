@@ -2,14 +2,21 @@ package com.example.son_auto.appdiary_1;
 
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.son_auto.appdiary_1.database.DiaryDatabase;
 import com.example.son_auto.appdiary_1.fragment.FragmentAdd;
@@ -21,6 +28,9 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private FloatingActionButton fabAdd;
+    private Button btnOpenFirebase;
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle drawerToggle;
 
     private FragmentListPageDiary fragmentListPageDiary;
     private FragmentAdd fragmentAdd;
@@ -42,6 +52,41 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
+        navigationDrawer();
+    }
+
+    private void navigationDrawer(){
+        drawerLayout = (DrawerLayout)findViewById(R.id.activity_main_drawerlayout);
+        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(drawerToggle);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+    }
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        drawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        drawerToggle.onConfigurationChanged(newConfig);
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+       // getMenuInflater().inflate(R.menu.main_actions, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(drawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void setCommand(String command) {
@@ -66,6 +111,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showFragmentAdd();
+            }
+        });
+        btnOpenFirebase = (Button)findViewById(R.id.activity_main_button_openfirebase);
+        btnOpenFirebase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this,FirebaseActivity.class);
+                startActivity(i);
+                finish();
             }
         });
     }
@@ -165,9 +219,11 @@ public class MainActivity extends AppCompatActivity {
         switch (count) {
             case 0:
                 // handle back press of fragment one
-                changeOfFloatButton(COMMAND_FLOATBUTTON_SHOW);
-                fragmentAdd.setCommand(FRAGMENT_ADD_COMMAND_CONTENT_ZERO_BACK);
-                Log.e("MainActivity","onBack");
+                if(fragmentAdd!=null){
+                    changeOfFloatButton(COMMAND_FLOATBUTTON_SHOW);
+                    fragmentAdd.setCommand(FRAGMENT_ADD_COMMAND_CONTENT_ZERO_BACK);
+                    Log.e("MainActivity","onBack");
+                }
                 break;
             case 1:
                 // handle back press of fragment two

@@ -31,12 +31,18 @@
         android:fitsSystemWindows="true">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
             <Button
                 android:id="@+id/activity_main_button_openfirebase"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Fire Base"/>
+            <Button
+                android:id="@+id/activity_main_button_openAbout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="About"/>
         </LinearLayout>
     </android.support.design.widget.NavigationView>
 

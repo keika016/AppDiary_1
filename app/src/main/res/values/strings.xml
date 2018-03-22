@@ -6,5 +6,7 @@
 
 
     <string name="firebase_account_weakpass">At least 6 characters</string>
+    <string name="aboue_forfun">Above content is loading from a JSON google sheet. \n
+                                Just for fun :)).</string>
 
 </resources>

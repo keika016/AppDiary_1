@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -28,7 +29,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private FloatingActionButton fabAdd;
-    private Button btnOpenFirebase;
+    private Button btnOpenFirebase, btnOpenAbout;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
 
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         init();
         navigationDrawer();
     }
@@ -114,10 +116,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         btnOpenFirebase = (Button)findViewById(R.id.activity_main_button_openfirebase);
+        btnOpenAbout = (Button)findViewById(R.id.activity_main_button_openAbout);
         btnOpenFirebase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this,FirebaseActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+        btnOpenAbout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this,AboutActivity.class);
                 startActivity(i);
                 finish();
             }

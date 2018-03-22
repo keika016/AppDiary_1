@@ -5,5 +5,7 @@
     <string name="navigation_drawer_close">close</string>
 
     <string name="firebase_account_weakpass">Tối thiểu 6 ký tự</string>
+    <string name="aboue_forfun">Nội dung ở trên là được load bằng JSON google sheet. \n
+                                Just for fun :)).</string>
 
 </resources>

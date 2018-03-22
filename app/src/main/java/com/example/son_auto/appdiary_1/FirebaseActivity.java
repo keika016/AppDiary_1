@@ -23,7 +23,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class FirebaseActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText mEdtName, mEdtPass;
-    private Button mBtnRegister, mBtnLogin;
+    private Button mBtnRegister, mBtnLogin, mBtnLogOut;
 
     private FirebaseAuth mFBAuth;
     private FirebaseAuth.AuthStateListener fireAuthStateListener;
@@ -55,15 +55,6 @@ public class FirebaseActivity extends AppCompatActivity implements View.OnClickL
         initView();
     }
 
-    private void initView() {
-        mEdtName = (EditText) findViewById(R.id.activity_firebase_editTextName);
-        mEdtPass = (EditText) findViewById(R.id.activity_firebase_editTextPass);
-        mBtnRegister = (Button) findViewById(R.id.activity_firebase_buttonDangKy);
-        mBtnLogin = (Button) findViewById(R.id.activity_firebase_buttonDangNhap);
-        mBtnRegister.setOnClickListener(this);
-        mBtnLogin.setOnClickListener(this);
-    }
-
     private void initFirebaseAuth() {
         mFBAuth = FirebaseAuth.getInstance();
         fireAuthStateListener = new FirebaseAuth.AuthStateListener() {
@@ -76,13 +67,39 @@ public class FirebaseActivity extends AppCompatActivity implements View.OnClickL
                 return;
             }
         };
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if(user!=null){
+    }
+
+    private void initView() {
+        mEdtName = (EditText) findViewById(R.id.activity_firebase_editTextName);
+        mEdtPass = (EditText) findViewById(R.id.activity_firebase_editTextPass);
+        mBtnRegister = (Button) findViewById(R.id.activity_firebase_buttonDangKy);
+        mBtnLogin = (Button) findViewById(R.id.activity_firebase_buttonDangNhap);
+        mBtnLogOut = (Button) findViewById(R.id.activity_firebase_buttonlogout);
+        mBtnRegister.setOnClickListener(this);
+        mBtnLogin.setOnClickListener(this);
+        mBtnLogOut.setOnClickListener(this);
+        checkUserLogin();
+    }
+
+    private boolean checkUserLogin() {
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
             Toast.makeText(this, "User singed in", Toast.LENGTH_SHORT).show();
-        }
-        else {
+            mBtnLogin.setEnabled(false);
+            mBtnLogOut.setEnabled(true);
+            return true;
+        } else {
             Toast.makeText(this, "No singed in", Toast.LENGTH_SHORT).show();
+            mBtnLogOut.setEnabled(false);
+            mBtnLogin.setEnabled(true);
+            return false;
         }
+    }
+
+    private boolean checkEdittextNotEmpty() {
+        if (mEdtPass.getText().toString().trim().compareTo("")!=0 && mEdtName.getText().toString().trim().compareTo("")!=0) {
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -101,29 +118,59 @@ public class FirebaseActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.activity_firebase_buttonDangKy:
-                String name = mEdtName.getText().toString();
-                String pass = mEdtPass.getText().toString();
-                mFBAuth.createUserWithEmailAndPassword(name, pass).addOnCompleteListener(FirebaseActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (!task.isSuccessful()) {
-                            try {
-                                throw task.getException();
-                            } catch (FirebaseAuthWeakPasswordException e) {
-                                Toast.makeText(FirebaseActivity.this, "Register Error" + getResources().getText(R.string.firebase_account_weakpass), Toast.LENGTH_SHORT).show();
-                            } catch (FirebaseAuthInvalidCredentialsException e) {
-                                Toast.makeText(FirebaseActivity.this, "Register Error" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                            } catch (FirebaseAuthUserCollisionException e) {
-                                Toast.makeText(FirebaseActivity.this, "Register Error" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                            } catch (Exception e) {
-                                Toast.makeText(FirebaseActivity.this, "Register Error" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-
+                if (checkEdittextNotEmpty() == true) {
+                    String name = mEdtName.getText().toString();
+                    String pass = mEdtPass.getText().toString();
+                    mFBAuth.createUserWithEmailAndPassword(name, pass).addOnCompleteListener(FirebaseActivity.this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (!task.isSuccessful()) {
+                                try {
+                                    throw task.getException();
+                                } catch (FirebaseAuthWeakPasswordException e) {
+                                    Toast.makeText(FirebaseActivity.this, "Register Error" + getResources().getText(R.string.firebase_account_weakpass), Toast.LENGTH_SHORT).show();
+                                } catch (FirebaseAuthInvalidCredentialsException e) {
+                                    Toast.makeText(FirebaseActivity.this, "Register Error" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                } catch (FirebaseAuthUserCollisionException e) {
+                                    Toast.makeText(FirebaseActivity.this, "Register Error" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                } catch (Exception e) {
+                                    Toast.makeText(FirebaseActivity.this, "Register Error" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                Toast.makeText(FirebaseActivity.this, "Dang ky thanh cong", Toast.LENGTH_SHORT).show();
+                                checkUserLogin();
                             }
                         }
-                    }
-                });
+                    });
+                } else {
+                    Toast.makeText(this, "Phai nhap du", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.activity_firebase_buttonDangNhap:
+                if (checkEdittextNotEmpty() == true) {
+                    String name = mEdtName.getText().toString();
+                    String pass = mEdtPass.getText().toString();
+                    mFBAuth.signInWithEmailAndPassword(name, pass).addOnCompleteListener(FirebaseActivity.this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (!task.isSuccessful()) {
+                                Toast.makeText(FirebaseActivity.this, "Register Error" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(FirebaseActivity.this, "Dang nhap thanh cong", Toast.LENGTH_SHORT).show();
+                                checkUserLogin();
+                            }
+                        }
+                    });
+                } else {
+                    Toast.makeText(this, "Phai nhap du", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case R.id.activity_firebase_buttonlogout:
+                FirebaseAuth.getInstance().signOut();
+                checkUserLogin();
+//                Intent i = new Intent(FirebaseActivity.this, MainActivity.class);
+//                finish();
+//                startActivity(i);
                 break;
         }
     }

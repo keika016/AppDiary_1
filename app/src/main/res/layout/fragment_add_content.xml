@@ -68,6 +68,7 @@
                                     android:layout_weight="8.5"
                                     android:background="@color/colorTim"
                                     android:gravity="top|left"
+                                    android:layout_margin="3dp"
                                     android:inputType="textMultiLine" />
 
                                 <ImageView
@@ -86,17 +87,25 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:weightSum="10">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="2"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.25" />
+
                     <ImageView
                         android:id="@+id/fragment_add_imageView"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_margin="1dp"
-                        android:layout_weight="5"
+                        android:layout_margin="4dp"
+                        android:layout_weight="2.75"
                         android:background="@drawable/if_sleepy_2" />
 
                     <TextView
@@ -104,9 +113,10 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_margin="1dp"
-                        android:layout_weight="5"
+                        android:layout_weight="7"
                         android:gravity="bottom|right"
-                        android:text="Date_Time_FragmentAdd" />
+                        android:text="Date_Time_FragmentAdd"
+                        android:textColor="@color/colorAccent" />
                 </LinearLayout>
 
             </LinearLayout>

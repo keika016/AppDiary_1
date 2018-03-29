@@ -3,20 +3,25 @@ package com.example.son_auto.appdiary_1;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.son_auto.appdiary_1.database.DiaryDatabase;
@@ -26,12 +31,14 @@ import com.example.son_auto.appdiary_1.fragment.FragmentListPageDiary;
 import java.util.ArrayList;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     private FloatingActionButton fabAdd;
     private Button btnOpenFirebase, btnOpenAbout;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
+    private NavigationView navigationView;
+    private Menu menu;
 
     private FragmentListPageDiary fragmentListPageDiary;
     private FragmentAdd fragmentAdd;
@@ -41,11 +48,13 @@ public class MainActivity extends AppCompatActivity {
     private static final String KEY_FRAGMENT = "KEY_FRAGMENT";
     private static final String FRAGMENT_ADD = "FRAGMENT_ADD";
 
+    //command
     private static final String COMMAND_SHOW_FRAGMENT_ADD = "showFragmentAdd";
     private static final String COMMAND_FLOATBUTTON_SHOW = "show";
     private static final String COMMAND_FLOATBUTTON_HIDE = "hide";
     private static final String FRAGMENT_ADD_COMMAND_CONTENT_ZERO_BACK = "contentzeroback";
     private static final String FRAGMENT_ADD_COMMAND_CONTENT_RESTORE = "contentzerorestore";
+    private static final String FRAGMENT_ADD_COMMAND_SAVE_DIARY = "savediary";
     private static final String FRAGMENT_ADD_KEY_MCONTENT = "key_mcontent";
 
     @Override
@@ -57,14 +66,17 @@ public class MainActivity extends AppCompatActivity {
         navigationDrawer();
     }
 
-    private void navigationDrawer(){
-        drawerLayout = (DrawerLayout)findViewById(R.id.activity_main_drawerlayout);
+    private void navigationDrawer() {
+        drawerLayout = (DrawerLayout) findViewById(R.id.activity_main_drawerlayout);
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(drawerToggle);
+        navigationView = (NavigationView) findViewById(R.id.activity_main_navigationview);
+        navigationView.setNavigationItemSelectedListener(this);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
     }
+
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
@@ -76,28 +88,51 @@ public class MainActivity extends AppCompatActivity {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         drawerToggle.onConfigurationChanged(newConfig);
-    }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-       // getMenuInflater().inflate(R.menu.main_actions, menu);
-        return super.onCreateOptionsMenu(menu);
+
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(drawerToggle.onOptionsItemSelected(item)) {
+        if (drawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            case R.id.menu_add_edit_diray_done:
+                fragmentAdd.setCommand(FRAGMENT_ADD_COMMAND_SAVE_DIARY);
+                fragmentAdd.getCommand();
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.add_edit_diary,menu);
+        this.menu = menu;
+        Log.e("onCreateOptionMenu", "onCreate OptionMenu");
+        showMenuDone(false);
+        return super.onCreateOptionsMenu(this.menu);
     }
 
     public void setCommand(String command) {
         switch (command) {
             case COMMAND_SHOW_FRAGMENT_ADD:
                 showFragmentAdd();
+                changeHamburgerToBackForAdd_EditPageDiary();
+                showMenuDone(true);
                 break;
 
         }
+    }
+    public void showMenuDone(boolean showMenu){
+        if(this.menu == null)
+            return;
+        this.menu.setGroupVisible(R.id.activity_main_group1, showMenu);
     }
 
     private void init() {
@@ -109,30 +144,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void initView() {
         fabAdd = (FloatingActionButton) findViewById(R.id.activity_main_fabAdd);
-        fabAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showFragmentAdd();
-            }
-        });
-        btnOpenFirebase = (Button)findViewById(R.id.activity_main_button_openfirebase);
-        btnOpenAbout = (Button)findViewById(R.id.activity_main_button_openAbout);
-        btnOpenFirebase.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this,FirebaseActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
-        btnOpenAbout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this,AboutActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
+        fabAdd.setOnClickListener(this);
+        Log.e("initView", "Init View");
     }
 
     private void initData() {
@@ -181,6 +194,17 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void changeHamburgerToBackForAdd_EditPageDiary() {
+        if (drawerToggle.isDrawerIndicatorEnabled() == true) {
+            //nếu humburger button hiện lên thì ẩn đi
+            // Remove hamburger
+            drawerToggle.setDrawerIndicatorEnabled(false);
+        } else {
+            //nếu humburger button bị ẩn đi thì hiện lên
+            drawerToggle.setDrawerIndicatorEnabled(true);
+        }
+    }
+
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -224,16 +248,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e("MainActivity", "Onresume");
+    }
+    @Override
     public void onBackPressed() {
         super.onBackPressed();
         int count = getFragmentManager().getBackStackEntryCount();
         switch (count) {
             case 0:
                 // handle back press of fragment one
-                if(fragmentAdd!=null){
+                if (fragmentAdd != null) {
                     changeOfFloatButton(COMMAND_FLOATBUTTON_SHOW);
                     fragmentAdd.setCommand(FRAGMENT_ADD_COMMAND_CONTENT_ZERO_BACK);
-                    Log.e("MainActivity","onBack");
+                    changeHamburgerToBackForAdd_EditPageDiary();
+                    showMenuDone(false);
+                    Log.e("MainActivity", "onBack");
                 }
                 break;
             case 1:
@@ -245,6 +276,32 @@ public class MainActivity extends AppCompatActivity {
             default:
                 getFragmentManager().popBackStack();
                 break;
+        }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.nav_firebase) {
+            // Handle the camera action
+            Intent i = new Intent(MainActivity.this, FirebaseActivity.class);
+            startActivity(i);
+        } else if (id == R.id.nav_about) {
+            Intent i = new Intent(MainActivity.this, AboutActivity.class);
+            startActivity(i);
+        }
+        return false;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.activity_main_fabAdd:
+                showFragmentAdd();
+                changeHamburgerToBackForAdd_EditPageDiary();
+                showMenuDone(true);
+                break;
+
         }
     }
 }

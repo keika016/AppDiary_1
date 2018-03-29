@@ -1,8 +1,14 @@
 <resources>
-    <string name="app_name">App Nhat ky Main</string>
+    <string name="app_name">Nhật Ký Của Tôi</string>
     <string name="title_activity_main2">Fire base</string>
-    <string name="navigation_drawer_open">open</string>
-    <string name="navigation_drawer_close">close</string>
+
+    <!--cho Navigation Drawer-->
+    <string name="navigation_drawer_open_thunghiem">open</string>
+    <string name="navigation_drawer_close_thunghiem">close</string>
+    <string name="navigation_drawer_title">Nhật Ký Của Tôi</string>
+    <string name="navigation_drawer_email">keika016@gmail.com</string>
+
+    <string name="menu_add">Hoàn tất</string>
 
     <string name="firebase_account_weakpass">Tối thiểu 6 ký tự</string>
     <string name="aboue_forfun">Nội dung ở trên là được load bằng JSON google sheet. \n

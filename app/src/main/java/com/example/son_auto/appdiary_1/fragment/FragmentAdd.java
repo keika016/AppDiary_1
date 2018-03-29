@@ -1,5 +1,6 @@
 package com.example.son_auto.appdiary_1.fragment;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +26,7 @@ import com.example.son_auto.appdiary_1.R;
 import com.example.son_auto.appdiary_1.adapter.AdapterForListEmotion;
 import com.example.son_auto.appdiary_1.model.PageDiary;
 
+import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -41,7 +44,7 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
     private EditText mContent;
     private ImageView mImageViewEmotion;
     private TextView mTextViewDateAndTime;
-    private Button mBtnSave, mBtnCancel, mBtnConfig;
+    private Button  mBtnConfig;
     private LinearLayout mLnLayoutContainer_Config, mLnLayout_main;
 
     //Layout Config
@@ -50,6 +53,7 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
     //Command and Key
     private static final String FRAGMENT_ADD_COMMAND_CONTENT_ZERO_BACK = "contentzeroback";
     private static final String FRAGMENT_ADD_COMMAND_CONTENT_RESTORE = "contentzerorestore";
+    private static final String FRAGMENT_ADD_COMMAND_SAVE_DIARY = "savediary";
     private static final String FRAGMENT_ADD_KEY_MCONTENT = "key_mcontent";
 
     //thuoc tinh
@@ -95,6 +99,9 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
                         Log.e("Fragment Add haha", " getcommand Content " + mObject);
                     }
                 }
+                break;
+            case FRAGMENT_ADD_COMMAND_SAVE_DIARY:
+                AddPageDiary();
                 break;
             default:
                 break;
@@ -142,8 +149,7 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
     private void initViewLayoutFragmentAdd() {
         mImageViewEmotion = (ImageView) mRootView.findViewById(R.id.fragment_add_imageView);
         mTextViewDateAndTime = (TextView) mRootView.findViewById(R.id.fragment_add_textView);
-        mBtnSave = (Button) mRootView.findViewById(R.id.fragment_add_buttonsave);
-        mBtnCancel = (Button) mRootView.findViewById(R.id.fragment_add_buttoncancel);
+
         mBtnConfig = (Button) mRootView.findViewById(R.id.fragment_add_buttonconfig);
         mContent = (EditText) mRootView.findViewById(R.id.fragment_add_edittextContent);
         mLnLayoutContainer_Config = (LinearLayout) mRootView.findViewById(R.id.fragment_add_layout_container_config);
@@ -151,12 +157,11 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
 
         mLnLayoutContainer_Config.setVisibility(View.INVISIBLE);
         mTextViewDateAndTime.setText(getDateAndTime());
-        mBtnSave.setOnClickListener(this);
-        mBtnCancel.setOnClickListener(this);
         mBtnConfig.setOnClickListener(this);
         mLnLayoutContainer_Config.setOnClickListener(this);
         mContent.requestFocus();
         initViewLayoutConfig();
+
     }
 
     private void initViewLayoutConfig() {
@@ -249,12 +254,6 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.fragment_add_buttonsave:
-                AddPageDiary();
-                break;
-            case R.id.fragment_add_buttoncancel:
-                getActivity().onBackPressed();
-                break;
             case R.id.fragment_add_buttonconfig:
                 if (!mLnLayoutContainer_Config.isShown())
                     mLnLayoutContainer_Config.setVisibility(View.VISIBLE);

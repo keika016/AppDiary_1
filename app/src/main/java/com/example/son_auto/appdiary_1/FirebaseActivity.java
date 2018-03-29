@@ -42,9 +42,7 @@ public class FirebaseActivity extends AppCompatActivity implements View.OnClickL
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent i = new Intent(FirebaseActivity.this, MainActivity.class);
                 finish();
-                startActivity(i);
                 return true;
         }
         return super.onOptionsItemSelected(item);

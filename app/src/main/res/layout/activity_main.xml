@@ -10,7 +10,6 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <include layout="@layout/activity_main_content" />
 
         <android.support.design.widget.FloatingActionButton
@@ -25,25 +24,13 @@
             app:fabSize="normal" />
     </RelativeLayout>
     <android.support.design.widget.NavigationView
+        android:id="@+id/activity_main_navigationview"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:fitsSystemWindows="true">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <Button
-                android:id="@+id/activity_main_button_openfirebase"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Fire Base"/>
-            <Button
-                android:id="@+id/activity_main_button_openAbout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="About"/>
-        </LinearLayout>
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_navigation_drawer"
+        app:menu="@menu/activity_navigation_drawer_drawer">
     </android.support.design.widget.NavigationView>
 
 </android.support.v4.widget.DrawerLayout>

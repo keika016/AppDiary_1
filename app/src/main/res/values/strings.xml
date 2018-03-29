@@ -1,12 +1,25 @@
 <resources>
-    <string name="app_name">AppDiary_1</string>
+    <string name="app_name">My Diary</string>
     <string name="title_activity_main2">Main2Activity</string>
-    <string name="navigation_drawer_open">open</string>
-    <string name="navigation_drawer_close">close</string>
+
+    <!--cho Navigation Drawer-->
+    <string name="navigation_drawer_open_thunghiem">open</string>
+    <string name="navigation_drawer_close_thunghiem">close</string>
+    <string name="navigation_drawer_title">My Diary</string>
+    <string name="navigation_drawer_email">keika016@gmail.com</string>
+
+
+    <string name="menu_add">Done</string>
 
 
     <string name="firebase_account_weakpass">At least 6 characters</string>
     <string name="aboue_forfun">Above content is loading from a JSON google sheet. \n
                                 Just for fun :)).</string>
+    <string name="title_activity_navigation_drawer">NavigationDrawerActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+
 
 </resources>

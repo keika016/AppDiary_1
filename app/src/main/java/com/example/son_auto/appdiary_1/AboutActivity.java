@@ -55,7 +55,6 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
         textView = (TextView) findViewById(R.id.activity_about_textview);
         loadImageView();
         loadContent();
-
     }
 
     private void loadContent() {
@@ -112,9 +111,7 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent i = new Intent(AboutActivity.this, MainActivity.class);
                 finish();
-                startActivity(i);
                 return true;
         }
         return super.onOptionsItemSelected(item);

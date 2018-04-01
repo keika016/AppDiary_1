@@ -65,10 +65,10 @@
                                     android:id="@+id/fragment_add_edittextContent"
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
+                                    android:layout_margin="3dp"
                                     android:layout_weight="8.5"
                                     android:background="@color/colorTim"
                                     android:gravity="top|left"
-                                    android:layout_margin="3dp"
                                     android:inputType="textMultiLine" />
 
                                 <ImageView
@@ -129,12 +129,7 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/fragment_add_buttonconfig"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="0dp"
-                android:text="Config" />
+            <include layout="@layout/fragment_add_config_2" />
         </LinearLayout>
 
     </LinearLayout>

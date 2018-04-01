@@ -44,7 +44,7 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
     private EditText mContent;
     private ImageView mImageViewEmotion;
     private TextView mTextViewDateAndTime;
-    private Button  mBtnConfig;
+   // private Button  mBtnConfig;
     private LinearLayout mLnLayoutContainer_Config, mLnLayout_main;
 
     //Layout Config
@@ -150,14 +150,14 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         mImageViewEmotion = (ImageView) mRootView.findViewById(R.id.fragment_add_imageView);
         mTextViewDateAndTime = (TextView) mRootView.findViewById(R.id.fragment_add_textView);
 
-        mBtnConfig = (Button) mRootView.findViewById(R.id.fragment_add_buttonconfig);
+       // mBtnConfig = (Button) mRootView.findViewById(R.id.fragment_add_buttonconfig);
         mContent = (EditText) mRootView.findViewById(R.id.fragment_add_edittextContent);
         mLnLayoutContainer_Config = (LinearLayout) mRootView.findViewById(R.id.fragment_add_layout_container_config);
         mLnLayout_main = (LinearLayout) mRootView.findViewById(R.id.fragment_add_lnlayout_main);
 
         mLnLayoutContainer_Config.setVisibility(View.INVISIBLE);
         mTextViewDateAndTime.setText(getDateAndTime());
-        mBtnConfig.setOnClickListener(this);
+       // mBtnConfig.setOnClickListener(this);
         mLnLayoutContainer_Config.setOnClickListener(this);
         mContent.requestFocus();
         initViewLayoutConfig();
@@ -254,14 +254,14 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.fragment_add_buttonconfig:
+           /* case R.id.fragment_add_buttonconfig:
                 if (!mLnLayoutContainer_Config.isShown())
                     mLnLayoutContainer_Config.setVisibility(View.VISIBLE);
                 break;
             case R.id.fragment_add_layout_container_config:
                 if (mLnLayoutContainer_Config.isShown())
                     mLnLayoutContainer_Config.setVisibility(View.INVISIBLE);
-                break;
+                break;*/
         }
     }
 }

@@ -122,15 +122,6 @@
 
         </RelativeLayout>
 
-        <!--This is Config-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <include layout="@layout/fragment_add_config_2" />
-        </LinearLayout>
-
     </LinearLayout>
+
 </LinearLayout>

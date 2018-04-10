@@ -18,6 +18,7 @@
 
             <!--Dành cho EditText và ImageBackGround-->
             <LinearLayout
+                android:id="@+id/fragment_add_content_LNforEdtAndBackGround"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="bottom|start"

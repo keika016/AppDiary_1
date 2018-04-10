@@ -10,44 +10,47 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:src="@drawable/ic_emotion_config_24dp"
         android:scaleType="fitCenter"
-        />
+        android:src="@drawable/ic_emotion_config_24dp" />
+
     <ImageView
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:background="@color/colorDen"
-        android:layout_weight="0.025"/>
+        android:layout_weight="0.025"
+        android:background="@color/colorDen" />
+
+    <ImageView
+        android:id="@+id/fragment_add_imageViewShowListBackGround"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_background_set_24dp" />
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.025"
+        android:background="@color/colorDen" />
+
     <ImageView
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:src="@drawable/ic_background_set_24dp"
         android:scaleType="fitCenter"
-        />
+        android:src="@drawable/ic_text_format_black_24dp" />
+
     <ImageView
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:background="@color/colorDen"
-        android:layout_weight="0.025"/>
+        android:layout_weight="0.025"
+        android:background="@color/colorDen" />
+
     <ImageView
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:src="@drawable/ic_text_format_black_24dp"
         android:scaleType="fitCenter"
-        />
-    <ImageView
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:background="@color/colorDen"
-        android:layout_weight="0.025"/>
-    <ImageView
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:src="@drawable/ic_picture_in_picture_alt_black_24dp"
-        android:scaleType="fitCenter"
-        />
+        android:src="@drawable/ic_picture_in_picture_alt_black_24dp" />
 
 </LinearLayout>

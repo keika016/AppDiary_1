@@ -29,7 +29,7 @@ public class AdapterForListEmotion extends RecyclerView.Adapter<AdapterForListEm
     @Override
     public DataViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView;
-        itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_emotion_layout, parent, false);
+        itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list_emotion, parent, false);
         return new DataViewHolder(itemView);
     }
 
@@ -58,7 +58,7 @@ public class AdapterForListEmotion extends RecyclerView.Adapter<AdapterForListEm
 
         public DataViewHolder(View itemView) {
             super(itemView);
-            imageViewEmotion = (ImageView) itemView.findViewById(R.id.item_emotion_imageview);
+            imageViewEmotion = (ImageView) itemView.findViewById(R.id.item_emotion_imageview2);
         }
 
     }

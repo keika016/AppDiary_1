@@ -4,6 +4,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 import com.example.son_auto.appdiary_1.MainActivity;
 import com.example.son_auto.appdiary_1.R;
 import com.example.son_auto.appdiary_1.adapter.AdapterForListEmotion;
+import com.example.son_auto.appdiary_1.adapter.AdapterForRecyclerView;
 import com.example.son_auto.appdiary_1.model.PageDiary;
 
 import java.lang.reflect.Type;
@@ -44,12 +46,16 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
     private EditText mContent;
     private ImageView mImageViewEmotion;
     private TextView mTextViewDateAndTime;
-   // private Button  mBtnConfig;
+    // private Button  mBtnConfig;
     private LinearLayout mLnLayoutContainer_Config, mLnLayout_main;
 
-    //Layout Config
+    //Layout Config-----------
     private LinearLayout mConfig_Lnlayout;
+    //list Emotion
     private RecyclerView mRecyclerViewEmotion1;
+    private LinearLayout mContainListEmotion_LnLayout;
+    private ImageView imgView_ShowListEmotion;
+
     //Command and Key
     private static final String FRAGMENT_ADD_COMMAND_CONTENT_ZERO_BACK = "contentzeroback";
     private static final String FRAGMENT_ADD_COMMAND_CONTENT_RESTORE = "contentzerorestore";
@@ -150,47 +156,69 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         mImageViewEmotion = (ImageView) mRootView.findViewById(R.id.fragment_add_imageView);
         mTextViewDateAndTime = (TextView) mRootView.findViewById(R.id.fragment_add_textView);
 
-       // mBtnConfig = (Button) mRootView.findViewById(R.id.fragment_add_buttonconfig);
+        // mBtnConfig = (Button) mRootView.findViewById(R.id.fragment_add_buttonconfig);
         mContent = (EditText) mRootView.findViewById(R.id.fragment_add_edittextContent);
-        mLnLayoutContainer_Config = (LinearLayout) mRootView.findViewById(R.id.fragment_add_layout_container_config);
+        // mLnLayoutContainer_Config = (LinearLayout) mRootView.findViewById(R.id.fragment_add_layout_container_config);
         mLnLayout_main = (LinearLayout) mRootView.findViewById(R.id.fragment_add_lnlayout_main);
 
-        mLnLayoutContainer_Config.setVisibility(View.INVISIBLE);
+//        mLnLayoutContainer_Config.setVisibility(View.INVISIBLE);
         mTextViewDateAndTime.setText(getDateAndTime());
-       // mBtnConfig.setOnClickListener(this);
-        mLnLayoutContainer_Config.setOnClickListener(this);
+        // mBtnConfig.setOnClickListener(this);
+        // mLnLayoutContainer_Config.setOnClickListener(this);
         mContent.requestFocus();
-        initViewLayoutConfig();
+        //initViewLayoutConfig();
 
+        //Config
+        imgView_ShowListEmotion = (ImageView) mRootView.findViewById(R.id.fragment_add_imageViewShowListEmotion);
+        imgView_ShowListEmotion.setOnClickListener(this);
+        mContainListEmotion_LnLayout = (LinearLayout) mRootView.findViewById(R.id.fragment_add_layout_Contain_ListEmotion);
+        mContainListEmotion_LnLayout.setOnClickListener(this);
+        mContainListEmotion_LnLayout.setEnabled(false);
+        mContainListEmotion_LnLayout.setVisibility(View.GONE);
     }
 
-    private void initViewLayoutConfig() {
-        mConfig_Lnlayout = (LinearLayout) mRootView.findViewById(R.id.fragment_add_layout_config);
-        mRecyclerViewEmotion1 = (RecyclerView) mRootView.findViewById(R.id.fragment_add_config_recyclerviewemotion);
+    //    private void initViewLayoutConfig() {
+//        mConfig_Lnlayout = (LinearLayout) mRootView.findViewById(R.id.fragment_add_layout_config);
+//        mRecyclerViewEmotion1 = (RecyclerView) mRootView.findViewById(R.id.fragment_add_config_recyclerviewemotion);
+//
+//        //không hiểu sao trên app cái này nó lại trượt qua được ??
+//        ArrayList<String> listIcon = new ArrayList<>();
+//        listIcon.add("pic1");
+//        listIcon.add("pic2");
+//        LinearLayoutManager linearLayoutManager_ListEmotion = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+//        mRecyclerViewEmotion1.setLayoutManager(linearLayoutManager_ListEmotion);
+//        mRecyclerViewEmotion1.setHasFixedSize(true);
+//        mRecyclerViewEmotion1.setAdapter(new AdapterForListEmotion(getContext(), listIcon));
+//
+//
+//    }
+    private void showOrHideListEmotion() {
+        if (mContainListEmotion_LnLayout.isEnabled() == false) {
+            mContainListEmotion_LnLayout.setEnabled(true);
+            mContainListEmotion_LnLayout.setVisibility(View.VISIBLE);
+            initListEmotion();
+        } else {
+            mContainListEmotion_LnLayout.setEnabled(false);
+            mContainListEmotion_LnLayout.setVisibility(View.GONE);
+        }
+    }
 
-        //không hiểu sao trên app cái này nó lại trượt qua được ??
+    private void initListEmotion() {
+        mRecyclerViewEmotion1 = (RecyclerView) mRootView.findViewById(R.id.fragment_add_recyclerviewListEmotion);
         ArrayList<String> listIcon = new ArrayList<>();
-        listIcon.add("pic1");
-        listIcon.add("pic2");
-        listIcon.add("pic3");
-        listIcon.add("pic3");
-        listIcon.add("pic3");
-        listIcon.add("ic_sad");
-        listIcon.add("ic_sleep");
-        listIcon.add("ic_sleep");
-        listIcon.add("ic_sad");
-        listIcon.add("ic_sleep");
-        listIcon.add("ic_sleep");
-        listIcon.add("ic_sad");
-        listIcon.add("ic_sleep");
-        listIcon.add("ic_sleep");
-        listIcon.add("ic_sad");
-        LinearLayoutManager linearLayoutManager_ListEmotion = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        mRecyclerViewEmotion1.setLayoutManager(linearLayoutManager_ListEmotion);
+        listIcon.add("if_sleepy_2");
+        listIcon.add("if_sleepy_2");
+        listIcon.add("if_sleepy_2");
+        listIcon.add("if_sleepy_2");
+        listIcon.add("if_sleepy_2");
+        listIcon.add("if_sleepy_2");
+        listIcon.add("if_sleepy_2");
+        listIcon.add("if_sleepy_2");
+        listIcon.add("if_sleepy_2");
+        listIcon.add("if_sleepy_2");
+        mRecyclerViewEmotion1.setLayoutManager(new GridLayoutManager(getContext(), 4, GridLayoutManager.VERTICAL, false));
         mRecyclerViewEmotion1.setHasFixedSize(true);
         mRecyclerViewEmotion1.setAdapter(new AdapterForListEmotion(getContext(), listIcon));
-
-
     }
 
     @Override
@@ -254,6 +282,13 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.fragment_add_imageViewShowListEmotion:
+                showOrHideListEmotion();
+                break;
+            case R.id.fragment_add_layout_Contain_ListEmotion:
+                mContainListEmotion_LnLayout.setVisibility(View.GONE);
+                mContainListEmotion_LnLayout.setEnabled(false);
+                break;
            /* case R.id.fragment_add_buttonconfig:
                 if (!mLnLayoutContainer_Config.isShown())
                     mLnLayoutContainer_Config.setVisibility(View.VISIBLE);

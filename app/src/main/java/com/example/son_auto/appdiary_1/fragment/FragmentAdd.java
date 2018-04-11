@@ -46,9 +46,12 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
     private RecyclerView mRecyclerViewEmotion1;
     private LinearLayout mContainListEmotion_LnLayout;
     private ImageView imgView_ShowListEmotion;
-    //list Back Ground
+    //list Image Back Ground
+    private RecyclerView mRecyclerViewImageBackground;
     private LinearLayout mContainListBackGround_LnLayout;
     private ImageView imgView_ShowListImageBackGround;
+    //list EditText backGround
+    private ImageView imgView_ShowListEditTextBackGround;
 
     //Command and Key
     private static final String FRAGMENT_ADD_COMMAND_CONTENT_ZERO_BACK = "contentzeroback";
@@ -175,6 +178,9 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         imgView_ShowListImageBackGround.setOnClickListener(this);
         mContainListBackGround_LnLayout = (LinearLayout) mRootView.findViewById(R.id.fragment_add_layout_Contain_ListImageBackGround);
         setForContainer(mContainListBackGround_LnLayout);
+        //EditText BackGround
+        imgView_ShowListEditTextBackGround = (ImageView) mRootView.findViewById(R.id.fragment_add_imageViewShowListEditTextBackGround);
+        imgView_ShowListEditTextBackGround.setOnClickListener(this);
         //-------------------
     }
 
@@ -216,7 +222,7 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         if (mContainListBackGround_LnLayout.isEnabled() == false) {
             mContainListBackGround_LnLayout.setEnabled(true);
             mContainListBackGround_LnLayout.setVisibility(View.VISIBLE);
-            initListEmotion();
+            initListImageBackGround();
 
             //ẩn các List Khác đi
             hideListConfig(mContainListEmotion_LnLayout);
@@ -246,6 +252,25 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         mRecyclerViewEmotion1.setLayoutManager(new GridLayoutManager(getContext(), 4, GridLayoutManager.VERTICAL, false));
         mRecyclerViewEmotion1.setHasFixedSize(true);
         mRecyclerViewEmotion1.setAdapter(new AdapterForListEmotion(getContext(), listIcon));
+    }
+
+    private void initListImageBackGround() {
+        mRecyclerViewImageBackground = (RecyclerView) mRootView.findViewById(R.id.fragment_add_recyclerviewListImageBackground);
+        ArrayList<String> listIcon = new ArrayList<>();
+        listIcon.add("pic2");
+        listIcon.add("pic2");
+        listIcon.add("pic2");
+        listIcon.add("pic2");
+        listIcon.add("pic2");
+        listIcon.add("pic2");
+        listIcon.add("pic2");
+        listIcon.add("pic2");
+        listIcon.add("pic2");
+        listIcon.add("pic2");
+        listIcon.add("pic2");
+        mRecyclerViewImageBackground.setLayoutManager(new GridLayoutManager(getContext(), 4, GridLayoutManager.VERTICAL, false));
+        mRecyclerViewImageBackground.setHasFixedSize(true);
+        mRecyclerViewImageBackground.setAdapter(new AdapterForListEmotion(getContext(), listIcon));
     }
 
     @Override
@@ -312,16 +337,23 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
             case R.id.fragment_add_imageViewShowListEmotion:
                 showOrHideListEmotion();
                 break;
+            case R.id.fragment_add_imageViewShowListBackGround:
+                showOrHideListBackGround();
+                break;
+            case R.id.fragment_add_imageViewShowListEditTextBackGround:
+                Toast.makeText(getContext(), "This is Show List EditText", Toast.LENGTH_SHORT).show();
+                break;
             case R.id.fragment_add_layout_Contain_ListEmotion:
                 hideListConfig(mContainListEmotion_LnLayout);
                 break;
             case R.id.fragment_add_layout_Contain_ListImageBackGround:
                 hideListConfig(mContainListBackGround_LnLayout);
                 break;
-            case R.id.fragment_add_imageViewShowListBackGround:
-                showOrHideListBackGround();
-                break;
             case R.id.fragment_add_content_LNforEdtAndBackGround:
+                hideListConfig(mContainListBackGround_LnLayout);
+                hideListConfig(mContainListEmotion_LnLayout);
+                break;
+            case R.id.fragment_add_edittextContent:
                 hideListConfig(mContainListBackGround_LnLayout);
                 hideListConfig(mContainListEmotion_LnLayout);
                 break;

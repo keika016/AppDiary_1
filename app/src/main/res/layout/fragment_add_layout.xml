@@ -94,7 +94,7 @@
             android:layout_height="0dp"
             android:layout_weight="4">
 
-            <include layout="@layout/fragment_add_layout_list_emotion" />
+            <include layout="@layout/fragment_add_layout_list_imagebackground" />
         </LinearLayout>
     </LinearLayout>
 

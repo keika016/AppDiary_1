@@ -47,6 +47,7 @@
         android:background="@color/colorDen" />
 
     <ImageView
+        android:id="@+id/fragment_add_imageViewShowListEditTextBackGround"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.son_auto.appdiary_1.R;
 
@@ -34,9 +35,15 @@ public class AdapterForListEmotion extends RecyclerView.Adapter<AdapterForListEm
     }
 
     @Override
-    public void onBindViewHolder(DataViewHolder holder, int position) {
+    public void onBindViewHolder(DataViewHolder holder, final int position) {
         int id = context.getResources().getIdentifier(listEmotion.get(position), "drawable", context.getPackageName());
         holder.imageViewEmotion.setImageResource(id);
+        holder.imageViewEmotion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "Hahaha "+position, Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 

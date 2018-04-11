@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/fragment_add_layout_listImageBackground"
+    android:id="@+id/fragment_add_layout_list_edittextbackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorTrang"
     android:orientation="vertical">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/fragment_add_recyclerviewListImageBackground"
+        android:id="@+id/fragment_add_recyclerviewLisEditTextBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 </LinearLayout>
+

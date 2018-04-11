@@ -71,6 +71,7 @@
             <include layout="@layout/fragment_add_layout_list_emotion" />
         </LinearLayout>
     </LinearLayout>
+    <!--End-->
 
     <!--Cho ListView Image BackGround-->
     <LinearLayout
@@ -97,5 +98,60 @@
             <include layout="@layout/fragment_add_layout_list_imagebackground" />
         </LinearLayout>
     </LinearLayout>
+    <!--End-->
+
+    <!--Cho ListView Image BackGround-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:gravity="start"
+        android:orientation="vertical"
+        android:weightSum="10">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5"
+            android:visibility="invisible" />
+
+        <LinearLayout
+            android:id="@+id/fragment_add_layout_Contain_ListEditTextBackGround"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4">
+
+            <include layout="@layout/fragment_add_layout_list_edittextbackground" />
+        </LinearLayout>
+    </LinearLayout>
+    <!--End-->
+
+    <!--Cho ListView Image BackGround-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:gravity="start"
+        android:orientation="vertical"
+        android:weightSum="10">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5"
+            android:visibility="invisible" />
+
+        <LinearLayout
+            android:id="@+id/fragment_add_layout_Contain_ListTextOption"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4">
+
+            <include layout="@layout/fragment_add_layout_list_textoption" />
+        </LinearLayout>
+    </LinearLayout>
+    <!--End-->
 
 </RelativeLayout>

@@ -1,5 +1,6 @@
 package com.example.son_auto.appdiary_1.fragment;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,12 +22,18 @@ import com.example.son_auto.appdiary_1.R;
 import com.example.son_auto.appdiary_1.adapter.AdapterForListEditTextBackground;
 import com.example.son_auto.appdiary_1.adapter.AdapterForListEmotion;
 import com.example.son_auto.appdiary_1.adapter.AdapterForListImageBackground;
+import com.example.son_auto.appdiary_1.adapter.Adapter_LV_ListTestPostion;
+import com.example.son_auto.appdiary_1.adapter.Adapter_LV_ListTextFont;
+import com.example.son_auto.appdiary_1.adapter.Adapter_LV_ListTextSize;
+import com.example.son_auto.appdiary_1.adapter.Adapter_LV_ListTextStyle;
+import com.example.son_auto.appdiary_1.adapter.Adapter_RV_ListTextColor;
 import com.example.son_auto.appdiary_1.model.PageDiary;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 
 /**
@@ -59,6 +67,22 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
     //list Text Option
     private ImageView imgView_ShowListTextOption;
     private LinearLayout mContainListTextOption_LnLayout;
+    // . list Text Option font
+    private ImageView imgView_ShowListTextFonts;
+    private ListView lv_ListTextFonts;
+    // . list Text Option style
+    private ImageView imgView_ShowListTextStyles;
+    private ListView lv_ListTextStyles;
+    // . list Text Option style
+    private ImageView imgView_ShowListTextColors;
+    private RecyclerView rv_ListTextColor;
+    // . list Text Option size
+    private ImageView imgView_ShowListTextSizes;
+    private ListView lv_ListTextSizes;
+    // . list Text Option postion
+    private ImageView imgView_ShowListTextPostions;
+    private ListView lv_ListTextPositions;
+
 
     //Command and Key
     private static final String FRAGMENT_ADD_COMMAND_CONTENT_ZERO_BACK = "contentzeroback";
@@ -271,16 +295,224 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
             mContainListTextOption_LnLayout.setEnabled(true);
             mContainListTextOption_LnLayout.setVisibility(View.VISIBLE);
 
+            //các list text option
+            initListTextFont();
+            initListTextStyle();
+            initListTextColor();
+            initListTextSize();
+            initListTextPosition();
+            showListTextFont();
+
             //ẩn các List Khác đi
             hideListConfig(mContainListEmotion_LnLayout);
             hideListConfig(mContainListBackGround_LnLayout);
             hideListConfig(mContainListEditTextBackGround_LnLayout);
         } else {
             hideListConfig(mContainListTextOption_LnLayout);
+            hideListConfig(lv_ListTextFonts);
+            hideListConfig(lv_ListTextStyles);
+            hideListConfig(rv_ListTextColor);
+            hideListConfig(lv_ListTextSizes);
+            hideListConfig(lv_ListTextPositions);
         }
     }
 
-    private void hideListConfig(LinearLayout ln) {
+    private void initListTextFont() {
+        imgView_ShowListTextFonts = (ImageView) mRootView.findViewById(R.id.fragment_add_textoption_imageView_ShowListFont);
+        imgView_ShowListTextFonts.setOnClickListener(this);
+        lv_ListTextFonts = (ListView) mRootView.findViewById(R.id.fragment_add_layout_listTextOption_ListView_Font);
+    }
+
+    private void initListTextStyle() {
+        imgView_ShowListTextStyles = (ImageView) mRootView.findViewById(R.id.fragment_add_textoption_imageView_ShowListStyle);
+        imgView_ShowListTextStyles.setOnClickListener(this);
+        lv_ListTextStyles = (ListView) mRootView.findViewById(R.id.fragment_add_layout_listTextOption_ListView_Style);
+    }
+
+    private void initListTextColor() {
+        imgView_ShowListTextColors = (ImageView) mRootView.findViewById(R.id.fragment_add_textoption_imageView_ShowListColor);
+        imgView_ShowListTextColors.setOnClickListener(this);
+        rv_ListTextColor = (RecyclerView) mRootView.findViewById(R.id.fragment_add_layout_listTextOption_RecyclerView_Color);
+    }
+
+    private void initListTextSize() {
+        imgView_ShowListTextSizes = (ImageView) mRootView.findViewById(R.id.fragment_add_textoption_imageView_ShowListSize);
+        imgView_ShowListTextSizes.setOnClickListener(this);
+        lv_ListTextSizes = (ListView) mRootView.findViewById(R.id.fragment_add_layout_listTextOption_ListView_Size);
+    }
+
+    private void initListTextPosition() {
+        imgView_ShowListTextPostions = (ImageView) mRootView.findViewById(R.id.fragment_add_textoption_imageView_ShowListPosition);
+        imgView_ShowListTextPostions.setOnClickListener(this);
+        lv_ListTextPositions = (ListView) mRootView.findViewById(R.id.fragment_add_layout_listTextOption_ListView_Position);
+    }
+
+    private void showListTextFont() {
+        lv_ListTextFonts.setEnabled(false);
+        hideListConfig(lv_ListTextStyles);
+        hideListConfig(rv_ListTextColor);
+        hideListConfig(lv_ListTextSizes);
+        hideListConfig(lv_ListTextPositions);
+        if (lv_ListTextFonts.isEnabled() == false) {
+            ArrayList<String> listTextFonts = new ArrayList<String>();
+            ArrayList<String> listTextName = new ArrayList<String>();
+            listTextFonts.add("fonts/opensans_regular.ttf");
+            listTextName.add("Opensans Regular");
+            listTextFonts.add("fonts/aller_regular.ttf");
+            listTextName.add("Aller Regular");
+            listTextFonts.add("fonts/amaticsc_regular.ttf");
+            listTextName.add("Amaticsc Regular");
+
+            listTextFonts.add("fonts/bebas_regular.ttf");
+            listTextName.add("Bebas Regular");
+            listTextFonts.add("fonts/cac_champagne.ttf");
+            listTextName.add("CAC Champagne");
+            listTextFonts.add("fonts/color_your_world.ttf");
+            listTextName.add("Color Your World");
+
+            listTextFonts.add("fonts/fff_tusj.ttf");
+            listTextName.add("FFF Tusj");
+            listTextFonts.add("fonts/lato_regular.ttf");
+            listTextName.add("Lato Regular");
+            listTextFonts.add("fonts/orange_juice_2.ttf");
+            listTextName.add("Orange Juice 2");
+            listTextFonts.add("fonts/ostrich_regular.ttf");
+            listTextName.add("Ostrich Regular");
+
+            listTextFonts.add("fonts/oswald_regular.ttf");
+            listTextName.add("Oswald Regular");
+            listTextFonts.add("fonts/pacifico.ttf");
+            listTextName.add("Pacifico");
+            listTextFonts.add("fonts/pt_sans.ttf");
+            listTextName.add("Pt Sans");
+            listTextFonts.add("fonts/raleway_regular.ttf");
+            listTextName.add("Raleway Regular");
+
+
+            listTextFonts.add("fonts/remachinescript_personal_use.ttf");
+            listTextName.add("Remachinescript Personal Use");
+            listTextFonts.add("fonts/roboto_regular.ttf");
+            listTextName.add("Roboto Regular");
+            listTextFonts.add("fonts/southernaire_personal_use_only.ttf");
+            listTextName.add("Southernaire Personal Use Only");
+            listTextFonts.add("fonts/waltographui.ttf");
+            listTextName.add("Waltographui");
+            listTextFonts.add("fonts/windsong.ttf");
+            listTextName.add("Windsong");
+            lv_ListTextFonts.setEnabled(true);
+            lv_ListTextFonts.setVisibility(View.VISIBLE);
+            Adapter_LV_ListTextFont adapter = new Adapter_LV_ListTextFont(getActivity(), listTextFonts, listTextName);
+            lv_ListTextFonts.setAdapter(adapter);
+        } else
+            hideListConfig(lv_ListTextFonts);
+    }
+
+    private void showListTextStyle() {
+        hideListConfig(lv_ListTextFonts);
+        hideListConfig(rv_ListTextColor);
+        hideListConfig(lv_ListTextSizes);
+        hideListConfig(lv_ListTextPositions);
+        if (lv_ListTextStyles.isEnabled() == false) {
+            ArrayList<Integer> listTextStyles = new ArrayList<Integer>();
+            ArrayList<String> listTextName = new ArrayList<String>();
+            listTextStyles.add(Typeface.NORMAL);
+            listTextName.add("Normal");
+            listTextStyles.add(Typeface.BOLD);
+            listTextName.add("Bold");
+            listTextStyles.add(Typeface.ITALIC);
+            listTextName.add("Italic");
+            listTextStyles.add(Typeface.BOLD_ITALIC);
+            listTextName.add("Bold Italic");
+            lv_ListTextStyles.setEnabled(true);
+            lv_ListTextStyles.setVisibility(View.VISIBLE);
+            Adapter_LV_ListTextStyle adapter = new Adapter_LV_ListTextStyle(getActivity(), listTextStyles, listTextName);
+            lv_ListTextStyles.setAdapter(adapter);
+        } else
+            hideListConfig(lv_ListTextStyles);
+    }
+
+    private void showListTextColor() {
+        hideListConfig(lv_ListTextFonts);
+        hideListConfig(lv_ListTextStyles);
+        hideListConfig(lv_ListTextSizes);
+        hideListConfig(lv_ListTextPositions);
+        if (rv_ListTextColor.isEnabled() == false) {
+            ArrayList<String> listIcon = new ArrayList<>();
+            listIcon.add(R.color.colorAccent + "");
+            listIcon.add(R.color.colorDen + "");
+            listIcon.add(R.color.colorTrang + "");
+            listIcon.add(R.color.colorTim + "");
+            listIcon.add(R.color.colorPrimaryDark + "");
+            listIcon.add(R.color.colorXanh + "");
+            listIcon.add(R.color.colorXanhLa + "");
+            listIcon.add(R.color.colorAccent + "");
+            listIcon.add(R.color.colorDen + "");
+            listIcon.add(R.color.colorTrang + "");
+            listIcon.add(R.color.colorTim + "");
+            listIcon.add(R.color.colorPrimaryDark + "");
+            listIcon.add(R.color.colorXanh + "");
+            listIcon.add(R.color.colorXanhLa + "");
+
+            rv_ListTextColor.setEnabled(true);
+            rv_ListTextColor.setVisibility(View.VISIBLE);
+            rv_ListTextColor.setLayoutManager(new GridLayoutManager(getContext(), 4, GridLayoutManager.VERTICAL, false));
+            rv_ListTextColor.setHasFixedSize(true);
+            Adapter_RV_ListTextColor adapter = new Adapter_RV_ListTextColor(getContext(), listIcon);
+            rv_ListTextColor.setAdapter(adapter);
+
+        } else
+            hideListConfig(rv_ListTextColor);
+    }
+
+    private void showListTextSize() {
+        hideListConfig(lv_ListTextFonts);
+        hideListConfig(rv_ListTextColor);
+        hideListConfig(lv_ListTextStyles);
+        hideListConfig(lv_ListTextPositions);
+        if (lv_ListTextSizes.isEnabled() == false) {
+            ArrayList<Integer> listTextStyles = new ArrayList<Integer>();
+            ArrayList<String> listTextName = new ArrayList<String>();
+            listTextStyles.add(Typeface.NORMAL);
+            listTextName.add("Normal Size");
+            listTextStyles.add(Typeface.BOLD);
+            listTextName.add("Bold Size");
+            listTextStyles.add(Typeface.ITALIC);
+            listTextName.add("Italic Size");
+            listTextStyles.add(Typeface.BOLD_ITALIC);
+            listTextName.add("Bold Italic Size");
+            lv_ListTextSizes.setEnabled(true);
+            lv_ListTextSizes.setVisibility(View.VISIBLE);
+            Adapter_LV_ListTextSize adapter = new Adapter_LV_ListTextSize(getActivity(), listTextStyles, listTextName);
+            lv_ListTextSizes.setAdapter(adapter);
+        } else
+            hideListConfig(lv_ListTextSizes);
+    }
+
+    private void showListTextPosition() {
+        hideListConfig(lv_ListTextFonts);
+        hideListConfig(rv_ListTextColor);
+        hideListConfig(lv_ListTextStyles);
+        hideListConfig(lv_ListTextSizes);
+        if (lv_ListTextPositions.isEnabled() == false) {
+            ArrayList<Integer> listTextStyles = new ArrayList<Integer>();
+            ArrayList<String> listTextName = new ArrayList<String>();
+            listTextStyles.add(Typeface.NORMAL);
+            listTextName.add("Normal Position");
+            listTextStyles.add(Typeface.BOLD);
+            listTextName.add("Bold  Position");
+            listTextStyles.add(Typeface.ITALIC);
+            listTextName.add("Italic  Position");
+            listTextStyles.add(Typeface.BOLD_ITALIC);
+            listTextName.add("Bold Italic  Position");
+            lv_ListTextPositions.setEnabled(true);
+            lv_ListTextPositions.setVisibility(View.VISIBLE);
+            Adapter_LV_ListTestPostion adapter = new Adapter_LV_ListTestPostion(getActivity(), listTextStyles, listTextName);
+            lv_ListTextPositions.setAdapter(adapter);
+        } else
+            hideListConfig(lv_ListTextPositions);
+    }
+
+    private void hideListConfig(View ln) {
         ln.setEnabled(false);
         ln.setVisibility(View.GONE);
     }
@@ -440,6 +672,21 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
                 hideListConfig(mContainListEmotion_LnLayout);
                 hideListConfig(mContainListEditTextBackGround_LnLayout);
                 hideListConfig(mContainListTextOption_LnLayout);
+                break;
+            case R.id.fragment_add_textoption_imageView_ShowListFont:
+                showListTextFont();
+                break;
+            case R.id.fragment_add_textoption_imageView_ShowListStyle:
+                showListTextStyle();
+                break;
+            case R.id.fragment_add_textoption_imageView_ShowListColor:
+                showListTextColor();
+                break;
+            case R.id.fragment_add_textoption_imageView_ShowListSize:
+                showListTextSize();
+                break;
+            case R.id.fragment_add_textoption_imageView_ShowListPosition:
+                showListTextPosition();
                 break;
            /* case R.id.fragment_add_buttonconfig:
                 if (!mLnLayoutContainer_Config.isShown())

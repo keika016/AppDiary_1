@@ -1,20 +1,31 @@
 package com.example.son_auto.appdiary_1.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Son-Auto on 3/5/2018.
  */
 
-public class PageDiary {
-    private String content, emotion, background, dateTime;
+public class PageDiary implements Serializable {
+    private String content, emotion, background, editTextBackGround, dateTime;
     private int id;
     private String font, style, color, size, position;
 
     public PageDiary() {
     }
 
-    public PageDiary(String emotion, String background, String dateTime, String content, String font, String style, String color, String size, String position, int id) {
+    public String getEditTextBackGround() {
+        return editTextBackGround;
+    }
+
+    public void setEditTextBackGround(String editTextBackGround) {
+        this.editTextBackGround = editTextBackGround;
+    }
+
+    public PageDiary(String emotion, String background, String editTextBackGround, String dateTime, String content, String font, String style, String color, String size, String position, int id) {
         this.emotion = emotion;
         this.background = background;
+        this.editTextBackGround = editTextBackGround;
         this.dateTime = dateTime;
         this.content = content;
         this.font = font;
@@ -28,6 +39,7 @@ public class PageDiary {
     public PageDiary(String emotion, String background, String dateTime, String content, String font, String style, String color, String size, String position) {
         this.emotion = emotion;
         this.background = background;
+        this.editTextBackGround = editTextBackGround;
         this.dateTime = dateTime;
         this.content = content;
         this.font = font;
@@ -123,6 +135,7 @@ public class PageDiary {
         sb.append("content='").append(content).append('\'');
         sb.append(", emotion='").append(emotion).append('\'');
         sb.append(", background='").append(background).append('\'');
+        sb.append(", editTextBackGround='").append(editTextBackGround).append('\'');
         sb.append(", dateTime='").append(dateTime).append('\'');
         sb.append(", id=").append(id);
         sb.append(", font='").append(font).append('\'');

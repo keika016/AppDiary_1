@@ -46,7 +46,6 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
     //Layout Fragment Add
     private View mRootView;
     private EditText mContent;
-    private ImageView mImageViewEmotion;
     private TextView mTextViewDateAndTime;
     // private Button  mBtnConfig;
     private LinearLayout mLnLayoutContainer_Config, mLnLayout_main;
@@ -86,6 +85,8 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
 
     //Page Diary Tam
     private PageDiary mPagaDiaryTam;
+    private ImageView mImageViewEmotion;
+    private ImageView mImgViewBackGround;
 
     //Command and Key
     private static final String FRAGMENT_ADD_COMMAND_CONTENT_ZERO_BACK = "contentzeroback";
@@ -189,7 +190,6 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
     }
 
     private void initViewLayoutFragmentAdd() {
-        mImageViewEmotion = (ImageView) mRootView.findViewById(R.id.fragment_add_imageView);
         mTextViewDateAndTime = (TextView) mRootView.findViewById(R.id.fragment_add_textView);
 
         // mBtnConfig = (Button) mRootView.findViewById(R.id.fragment_add_buttonconfig);
@@ -230,18 +230,24 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         mContainListTextOption_LnLayout = (LinearLayout) mRootView.findViewById(R.id.fragment_add_layout_Contain_ListTextOption);
         setForContainer(mContainListTextOption_LnLayout);
         //-------------------
-        
+
         //Page Diary Tạm
+        mImageViewEmotion = (ImageView) mRootView.findViewById(R.id.fragment_add_imageView);
+        mImgViewBackGround = (ImageView) mRootView.findViewById(R.id.fragment_add_pagediary_imageBackground);
         String emotion1 = "if_sleepy_2";
         String background1 = R.color.colorAccent + "";
-        String datetime1 = mTextViewDateAndTime.getText().toString();
+        String editTextCorlorBackGround = R.color.colorXanhLa + "";
+
         String content1 = mContent.getText().toString();
-        String font1 = "opensans_regular";
         String style1 = Typeface.BOLD + "";
         String color1 = R.color.colorPrimaryDark + "";
         String size1 = 20 + "";
         String position1 = "Left";
         mPagaDiaryTam = new PageDiary();
+        mPagaDiaryTam.setDateTime(mTextViewDateAndTime.getText().toString());
+        mPagaDiaryTam.setFont("fonts/opensans_regular.ttf");
+        mPagaDiaryTam.setStyle(Typeface.NORMAL + "");
+
     }
 
     private void setForContainer(LinearLayout ln) {
@@ -541,15 +547,7 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         mRecyclerViewEmotion1 = (RecyclerView) mRootView.findViewById(R.id.fragment_add_recyclerviewListEmotion);
         ArrayList<String> listIcon = new ArrayList<>();
         listIcon.add("if_sleepy_2");
-        listIcon.add("if_sleepy_2");
-        listIcon.add("if_sleepy_2");
-        listIcon.add("if_sleepy_2");
-        listIcon.add("if_sleepy_2");
-        listIcon.add("if_sleepy_2");
-        listIcon.add("if_sleepy_2");
-        listIcon.add("if_sleepy_2");
-        listIcon.add("if_sleepy_2");
-        listIcon.add("if_sleepy_2");
+        listIcon.add("ic_sad");
         mRecyclerViewEmotion1.setLayoutManager(new GridLayoutManager(getContext(), 4, GridLayoutManager.VERTICAL, false));
         mRecyclerViewEmotion1.setHasFixedSize(true);
         mRecyclerViewEmotion1.setAdapter(new AdapterForListEmotion(getContext(), listIcon));
@@ -558,17 +556,9 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
     private void initListImageBackGround() {
         mRecyclerViewImageBackground = (RecyclerView) mRootView.findViewById(R.id.fragment_add_recyclerviewListImageBackground);
         ArrayList<String> listIcon = new ArrayList<>();
+        listIcon.add("pic1");
         listIcon.add("pic2");
-        listIcon.add("pic2");
-        listIcon.add("pic2");
-        listIcon.add("pic2");
-        listIcon.add("pic2");
-        listIcon.add("pic2");
-        listIcon.add("pic2");
-        listIcon.add("pic2");
-        listIcon.add("pic2");
-        listIcon.add("pic2");
-        listIcon.add("pic2");
+        listIcon.add("pic3");
         mRecyclerViewImageBackground.setLayoutManager(new GridLayoutManager(getContext(), 4, GridLayoutManager.VERTICAL, false));
         mRecyclerViewImageBackground.setHasFixedSize(true);
         mRecyclerViewImageBackground.setAdapter(new AdapterForListImageBackground(getContext(), listIcon));
@@ -595,6 +585,42 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         mRecyclerViewEditTextBackground.setHasFixedSize(true);
         mRecyclerViewEditTextBackground.setAdapter(new AdapterForListEditTextBackground(getContext(), listIcon));
     }
+
+    //Cho Page Diary Tạm----------------------
+    public void setPageDiary_Emotion(String iconName) {
+        mPagaDiaryTam.setEmotion(iconName + "");
+        int id = getContext().getResources().getIdentifier(iconName, "drawable", getContext().getPackageName());
+        mImageViewEmotion.setImageResource(id);
+    }
+
+    public void setPageDiary_ImageBackground(String imageviewName) {
+        mPagaDiaryTam.setBackground(imageviewName + "");
+        int id = getContext().getResources().getIdentifier(imageviewName, "drawable", getContext().getPackageName());
+        mImgViewBackGround.setBackgroundResource(id);
+        Log.e("PADIARY ", "Image BackGround: " + mPagaDiaryTam.getBackground());
+    }
+
+    public void setPageDiary_EditBackground(String colorName) {
+        mPagaDiaryTam.setEditTextBackGround(colorName + "");
+        int id = getContext().getResources().getIdentifier(colorName, "drawable", getContext().getPackageName());
+        mContent.setBackgroundResource(id);
+    }
+
+    public void setPageDiary_TextFont(String fontName) {
+        mPagaDiaryTam.setFont(fontName + "");
+        Typeface type = Typeface.createFromAsset(getActivity().getAssets(), fontName);
+        mContent.setTypeface(type, Integer.parseInt(mPagaDiaryTam.getStyle()));
+        Log.e("PADIARY ", "Font: " + mPagaDiaryTam.getFont() + " - Style: " + mPagaDiaryTam.getStyle());
+    }
+
+    public void setPageDiary_TextStyle(String styleName) {
+        mPagaDiaryTam.setStyle(styleName + "");
+        Typeface type = Typeface.createFromAsset(getActivity().getAssets(), mPagaDiaryTam.getFont());
+        mContent.setTypeface(type, Integer.parseInt(mPagaDiaryTam.getStyle()));
+        Log.e("PADIARY ", "Font: " + mPagaDiaryTam.getFont() + " - Style: " + mPagaDiaryTam.getStyle());
+    }
+
+    //-----------------------------------------
 
     @Override
     public void onStart() {

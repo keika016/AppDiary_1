@@ -66,6 +66,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationDrawer();
     }
 
+    public FragmentAdd getFragmentAdd() {
+        return fragmentAdd;
+    }
+
     private void navigationDrawer() {
         drawerLayout = (DrawerLayout) findViewById(R.id.activity_main_drawerlayout);
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);

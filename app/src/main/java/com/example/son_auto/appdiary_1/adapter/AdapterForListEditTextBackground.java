@@ -36,9 +36,15 @@ public class AdapterForListEditTextBackground extends RecyclerView.Adapter<Adapt
     }
 
     @Override
-    public void onBindViewHolder(DataViewHolder holder, int position) {
+    public void onBindViewHolder(DataViewHolder holder, final int position) {
         int id = Integer.parseInt(listEditTextBackGround.get(position));
         holder.imageViewEmotion.setBackgroundColor(ContextCompat.getColor(context, id));
+        holder.imageViewEmotion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) context).getFragmentAdd().setPageDiary_EditBackground(listEditTextBackGround.get(position));
+            }
+        });
     }
 
     @Override

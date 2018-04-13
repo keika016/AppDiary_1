@@ -9,7 +9,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.example.son_auto.appdiary_1.MainActivity;
 import com.example.son_auto.appdiary_1.R;
+import com.example.son_auto.appdiary_1.fragment.FragmentAdd;
 
 import java.util.ArrayList;
 
@@ -41,7 +43,7 @@ public class AdapterForListEmotion extends RecyclerView.Adapter<AdapterForListEm
         holder.imageViewEmotion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "Hahaha "+position, Toast.LENGTH_SHORT).show();
+                ((MainActivity) context).getFragmentAdd().setPageDiary_Emotion(listEmotion.get(position));
             }
         });
 

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.example.son_auto.appdiary_1.MainActivity;
 import com.example.son_auto.appdiary_1.R;
 
 import java.util.ArrayList;
@@ -44,7 +45,7 @@ public class Adapter_LV_ListTextFont extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         if (convertView == null) {
             convertView = LayoutInflater.from(activity).inflate(R.layout.item_list_textoption_font, null);
@@ -56,6 +57,12 @@ public class Adapter_LV_ListTextFont extends BaseAdapter {
         Typeface type = Typeface.createFromAsset(activity.getAssets(), listItem.get(position).toString());
         viewHolder.tvTextFont.setTypeface(type);
         viewHolder.tvTextFont.setText(listName.get(position).toString() + "");
+        viewHolder.tvTextFont.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) activity).getFragmentAdd().setPageDiary_TextFont(listItem.get(position));
+            }
+        });
 
         return convertView;
     }

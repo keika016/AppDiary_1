@@ -23,6 +23,7 @@ public class DiaryDatabase extends SQLiteOpenHelper {
     private static final String DIARY_ID = "tbdiary_id";
     private static final String DIARY_EMOTION = "tbdiary_emotion";
     private static final String DIARY_BACKGROUND = "tbdiary_background";
+    private static final String DIARY_EDITTEXTBACKGROUND = "tbdiary_edittext_background";
     private static final String DIARY_DATETIME = "tbdiary_datetime";
 
     private static final String DIARY_CONTENT = "tbdiary_content";
@@ -46,6 +47,7 @@ public class DiaryDatabase extends SQLiteOpenHelper {
                 DIARY_ID + " integer primary key autoincrement, " +
                 DIARY_EMOTION + " text," +
                 DIARY_BACKGROUND + " text," +
+                DIARY_EDITTEXTBACKGROUND + " text," +
                 DIARY_DATETIME + " text," +
                 DIARY_CONTENT + " text," +
                 DIARY_FONT + " text," +
@@ -66,6 +68,7 @@ public class DiaryDatabase extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(DIARY_EMOTION, pageDiary.getEmotion());
         values.put(DIARY_BACKGROUND, pageDiary.getBackground());
+        values.put(DIARY_EDITTEXTBACKGROUND, pageDiary.getBackground());
         values.put(DIARY_DATETIME, pageDiary.getDateTime());
         values.put(DIARY_CONTENT, pageDiary.getContent());
         values.put(DIARY_FONT, pageDiary.getFont());
@@ -93,14 +96,15 @@ public class DiaryDatabase extends SQLiteOpenHelper {
                 p.setId(Integer.parseInt(cursor.getString(0)));
                 p.setEmotion(cursor.getString(1));
                 p.setBackground(cursor.getString(2));
-                p.setDateTime(cursor.getString(3));
-                p.setContent(cursor.getString(4));
+                p.setEditTextBackGround(cursor.getString(3));
+                p.setDateTime(cursor.getString(4));
+                p.setContent(cursor.getString(5));
 
-                p.setFont(cursor.getString(5));
-                p.setStyle(cursor.getString(6));
-                p.setColor(cursor.getString(7));
-                p.setSize(cursor.getString(8));
-                p.setPosition(cursor.getString(9));
+                p.setFont(cursor.getString(6));
+                p.setStyle(cursor.getString(7));
+                p.setColor(cursor.getString(8));
+                p.setSize(cursor.getString(9));
+                p.setPosition(cursor.getString(10));
 
                 listPage.add(p);
             } while (cursor.moveToNext());

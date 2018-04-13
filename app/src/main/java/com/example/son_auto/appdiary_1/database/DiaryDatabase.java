@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.example.son_auto.appdiary_1.model.PageDiary;
 
@@ -20,10 +21,16 @@ public class DiaryDatabase extends SQLiteOpenHelper {
     public static final String TABLE_NAME = "tbdiary_name";
 
     private static final String DIARY_ID = "tbdiary_id";
-    private static final String DIARY_CONTENT = "tbdiary_content";
     private static final String DIARY_EMOTION = "tbdiary_emotion";
     private static final String DIARY_BACKGROUND = "tbdiary_background";
     private static final String DIARY_DATETIME = "tbdiary_datetime";
+
+    private static final String DIARY_CONTENT = "tbdiary_content";
+    private static final String DIARY_FONT = "tbdiary_font";
+    private static final String DIARY_STYLE = "tbdiary_style";
+    private static final String DIARY_COLOR = "tbdiary_color";
+    private static final String DIARY_SIZE = "tbdiary_size";
+    private static final String DIARY_POSITION = "tbdiary_position";
 
     private Context context;
 
@@ -37,10 +44,15 @@ public class DiaryDatabase extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String query = "create table " + TABLE_NAME + " (" +
                 DIARY_ID + " integer primary key autoincrement, " +
-                DIARY_CONTENT + " ntext," +
-                DIARY_EMOTION + " text, " +
-                DIARY_BACKGROUND + " text, "+
-                DIARY_DATETIME+" text)";
+                DIARY_EMOTION + " text," +
+                DIARY_BACKGROUND + " text," +
+                DIARY_DATETIME + " text," +
+                DIARY_CONTENT + " text," +
+                DIARY_FONT + " text," +
+                DIARY_STYLE + " text," +
+                DIARY_COLOR + " text," +
+                DIARY_SIZE + " text," +
+                DIARY_POSITION + " text);";
         db.execSQL(query);
     }
 
@@ -52,10 +64,15 @@ public class DiaryDatabase extends SQLiteOpenHelper {
     public void addDiary(PageDiary pageDiary) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(DIARY_CONTENT, pageDiary.getContent());
         values.put(DIARY_EMOTION, pageDiary.getEmotion());
         values.put(DIARY_BACKGROUND, pageDiary.getBackground());
         values.put(DIARY_DATETIME, pageDiary.getDateTime());
+        values.put(DIARY_CONTENT, pageDiary.getContent());
+        values.put(DIARY_FONT, pageDiary.getFont());
+        values.put(DIARY_STYLE, pageDiary.getStyle());
+        values.put(DIARY_COLOR, pageDiary.getColor());
+        values.put(DIARY_SIZE, pageDiary.getSize());
+        values.put(DIARY_POSITION, pageDiary.getPosition());
         db.insert(TABLE_NAME, null, values);
         db.close();
     }
@@ -65,20 +82,47 @@ public class DiaryDatabase extends SQLiteOpenHelper {
         String query = "select * from " + TABLE_NAME;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-        if (cursor.moveToFirst()) {
+        cursor.moveToFirst();
+        if (cursor.isBeforeFirst()) {
+            cursor.close();
+            db.close();
+            return null;//cửa hàng không tồn tại
+        } else {
             do {
                 PageDiary p = new PageDiary();
                 p.setId(Integer.parseInt(cursor.getString(0)));
-                p.setContent(cursor.getString(1));
-                p.setEmotion(cursor.getString(2));
-                p.setBackground(cursor.getString(3));
-                p.setDateTime(cursor.getString(4));
+                p.setEmotion(cursor.getString(1));
+                p.setBackground(cursor.getString(2));
+                p.setDateTime(cursor.getString(3));
+                p.setContent(cursor.getString(4));
+
+                p.setFont(cursor.getString(5));
+                p.setStyle(cursor.getString(6));
+                p.setColor(cursor.getString(7));
+                p.setSize(cursor.getString(8));
+                p.setPosition(cursor.getString(9));
+
                 listPage.add(p);
             } while (cursor.moveToNext());
         }
-
         cursor.close();
         db.close();
         return listPage;
+    }
+
+    public boolean checkDBHaveItem() {
+        boolean b = false;
+        String query = "select * from " + TABLE_NAME;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        cursor.moveToFirst();
+        if (cursor.isBeforeFirst()) {
+            //cửa hàng không tồn tại
+        } else {
+            b = true;
+        }
+        cursor.close();
+        db.close();
+        return b;
     }
 }

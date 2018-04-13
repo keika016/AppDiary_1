@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,6 +84,8 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
     private ImageView imgView_ShowListTextPostions;
     private ListView lv_ListTextPositions;
 
+    //Page Diary Tam
+    private PageDiary mPagaDiaryTam;
 
     //Command and Key
     private static final String FRAGMENT_ADD_COMMAND_CONTENT_ZERO_BACK = "contentzeroback";
@@ -160,16 +163,21 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
     }
 
     private void AddPageDiary() {
+        String emotion1 = "if_sleepy_2";
+        String background1 = R.color.colorTrang + "";
+        String datetime1 = mTextViewDateAndTime.getText().toString();
         String content1 = mContent.getText().toString();
-        String emotion1 = "pic1";
-        int background1 = R.color.colorAccent;
-        String datetime = mTextViewDateAndTime.getText().toString();
-        PageDiary p = new PageDiary(content1, emotion1, background1 + "", datetime);
+        String font1 = "opensans_regular";
+        String style1 = Typeface.BOLD + "";
+        String color1 = R.color.colorPrimaryDark + "";
+        String size1 = 20 + "";
+        String position1 = "Left";
+        PageDiary p = new PageDiary(emotion1, background1, datetime1, content1, font1, style1, color1, size1, position1);
         MainActivity.getDiaryDatabase().addDiary(p);
         Toast.makeText(getContext(), "Page Added", Toast.LENGTH_SHORT).show();
+        clearEditText();
         getActivity().onBackPressed();
     }
-
 
     @Nullable
     @Override
@@ -222,6 +230,18 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         mContainListTextOption_LnLayout = (LinearLayout) mRootView.findViewById(R.id.fragment_add_layout_Contain_ListTextOption);
         setForContainer(mContainListTextOption_LnLayout);
         //-------------------
+        
+        //Page Diary Tạm
+        String emotion1 = "if_sleepy_2";
+        String background1 = R.color.colorAccent + "";
+        String datetime1 = mTextViewDateAndTime.getText().toString();
+        String content1 = mContent.getText().toString();
+        String font1 = "opensans_regular";
+        String style1 = Typeface.BOLD + "";
+        String color1 = R.color.colorPrimaryDark + "";
+        String size1 = 20 + "";
+        String position1 = "Left";
+        mPagaDiaryTam = new PageDiary();
     }
 
     private void setForContainer(LinearLayout ln) {

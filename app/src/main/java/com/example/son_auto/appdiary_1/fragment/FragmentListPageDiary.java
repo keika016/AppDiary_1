@@ -1,5 +1,6 @@
 package com.example.son_auto.appdiary_1.fragment;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 
 import com.example.son_auto.appdiary_1.MainActivity;
 import com.example.son_auto.appdiary_1.R;
@@ -30,10 +32,10 @@ public class FragmentListPageDiary extends Fragment {
 
     private static final String FRAGMENT_LIST_COMMAND_ADD_PAGEDIARY = "addPage";
 
-    public  void setCommand(String command) {
+    public void setCommand(String command) {
         switch (command) {
             case FRAGMENT_LIST_COMMAND_ADD_PAGEDIARY:
-              //refeshListPageDiary();
+                //refeshListPageDiary();
                 break;
         }
     }
@@ -43,6 +45,7 @@ public class FragmentListPageDiary extends Fragment {
             instance = new FragmentListPageDiary();
         return instance;
     }
+
     private void init() {
         initData();
         initView();
@@ -58,8 +61,11 @@ public class FragmentListPageDiary extends Fragment {
     }
 
     private void initData() {
-        listPage = new ArrayList<>();
-        listPage.addAll(MainActivity.getDiaryDatabase().getAllPageDiary());
+        listPage = new ArrayList<PageDiary>();
+        if (MainActivity.getDiaryDatabase().checkDBHaveItem() == true) {
+            listPage.addAll(MainActivity.getDiaryDatabase().getAllPageDiary());
+        }
+
     }
 
     @Nullable

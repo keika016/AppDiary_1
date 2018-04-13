@@ -7,6 +7,35 @@ package com.example.son_auto.appdiary_1.model;
 public class PageDiary {
     private String content, emotion, background, dateTime;
     private int id;
+    private String font, style, color, size, position;
+
+    public PageDiary() {
+    }
+
+    public PageDiary(String emotion, String background, String dateTime, String content, String font, String style, String color, String size, String position, int id) {
+        this.emotion = emotion;
+        this.background = background;
+        this.dateTime = dateTime;
+        this.content = content;
+        this.font = font;
+        this.style = style;
+        this.color = color;
+        this.size = size;
+        this.position = position;
+        this.id = id;
+    }
+
+    public PageDiary(String emotion, String background, String dateTime, String content, String font, String style, String color, String size, String position) {
+        this.emotion = emotion;
+        this.background = background;
+        this.dateTime = dateTime;
+        this.content = content;
+        this.font = font;
+        this.style = style;
+        this.color = color;
+        this.size = size;
+        this.position = position;
+    }
 
     public String getContent() {
         return content;
@@ -32,14 +61,6 @@ public class PageDiary {
         this.background = background;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getDateTime() {
         return dateTime;
     }
@@ -48,21 +69,52 @@ public class PageDiary {
         this.dateTime = dateTime;
     }
 
-    public PageDiary() {
+    public int getId() {
+        return id;
     }
 
-    public PageDiary(String content, String emotion, String background, String dateTime, int id) {
-        this.content = content;
-        this.emotion = emotion;
-        this.background = background;
-        this.dateTime = dateTime;
+    public void setId(int id) {
         this.id = id;
     }
-    public PageDiary(String content, String emotion, String background, String dateTime) {
-        this.content = content;
-        this.emotion = emotion;
-        this.background = background;
-        this.dateTime = dateTime;
+
+    public String getFont() {
+        return font;
+    }
+
+    public void setFont(String font) {
+        this.font = font;
+    }
+
+    public String getStyle() {
+        return style;
+    }
+
+    public void setStyle(String style) {
+        this.style = style;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
     }
 
     @Override
@@ -73,6 +125,11 @@ public class PageDiary {
         sb.append(", background='").append(background).append('\'');
         sb.append(", dateTime='").append(dateTime).append('\'');
         sb.append(", id=").append(id);
+        sb.append(", font='").append(font).append('\'');
+        sb.append(", style='").append(style).append('\'');
+        sb.append(", color='").append(color).append('\'');
+        sb.append(", size='").append(size).append('\'');
+        sb.append(", position='").append(position).append('\'');
         sb.append('}');
         return sb.toString();
     }

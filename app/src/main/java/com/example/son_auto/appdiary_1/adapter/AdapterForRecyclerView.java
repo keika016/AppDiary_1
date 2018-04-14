@@ -1,8 +1,10 @@
 package com.example.son_auto.appdiary_1.adapter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +29,7 @@ public class AdapterForRecyclerView extends RecyclerView.Adapter<AdapterForRecyc
     private Context context;
 
     private static final String COMMAND_SHOW_FRAGMENT_ADD = "showFragmentAdd";
+    private static final String FRAGMENT_ADD_KEY_LOADPAGE = "loadpage";
 
     public AdapterForRecyclerView(Context context, ArrayList<PageDiary> listPage) {
         this.listPage = listPage;
@@ -41,17 +44,32 @@ public class AdapterForRecyclerView extends RecyclerView.Adapter<AdapterForRecyc
     }
 
     @Override
-    public void onBindViewHolder(DataViewHolder holder, int position) {
-        PageDiary p = listPage.get(position);
+    public void onBindViewHolder(DataViewHolder holder, final int position) {
+        final PageDiary p = listPage.get(position);
         holder.tvContent.setText(p.getContent());
-        holder.imageViewBackGround.setBackgroundColor(ContextCompat.getColor(context, Integer.parseInt(p.getBackground())));
+       // holder.imageViewBackGround.setBackgroundColor(ContextCompat.getColor(context, Integer.parseInt(p.getBackground())));
+        if (isNumericOnlyNumber(p.getBackground()) == true) {
+            holder.imageViewBackGround.setBackgroundColor(ContextCompat.getColor(context, Integer.parseInt(p.getBackground())));
+        } else {
+            int id = context.getResources().getIdentifier(p.getBackground(), "drawable", context.getPackageName());
+            holder.imageViewBackGround.setBackgroundResource(id);
+        }
         holder.imageViewEmotion.setImageResource(context.getResources().getIdentifier(p.getEmotion(), "drawable", context.getPackageName()));
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ((MainActivity) context).setCommand(COMMAND_SHOW_FRAGMENT_ADD);
+                Bundle b = new Bundle();
+                b.putSerializable(FRAGMENT_ADD_KEY_LOADPAGE, p);
+                ((MainActivity) context).getFragmentAdd().setArguments(b);
             }
         });
+
+
+    }
+
+    public static boolean isNumericOnlyNumber(String str) {
+        return str.matches("\\d+");
     }
 
     @Override

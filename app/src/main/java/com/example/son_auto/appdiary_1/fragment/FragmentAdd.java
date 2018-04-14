@@ -95,6 +95,7 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
     private static final String FRAGMENT_ADD_COMMAND_CONTENT_RESTORE = "contentzerorestore";
     private static final String FRAGMENT_ADD_COMMAND_SAVE_DIARY = "savediary";
     private static final String FRAGMENT_ADD_KEY_MCONTENT = "key_mcontent";
+    private static final String FRAGMENT_ADD_KEY_LOADPAGE = "loadpage";
 
     //thuoc tinh
     private String mCommand;
@@ -166,17 +167,9 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
     }
 
     private void AddPageDiary() {
-        String emotion1 = "if_sleepy_2";
-        String background1 = R.color.colorTrang + "";
-        String datetime1 = mTextViewDateAndTime.getText().toString();
-        String content1 = mContent.getText().toString();
-        String font1 = "opensans_regular";
-        String style1 = Typeface.BOLD + "";
-        String color1 = R.color.colorPrimaryDark + "";
-        String size1 = 20 + "";
-        String position1 = "Left";
-        PageDiary p = new PageDiary(emotion1, background1, datetime1, content1, font1, style1, color1, size1, position1);
-        MainActivity.getDiaryDatabase().addDiary(p);
+        mPagaDiaryTam.setContent(mContent.getText().toString());
+        MainActivity.getDiaryDatabase().addDiary(mPagaDiaryTam);
+        Log.e("Fragment Add haha", "AddPage: " + mPagaDiaryTam);
         Toast.makeText(getContext(), "Page Added", Toast.LENGTH_SHORT).show();
         clearEditText();
         getActivity().onBackPressed();
@@ -236,11 +229,10 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         //Page Diary Tạm
         mImageViewEmotion = (ImageView) mRootView.findViewById(R.id.fragment_add_imageView);
         mImgViewBackGround = (ImageView) mRootView.findViewById(R.id.fragment_add_pagediary_imageBackground);
-        String background1 = R.color.colorAccent + "";
-        String content1 = mContent.getText().toString();
 
         mPagaDiaryTam = new PageDiary();
         mPagaDiaryTam.setEmotion("if_sleepy_2");
+        mPagaDiaryTam.setBackground(R.color.colorTrang + "");
         mPagaDiaryTam.setEditTextBackGround(Color.TRANSPARENT + "");
         mPagaDiaryTam.setDateTime(mTextViewDateAndTime.getText().toString());
         mPagaDiaryTam.setFont("fonts/opensans_regular.ttf");
@@ -252,6 +244,7 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         mContent.setTextSize(Float.parseFloat(mPagaDiaryTam.getSize()));
         Typeface type = Typeface.createFromAsset(getActivity().getAssets(), mPagaDiaryTam.getFont());
         mContent.setTypeface(type, Integer.parseInt(mPagaDiaryTam.getStyle()));
+        mImgViewBackGround.setBackgroundColor(ContextCompat.getColor(getContext(), Integer.parseInt(mPagaDiaryTam.getBackground())));
     }
 
     private void setForContainer(LinearLayout ln) {
@@ -573,6 +566,14 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
     private void initListImageBackGround() {
         mRecyclerViewImageBackground = (RecyclerView) mRootView.findViewById(R.id.fragment_add_recyclerviewListImageBackground);
         ArrayList<String> listIcon = new ArrayList<>();
+        listIcon.add(R.color.colorAccent + "");
+        listIcon.add(R.color.colorDen + "");
+        listIcon.add(R.color.colorTrang + "");
+        listIcon.add(R.color.colorTim + "");
+        listIcon.add(R.color.colorPrimaryDark + "");
+        listIcon.add(R.color.colorXanh + "");
+        listIcon.add(R.color.colorXanhLa + "");
+        listIcon.add("side_nav_bar");
         listIcon.add("pic1");
         listIcon.add("pic2");
         listIcon.add("pic3");
@@ -584,6 +585,7 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
     private void initListEditTextBackGround() {
         mRecyclerViewEditTextBackground = (RecyclerView) mRootView.findViewById(R.id.fragment_add_recyclerviewLisEditTextBackground);
         ArrayList<String> listIcon = new ArrayList<>();
+        listIcon.add(R.color.colorTransparent + "");
         listIcon.add(R.color.colorAccent + "");
         listIcon.add(R.color.colorDen + "");
         listIcon.add(R.color.colorTrang + "");
@@ -591,13 +593,9 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         listIcon.add(R.color.colorPrimaryDark + "");
         listIcon.add(R.color.colorXanh + "");
         listIcon.add(R.color.colorXanhLa + "");
-        listIcon.add(R.color.colorAccent + "");
-        listIcon.add(R.color.colorDen + "");
-        listIcon.add(R.color.colorTrang + "");
-        listIcon.add(R.color.colorTim + "");
-        listIcon.add(R.color.colorPrimaryDark + "");
-        listIcon.add(R.color.colorXanh + "");
-        listIcon.add(R.color.colorXanhLa + "");
+
+        listIcon.add("side_nav_bar");
+
         mRecyclerViewEditTextBackground.setLayoutManager(new GridLayoutManager(getContext(), 4, GridLayoutManager.VERTICAL, false));
         mRecyclerViewEditTextBackground.setHasFixedSize(true);
         mRecyclerViewEditTextBackground.setAdapter(new AdapterForListEditTextBackground(getContext(), listIcon));
@@ -612,16 +610,33 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
 
     public void setPageDiary_ImageBackground(String imageviewName) {
         mPagaDiaryTam.setBackground(imageviewName + "");
-        int id = getContext().getResources().getIdentifier(imageviewName, "drawable", getContext().getPackageName());
-        mImgViewBackGround.setBackgroundResource(id);
-        Log.e("PADIARY ", "Image BackGround: " + mPagaDiaryTam.getBackground());
+        if (isNumericOnlyNumber(imageviewName) == true) {
+            mImgViewBackGround.setBackgroundColor(ContextCompat.getColor(getContext(), Integer.parseInt(mPagaDiaryTam.getBackground())));
+            Log.e("PADIARY ", "Color: " + mPagaDiaryTam.getColor());
+        } else {
+            int id = getContext().getResources().getIdentifier(imageviewName, "drawable", getContext().getPackageName());
+            mImgViewBackGround.setBackgroundResource(id);
+            Log.e("PADIARY ", "Image BackGround: " + mPagaDiaryTam.getBackground());
+        }
+    }
+
+    public static boolean isNumericOnlyNumber(String str) {
+        return str.matches("\\d+");
     }
 
     public void setPageDiary_EditBackground(String colorName) {
         mPagaDiaryTam.setEditTextBackGround(colorName + "");
-        int id = getContext().getResources().getIdentifier(colorName, "drawable", getContext().getPackageName());
-        mContent.setBackgroundResource(id);
+
+        if (isNumericOnlyNumber(colorName) == true) {
+            mContent.setBackgroundColor(ContextCompat.getColor(getContext(), Integer.parseInt(mPagaDiaryTam.getEditTextBackGround())));
+            Log.e("PADIARY ", "EditText BackGround: " + mPagaDiaryTam.getEditTextBackGround());
+        } else {
+            int id = getContext().getResources().getIdentifier(colorName, "drawable", getContext().getPackageName());
+            mContent.setBackgroundResource(id);
+            Log.e("PADIARY ", "EditText BackGround: " + mPagaDiaryTam.getEditTextBackGround());
+        }
     }
+
 
     public void setPageDiary_TextFont(String fontName) {
         mPagaDiaryTam.setFont(fontName + "");
@@ -651,7 +666,12 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
 
     public void setPageDiary_TextPostion(String postionName) {
         mPagaDiaryTam.setPosition(postionName + "");
-        switch (postionName) {
+        SwicthPosition(mPagaDiaryTam.getPosition());
+        Log.e("PADIARY ", "Position: " + mPagaDiaryTam.getPosition());
+    }
+
+    private void SwicthPosition(String position) {
+        switch (position) {
             case "Left":
                 mContent.setGravity(Gravity.LEFT);
                 break;
@@ -687,8 +707,6 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
                 mContent.setGravity(Gravity.RIGHT | Gravity.BOTTOM);
                 break;
         }
-
-        Log.e("PADIARY ", "Position: " + mPagaDiaryTam.getPosition());
     }
     //-----------------------------------------
 
@@ -711,6 +729,39 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         Log.e("Fragment Add haha", "onResume" + this.mCommand);
         //Dùng cho EditText = ""
         getCommand();
+        loadPageDiary();
+    }
+
+    private void loadPageDiary() {
+        if (this.getArguments() != null) {
+            if (this.getArguments().get(FRAGMENT_ADD_KEY_LOADPAGE) != null) {
+                PageDiary p = (PageDiary) this.getArguments().get(FRAGMENT_ADD_KEY_LOADPAGE);
+                mPagaDiaryTam = p;
+                Log.e("Fragment Load Page", "" + p);
+                int id = getContext().getResources().getIdentifier(mPagaDiaryTam.getEmotion(), "drawable", getContext().getPackageName());
+                mImageViewEmotion.setImageResource(id);
+                if (isNumericOnlyNumber(mPagaDiaryTam.getBackground()) == true) {
+                    mImgViewBackGround.setBackgroundColor(ContextCompat.getColor(getContext(), Integer.parseInt(mPagaDiaryTam.getBackground())));
+                } else {
+                    int id2 = getContext().getResources().getIdentifier(mPagaDiaryTam.getBackground(), "drawable", getContext().getPackageName());
+                    mImgViewBackGround.setBackgroundResource(id2);
+                }
+                if (isNumericOnlyNumber(mPagaDiaryTam.getEditTextBackGround()) == true) {
+                    mContent.setBackgroundColor(ContextCompat.getColor(getContext(), Integer.parseInt(mPagaDiaryTam.getEditTextBackGround())));
+                } else {
+                    int id3 = getContext().getResources().getIdentifier(mPagaDiaryTam.getEditTextBackGround(), "drawable", getContext().getPackageName());
+                    mContent.setBackgroundResource(id3);
+                }
+                Typeface type = Typeface.createFromAsset(getActivity().getAssets(), mPagaDiaryTam.getFont());
+                mContent.setTypeface(type, Integer.parseInt(mPagaDiaryTam.getStyle()));
+                mContent.setTextColor(ContextCompat.getColor(getContext(), Integer.parseInt(mPagaDiaryTam.getColor())));
+                mContent.setTextSize(Float.parseFloat(mPagaDiaryTam.getSize()));
+                SwicthPosition(mPagaDiaryTam.getPosition());
+                mContent.setText(mPagaDiaryTam.getContent() + "");
+                Log.e("Fragment Load Page", "" + mPagaDiaryTam);
+                this.getArguments().remove(FRAGMENT_ADD_KEY_LOADPAGE);
+            }
+        }
     }
 
     @Override

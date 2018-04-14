@@ -34,8 +34,7 @@
                     <ImageView
                         android:id="@+id/fragment_add_pagediary_imageBackground"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/pic1" />
+                        android:layout_height="match_parent" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -64,15 +63,15 @@
                                     android:layout_height="match_parent"
                                     android:layout_weight="0.75" />
 
-                                <android.support.v7.widget.AppCompatEditText
+                                <EditText
                                     android:id="@+id/fragment_add_edittextContent"
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
                                     android:layout_margin="3dp"
                                     android:layout_weight="8.5"
+                                    android:background="@color/colorTransparent"
                                     android:gravity="top|left"
-                                    android:inputType="textMultiLine"
-                                    app:backgroundTint="@android:color/transparent" />
+                                    android:inputType="textMultiLine" />
 
                                 <ImageView
                                     android:layout_width="0dp"

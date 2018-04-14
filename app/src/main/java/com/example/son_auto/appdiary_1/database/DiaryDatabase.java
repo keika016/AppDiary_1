@@ -68,7 +68,7 @@ public class DiaryDatabase extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(DIARY_EMOTION, pageDiary.getEmotion());
         values.put(DIARY_BACKGROUND, pageDiary.getBackground());
-        values.put(DIARY_EDITTEXTBACKGROUND, pageDiary.getBackground());
+        values.put(DIARY_EDITTEXTBACKGROUND, pageDiary.getEditTextBackGround());
         values.put(DIARY_DATETIME, pageDiary.getDateTime());
         values.put(DIARY_CONTENT, pageDiary.getContent());
         values.put(DIARY_FONT, pageDiary.getFont());

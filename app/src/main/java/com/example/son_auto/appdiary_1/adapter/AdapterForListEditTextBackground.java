@@ -37,8 +37,10 @@ public class AdapterForListEditTextBackground extends RecyclerView.Adapter<Adapt
 
     @Override
     public void onBindViewHolder(DataViewHolder holder, final int position) {
-        int id = Integer.parseInt(listEditTextBackGround.get(position));
-        holder.imageViewEmotion.setBackgroundColor(ContextCompat.getColor(context, id));
+        int id = context.getResources().getIdentifier(listEditTextBackGround.get(position), "drawable", context.getPackageName());
+        holder.imageViewEmotion.setImageResource(id);
+//        int id = Integer.parseInt(listEditTextBackGround.get(position));
+//        holder.imageViewEmotion.setBackgroundColor(ContextCompat.getColor(context, id));
         holder.imageViewEmotion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

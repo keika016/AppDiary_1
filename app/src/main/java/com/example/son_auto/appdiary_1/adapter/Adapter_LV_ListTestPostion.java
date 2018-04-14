@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.example.son_auto.appdiary_1.MainActivity;
 import com.example.son_auto.appdiary_1.R;
 
 import java.util.ArrayList;
@@ -17,10 +18,10 @@ import java.util.ArrayList;
 
 public class Adapter_LV_ListTestPostion extends BaseAdapter {
     private Activity activity;
-    private ArrayList<Integer> listItem;
+    private ArrayList<String> listItem;
     private ArrayList<String> listName;
 
-    public Adapter_LV_ListTestPostion(Activity activity, ArrayList<Integer> items, ArrayList<String> listName) {
+    public Adapter_LV_ListTestPostion(Activity activity, ArrayList<String> items, ArrayList<String> listName) {
         this.activity = activity;
         this.listItem = items;
         this.listName = listName;
@@ -42,7 +43,7 @@ public class Adapter_LV_ListTestPostion extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         if (convertView == null) {
             convertView = LayoutInflater.from(activity).inflate(R.layout.item_list_textoption_position, null);
@@ -52,6 +53,12 @@ public class Adapter_LV_ListTestPostion extends BaseAdapter {
         } else
             viewHolder = (ViewHolder) convertView.getTag();
         viewHolder.tvTextFont.setText(listName.get(position).toString() + "");
+        viewHolder.tvTextFont.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) activity).getFragmentAdd().setPageDiary_TextPostion(listItem.get(position) + "");
+            }
+        });
 
         return convertView;
     }

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.example.son_auto.appdiary_1.MainActivity;
 import com.example.son_auto.appdiary_1.R;
 
 import java.util.ArrayList;
@@ -34,9 +35,15 @@ public class Adapter_RV_ListTextColor extends RecyclerView.Adapter<Adapter_RV_Li
     }
 
     @Override
-    public void onBindViewHolder(DataViewHolder holder, int position) {
+    public void onBindViewHolder(DataViewHolder holder, final int position) {
         int id = Integer.parseInt(listEditTextColor.get(position));
         holder.imageViewEmotion.setBackgroundColor(ContextCompat.getColor(context, id));
+        holder.imageViewEmotion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) context).getFragmentAdd().setPageDiary_TextColor(listEditTextColor.get(position) + "");
+            }
+        });
     }
 
     @Override

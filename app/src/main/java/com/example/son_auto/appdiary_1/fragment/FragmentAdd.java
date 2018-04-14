@@ -1,9 +1,11 @@
 package com.example.son_auto.appdiary_1.fragment;
 
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -234,20 +236,22 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         //Page Diary Tạm
         mImageViewEmotion = (ImageView) mRootView.findViewById(R.id.fragment_add_imageView);
         mImgViewBackGround = (ImageView) mRootView.findViewById(R.id.fragment_add_pagediary_imageBackground);
-        String emotion1 = "if_sleepy_2";
         String background1 = R.color.colorAccent + "";
-        String editTextCorlorBackGround = R.color.colorXanhLa + "";
-
         String content1 = mContent.getText().toString();
-        String style1 = Typeface.BOLD + "";
-        String color1 = R.color.colorPrimaryDark + "";
-        String size1 = 20 + "";
-        String position1 = "Left";
+
         mPagaDiaryTam = new PageDiary();
+        mPagaDiaryTam.setEmotion("if_sleepy_2");
+        mPagaDiaryTam.setEditTextBackGround(Color.TRANSPARENT + "");
         mPagaDiaryTam.setDateTime(mTextViewDateAndTime.getText().toString());
         mPagaDiaryTam.setFont("fonts/opensans_regular.ttf");
         mPagaDiaryTam.setStyle(Typeface.NORMAL + "");
-
+        mPagaDiaryTam.setColor(R.color.colorDen + "");
+        mPagaDiaryTam.setSize(15 + "");
+        mPagaDiaryTam.setPosition("Left Top");
+        mContent.setTextColor(ContextCompat.getColor(getActivity(), Integer.parseInt(mPagaDiaryTam.getColor())));
+        mContent.setTextSize(Float.parseFloat(mPagaDiaryTam.getSize()));
+        Typeface type = Typeface.createFromAsset(getActivity().getAssets(), mPagaDiaryTam.getFont());
+        mContent.setTypeface(type, Integer.parseInt(mPagaDiaryTam.getStyle()));
     }
 
     private void setForContainer(LinearLayout ln) {
@@ -498,14 +502,10 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         if (lv_ListTextSizes.isEnabled() == false) {
             ArrayList<Integer> listTextStyles = new ArrayList<Integer>();
             ArrayList<String> listTextName = new ArrayList<String>();
-            listTextStyles.add(Typeface.NORMAL);
-            listTextName.add("Normal Size");
-            listTextStyles.add(Typeface.BOLD);
-            listTextName.add("Bold Size");
-            listTextStyles.add(Typeface.ITALIC);
-            listTextName.add("Italic Size");
-            listTextStyles.add(Typeface.BOLD_ITALIC);
-            listTextName.add("Bold Italic Size");
+            for (int i = 15; i <= 51; i += 2) {
+                listTextStyles.add(i);
+                listTextName.add(i + "");
+            }
             lv_ListTextSizes.setEnabled(true);
             lv_ListTextSizes.setVisibility(View.VISIBLE);
             Adapter_LV_ListTextSize adapter = new Adapter_LV_ListTextSize(getActivity(), listTextStyles, listTextName);
@@ -520,16 +520,33 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         hideListConfig(lv_ListTextStyles);
         hideListConfig(lv_ListTextSizes);
         if (lv_ListTextPositions.isEnabled() == false) {
-            ArrayList<Integer> listTextStyles = new ArrayList<Integer>();
+            ArrayList<String> listTextStyles = new ArrayList<String>();
             ArrayList<String> listTextName = new ArrayList<String>();
-            listTextStyles.add(Typeface.NORMAL);
-            listTextName.add("Normal Position");
-            listTextStyles.add(Typeface.BOLD);
-            listTextName.add("Bold  Position");
-            listTextStyles.add(Typeface.ITALIC);
-            listTextName.add("Italic  Position");
-            listTextStyles.add(Typeface.BOLD_ITALIC);
-            listTextName.add("Bold Italic  Position");
+            listTextStyles.add("Left");
+            listTextName.add("Left Position");
+            listTextStyles.add("Right");
+            listTextName.add("Right Position");
+            listTextStyles.add("Center");
+            listTextName.add("Center Position");
+            listTextStyles.add("Top");
+            listTextName.add("Top Position");
+            listTextStyles.add("Bottom");
+            listTextName.add("Bottom Position");
+
+            listTextStyles.add("Left Center");
+            listTextName.add("Left Center Position");
+            listTextStyles.add("Left Top");
+            listTextName.add("Left Top Position");
+            listTextStyles.add("Left Bottom");
+            listTextName.add("Left Bottom Position");
+
+            listTextStyles.add("Right Center");
+            listTextName.add("Right Center Position");
+            listTextStyles.add("Right Top");
+            listTextName.add("Right Top Position");
+            listTextStyles.add("Right Bottom");
+            listTextName.add("Right Bottom Position");
+
             lv_ListTextPositions.setEnabled(true);
             lv_ListTextPositions.setVisibility(View.VISIBLE);
             Adapter_LV_ListTestPostion adapter = new Adapter_LV_ListTestPostion(getActivity(), listTextStyles, listTextName);
@@ -620,6 +637,59 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         Log.e("PADIARY ", "Font: " + mPagaDiaryTam.getFont() + " - Style: " + mPagaDiaryTam.getStyle());
     }
 
+    public void setPageDiary_TextColor(String colorName) {
+        mPagaDiaryTam.setColor(colorName + "");
+        mContent.setTextColor(ContextCompat.getColor(getContext(), Integer.parseInt(mPagaDiaryTam.getColor())));
+        Log.e("PADIARY ", "Color: " + mPagaDiaryTam.getColor());
+    }
+
+    public void setPageDiary_TextSize(String sizeName) {
+        mPagaDiaryTam.setSize(sizeName + "");
+        mContent.setTextSize(Float.parseFloat(mPagaDiaryTam.getSize()));
+        Log.e("PADIARY ", "Size: " + mPagaDiaryTam.getSize());
+    }
+
+    public void setPageDiary_TextPostion(String postionName) {
+        mPagaDiaryTam.setPosition(postionName + "");
+        switch (postionName) {
+            case "Left":
+                mContent.setGravity(Gravity.LEFT);
+                break;
+            case "Right":
+                mContent.setGravity(Gravity.RIGHT);
+                break;
+            case "Center":
+                mContent.setGravity(Gravity.CENTER);
+                break;
+            case "Top":
+                mContent.setGravity(Gravity.TOP);
+                break;
+            case "Bottom":
+                mContent.setGravity(Gravity.BOTTOM);
+                break;
+
+            case "Left Center":
+                mContent.setGravity(Gravity.LEFT | Gravity.CENTER);
+                break;
+            case "Left Top":
+                mContent.setGravity(Gravity.LEFT | Gravity.TOP);
+                break;
+            case "Left Bottom":
+                mContent.setGravity(Gravity.LEFT | Gravity.BOTTOM);
+                break;
+            case "Right Center":
+                mContent.setGravity(Gravity.RIGHT | Gravity.CENTER);
+                break;
+            case "Right Top":
+                mContent.setGravity(Gravity.RIGHT | Gravity.TOP);
+                break;
+            case "Right Bottom":
+                mContent.setGravity(Gravity.RIGHT | Gravity.BOTTOM);
+                break;
+        }
+
+        Log.e("PADIARY ", "Position: " + mPagaDiaryTam.getPosition());
+    }
     //-----------------------------------------
 
     @Override

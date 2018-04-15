@@ -7,8 +7,30 @@
     <string name="navigation_drawer_close_thunghiem">close</string>
     <string name="navigation_drawer_title">Nhật Ký Của Tôi</string>
     <string name="navigation_drawer_email">keika016@gmail.com</string>
+    <string name="navigation_drawer_applock">Đặt mã khóa</string>
+    <string name="navigation_drawer_about">Về chúng tôi</string>
 
     <string name="menu_add">Hoàn tất</string>
+
+    <!--cho màn hìnhEditOrAdd Page -->
+    <string name="fragment_add_textoption_style_normal">Bình thường</string>
+    <string name="fragment_add_textoption_style_bold">In đậm</string>
+    <string name="fragment_add_textoption_style_italic">In nghiêng</string>
+    <string name="fragment_add_textoption_style_bold_italic">In đậm - nghiêng</string>
+    <string name="fragment_add_textoption_position_left">Trái</string>
+    <string name="fragment_add_textoption_position_right">Phải</string>
+    <string name="fragment_add_textoption_position_center">Giữa</string>
+    <string name="fragment_add_textoption_position_top">Trên</string>
+    <string name="fragment_add_textoption_position_bottom">Dưới</string>
+    <string name="fragment_add_textoption_position_left_center">Trái-Giữa</string>
+    <string name="fragment_add_textoption_position_left_top">Trái-Trên</string>
+    <string name="fragment_add_textoption_position_left_bottom">Trái-Dưới</string>
+    <string name="fragment_add_textoption_position_right_center">Phải-Giữa</string>
+    <string name="fragment_add_textoption_position_right_top">Phải-Trên</string>
+    <string name="fragment_add_textoption_position_right_bottom">Phải-Dưới</string>
+    <string name="fragment_add_adding">Đã thêm nhật ký</string>
+    <string name="fragment_add_edting">Đã sửa nhật ký</string>
+
 
     <string name="firebase_account_weakpass">Tối thiểu 6 ký tự</string>
     <string name="aboue_forfun">Nội dung ở trên là được load bằng JSON google sheet. \n

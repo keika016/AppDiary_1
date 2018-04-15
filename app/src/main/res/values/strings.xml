@@ -7,16 +7,35 @@
     <string name="navigation_drawer_close_thunghiem">close</string>
     <string name="navigation_drawer_title">My Diary</string>
     <string name="navigation_drawer_email">keika016@gmail.com</string>
-
+    <string name="navigation_drawer_applock">Set lock code</string>
+    <string name="navigation_drawer_about">About</string>
 
     <string name="menu_add">Done</string>
+
+    <!--cho màn hìnhEditOrAdd Page -->
+    <string name="fragment_add_textoption_style_normal">Normal</string>
+    <string name="fragment_add_textoption_style_bold">Bold</string>
+    <string name="fragment_add_textoption_style_italic">Italic</string>
+    <string name="fragment_add_textoption_style_bold_italic">Bold Italic</string>
+    <string name="fragment_add_textoption_position_left">Left Position</string>
+    <string name="fragment_add_textoption_position_right">Right Position</string>
+    <string name="fragment_add_textoption_position_center">Center Position</string>
+    <string name="fragment_add_textoption_position_top">Top Position</string>
+    <string name="fragment_add_textoption_position_bottom">Bottom Position</string>
+    <string name="fragment_add_textoption_position_left_center">Left Center Position</string>
+    <string name="fragment_add_textoption_position_left_top">Left Top Position</string>
+    <string name="fragment_add_textoption_position_left_bottom">Left Bottom Position</string>
+    <string name="fragment_add_textoption_position_right_center">Right Center Position</string>
+    <string name="fragment_add_textoption_position_right_top">Right Top Position</string>
+    <string name="fragment_add_textoption_position_right_bottom">Right Bottom Position</string>
+    <string name="fragment_add_adding">Page Diary Added</string>
+    <string name="fragment_add_edting">Page Diary Edited</string>
 
 
     <string name="firebase_account_weakpass">At least 6 characters</string>
     <string name="aboue_forfun">Above content is loading from a JSON google sheet. \n
                                 Just for fun :)).</string>
     <string name="title_activity_navigation_drawer">NavigationDrawerActivity</string>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 

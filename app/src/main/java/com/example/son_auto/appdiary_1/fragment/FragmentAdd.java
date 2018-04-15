@@ -170,10 +170,10 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         mPagaDiaryTam.setContent(mContent.getText().toString());
         if (mPagaDiaryTam.getId() == 0) {
             MainActivity.getDiaryDatabase().addDiary(mPagaDiaryTam);
-            Toast.makeText(getContext(), "Page Added", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), getContext().getString(R.string.fragment_add_adding) + "", Toast.LENGTH_SHORT).show();
         } else {
             MainActivity.getDiaryDatabase().updateDiary(mPagaDiaryTam);
-            Toast.makeText(getContext(), "Page Edited", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), getContext().getString(R.string.fragment_add_edting) + "", Toast.LENGTH_SHORT).show();
         }
 
         Log.e("Fragment Add haha", "AddPage: " + mPagaDiaryTam);
@@ -446,13 +446,13 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
             ArrayList<Integer> listTextStyles = new ArrayList<Integer>();
             ArrayList<String> listTextName = new ArrayList<String>();
             listTextStyles.add(Typeface.NORMAL);
-            listTextName.add("Normal");
+            listTextName.add(getContext().getString(R.string.fragment_add_textoption_style_normal) + "");
             listTextStyles.add(Typeface.BOLD);
-            listTextName.add("Bold");
+            listTextName.add(getContext().getString(R.string.fragment_add_textoption_style_bold) + "");
             listTextStyles.add(Typeface.ITALIC);
-            listTextName.add("Italic");
+            listTextName.add(getContext().getString(R.string.fragment_add_textoption_style_italic) + "");
             listTextStyles.add(Typeface.BOLD_ITALIC);
-            listTextName.add("Bold Italic");
+            listTextName.add(getContext().getString(R.string.fragment_add_textoption_style_bold_italic) + "");
             lv_ListTextStyles.setEnabled(true);
             lv_ListTextStyles.setVisibility(View.VISIBLE);
             Adapter_LV_ListTextStyle adapter = new Adapter_LV_ListTextStyle(getActivity(), listTextStyles, listTextName);
@@ -523,29 +523,29 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
             ArrayList<String> listTextStyles = new ArrayList<String>();
             ArrayList<String> listTextName = new ArrayList<String>();
             listTextStyles.add("Left");
-            listTextName.add("Left Position");
+            listTextName.add(getContext().getString(R.string.fragment_add_textoption_position_left) + "");
             listTextStyles.add("Right");
-            listTextName.add("Right Position");
+            listTextName.add(getContext().getString(R.string.fragment_add_textoption_position_right) + "");
             listTextStyles.add("Center");
-            listTextName.add("Center Position");
+            listTextName.add(getContext().getString(R.string.fragment_add_textoption_position_center) + "");
             listTextStyles.add("Top");
-            listTextName.add("Top Position");
+            listTextName.add(getContext().getString(R.string.fragment_add_textoption_position_top) + "");
             listTextStyles.add("Bottom");
-            listTextName.add("Bottom Position");
+            listTextName.add(getContext().getString(R.string.fragment_add_textoption_position_bottom) + "");
 
             listTextStyles.add("Left Center");
-            listTextName.add("Left Center Position");
+            listTextName.add(getContext().getString(R.string.fragment_add_textoption_position_left_center) + "");
             listTextStyles.add("Left Top");
-            listTextName.add("Left Top Position");
+            listTextName.add(getContext().getString(R.string.fragment_add_textoption_position_left_top) + "");
             listTextStyles.add("Left Bottom");
-            listTextName.add("Left Bottom Position");
+            listTextName.add(getContext().getString(R.string.fragment_add_textoption_position_left_bottom) + "");
 
             listTextStyles.add("Right Center");
-            listTextName.add("Right Center Position");
+            listTextName.add(getContext().getString(R.string.fragment_add_textoption_position_right_center) + "");
             listTextStyles.add("Right Top");
-            listTextName.add("Right Top Position");
+            listTextName.add(getContext().getString(R.string.fragment_add_textoption_position_right_top) + "");
             listTextStyles.add("Right Bottom");
-            listTextName.add("Right Bottom Position");
+            listTextName.add(getContext().getString(R.string.fragment_add_textoption_position_right_bottom) + "");
 
             lv_ListTextPositions.setEnabled(true);
             lv_ListTextPositions.setVisibility(View.VISIBLE);

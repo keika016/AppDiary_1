@@ -1,7 +1,9 @@
 package com.example.son_auto.appdiary_1;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -28,6 +30,7 @@ import com.example.son_auto.appdiary_1.database.DiaryDatabase;
 import com.example.son_auto.appdiary_1.fragment.FragmentAdd;
 import com.example.son_auto.appdiary_1.fragment.FragmentListPageDiary;
 
+import java.io.File;
 import java.util.ArrayList;
 
 
@@ -39,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ActionBarDrawerToggle drawerToggle;
     private NavigationView navigationView;
     private Menu menu;
+    private boolean showMenu;
 
     private FragmentListPageDiary fragmentListPageDiary;
     private FragmentAdd fragmentAdd;
@@ -47,6 +51,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private static final String KEY_FRAGMENT = "KEY_FRAGMENT";
     private static final String FRAGMENT_ADD = "FRAGMENT_ADD";
+
+    private final static String APP_LOCK = "applock";
+    private final static String APP_LOCK_STATUS = "status";
+    private final static String APP_LOCK_LOCKED = "locked";
+    private final static String APP_LOCK_UNLOCKED = "unlocked";
 
     //command
     private static final String COMMAND_SHOW_FRAGMENT_ADD = "showFragmentAdd";
@@ -61,9 +70,56 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        if (checkPreferenceFileExist(APP_LOCK) == true) {
+            SharedPreferences shared = getSharedPreferences(APP_LOCK, Context.MODE_PRIVATE);
+            String s = shared.getString(APP_LOCK_STATUS, "NULL");
+            if (s.compareTo(APP_LOCK_LOCKED) == 0) {
+                Intent i = new Intent(MainActivity.this, AppLock_LoadActivity.class);
+                startActivity(i);
+                finish();
+            }
+        }
         init();
         navigationDrawer();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        setLock();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.e("Main Activity", "onStop");
+        setLock();
+    }
+
+    private void setLock() {
+        if (checkPreferenceFileExist(APP_LOCK) == true) {
+            SharedPreferences shared = getSharedPreferences(APP_LOCK, Context.MODE_PRIVATE);
+            String s = shared.getString(APP_LOCK_STATUS, "NULL");
+            if (s.compareTo(APP_LOCK_UNLOCKED) == 0) {
+                SharedPreferences.Editor editor = shared.edit();
+                editor.remove(APP_LOCK_STATUS);
+                editor.putString(APP_LOCK_STATUS, APP_LOCK_LOCKED);
+                editor.apply();
+                Log.e("Main Activity", "App Lock in");
+            }
+        }
+
+    }
+
+    private String docDuLieu() {
+        SharedPreferences shared = getSharedPreferences(APP_LOCK, Context.MODE_PRIVATE);
+        return shared.getString(APP_LOCK, "NULL");
+    }
+
+    public boolean checkPreferenceFileExist(String fileName) {
+        File f = new File(getApplicationContext().getApplicationInfo().dataDir + "/shared_prefs/"
+                + fileName + ".xml");
+        return f.exists();
     }
 
     public FragmentAdd getFragmentAdd() {
@@ -116,10 +172,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.add_edit_diary,menu);
+        getMenuInflater().inflate(R.menu.add_edit_diary, menu);
         this.menu = menu;
-        Log.e("onCreateOptionMenu", "onCreate OptionMenu");
         showMenuDone(false);
+        if (fragmentAdd != null) {
+            if (showMenu == true)
+                showMenuDone(true);
+        }
+        Log.e("MainActivitiy,", "Menu done:");
         return super.onCreateOptionsMenu(this.menu);
     }
 
@@ -133,9 +193,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         }
     }
-    public void showMenuDone(boolean showMenu){
-        if(this.menu == null)
+
+    public void showMenuDone(boolean showMenu) {
+        if (this.menu == null) {
             return;
+        }
         this.menu.setGroupVisible(R.id.activity_main_group1, showMenu);
     }
 
@@ -144,12 +206,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         initView();
         initFragment();
         replaceFragment(fragmentListPageDiary, false);
+        showMenu = false;
     }
 
     private void initView() {
         fabAdd = (FloatingActionButton) findViewById(R.id.activity_main_fabAdd);
         fabAdd.setOnClickListener(this);
-        Log.e("initView", "Init View");
     }
 
     private void initData() {
@@ -212,7 +274,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        Log.e("MainActivity", "Main OnSave ");
         if (fragmentAdd != null) {
             if (fragmentAdd.isVisible()) {
                 ArrayList<String> list = new ArrayList<>();
@@ -221,16 +282,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 fragmentAdd.setCommand(FRAGMENT_ADD_COMMAND_CONTENT_RESTORE);
                 //dòng dưới dành cho khi xoay màn hình, EditText trong Fragment không mất text
                 list.add(fragmentAdd.getmObject().toString());
-                Log.e("MainActivity", "Main OnSave 2 ");
                 outState.putStringArrayList(KEY_FRAGMENT, list);
             }
         }
     }
 
+
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        Log.e("MainActivity", "Main Retore");
+        Log.e("MainActivitiy,", "Onrestore:");
         if (savedInstanceState != null)
             if (savedInstanceState.containsKey(KEY_FRAGMENT)) {
                 String s = savedInstanceState.getStringArrayList(KEY_FRAGMENT).get(0).toString();
@@ -242,8 +303,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         String text = savedInstanceState.getStringArrayList(KEY_FRAGMENT).get(1).toString();
                         b.putString(FRAGMENT_ADD_KEY_MCONTENT, text);
                         fragmentAdd.setArguments(b);
+                        changeHamburgerToBackForAdd_EditPageDiary();
+                        showMenu = true;
                         /////
-                        Log.e("MainActivity", "Main Retore 2");
                         break;
                     default:
                         break;
@@ -254,8 +316,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onResume() {
         super.onResume();
-        Log.e("MainActivity", "Onresume");
     }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -268,7 +330,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     fragmentAdd.setCommand(FRAGMENT_ADD_COMMAND_CONTENT_ZERO_BACK);
                     changeHamburgerToBackForAdd_EditPageDiary();
                     showMenuDone(false);
-                    Log.e("MainActivity", "onBack");
+                    showMenu = false;
                 }
                 break;
             case 1:
@@ -293,6 +355,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_about) {
             Intent i = new Intent(MainActivity.this, AboutActivity.class);
             startActivity(i);
+        } else if (id == R.id.nav_applock) {
+            Intent i = new Intent(MainActivity.this, AppLockActivity.class);
+            startActivity(i);
+            finish();
         }
         return false;
     }

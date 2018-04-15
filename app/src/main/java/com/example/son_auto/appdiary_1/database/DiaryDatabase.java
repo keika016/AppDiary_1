@@ -80,6 +80,31 @@ public class DiaryDatabase extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void updateDiary(PageDiary pageDiary) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(DIARY_EMOTION, pageDiary.getEmotion());
+        values.put(DIARY_BACKGROUND, pageDiary.getBackground());
+        values.put(DIARY_EDITTEXTBACKGROUND, pageDiary.getEditTextBackGround());
+        values.put(DIARY_DATETIME, pageDiary.getDateTime());
+        values.put(DIARY_CONTENT, pageDiary.getContent());
+        values.put(DIARY_FONT, pageDiary.getFont());
+        values.put(DIARY_STYLE, pageDiary.getStyle());
+        values.put(DIARY_COLOR, pageDiary.getColor());
+        values.put(DIARY_SIZE, pageDiary.getSize());
+        values.put(DIARY_POSITION, pageDiary.getPosition());
+
+        db.update(TABLE_NAME, values, DIARY_ID + "=?", new String[]{pageDiary.getId() + ""});
+        db.close();
+    }
+
+    public void xoaPageDiary(int idPageDiary) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_NAME, DIARY_ID + " =? ", new String[]{idPageDiary + ""});
+        db.close();
+    }
+
+
     public ArrayList<PageDiary> getAllPageDiary() {
         ArrayList<PageDiary> listPage = new ArrayList<>();
         String query = "select * from " + TABLE_NAME;

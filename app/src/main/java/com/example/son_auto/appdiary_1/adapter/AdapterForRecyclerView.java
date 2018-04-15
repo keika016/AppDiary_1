@@ -1,6 +1,10 @@
 package com.example.son_auto.appdiary_1.adapter;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.son_auto.appdiary_1.MainActivity;
 import com.example.son_auto.appdiary_1.R;
@@ -47,7 +52,7 @@ public class AdapterForRecyclerView extends RecyclerView.Adapter<AdapterForRecyc
     public void onBindViewHolder(DataViewHolder holder, final int position) {
         final PageDiary p = listPage.get(position);
         holder.tvContent.setText(p.getContent());
-       // holder.imageViewBackGround.setBackgroundColor(ContextCompat.getColor(context, Integer.parseInt(p.getBackground())));
+        // holder.imageViewBackGround.setBackgroundColor(ContextCompat.getColor(context, Integer.parseInt(p.getBackground())));
         if (isNumericOnlyNumber(p.getBackground()) == true) {
             holder.imageViewBackGround.setBackgroundColor(ContextCompat.getColor(context, Integer.parseInt(p.getBackground())));
         } else {
@@ -55,13 +60,47 @@ public class AdapterForRecyclerView extends RecyclerView.Adapter<AdapterForRecyc
             holder.imageViewBackGround.setBackgroundResource(id);
         }
         holder.imageViewEmotion.setImageResource(context.getResources().getIdentifier(p.getEmotion(), "drawable", context.getPackageName()));
+
+        final boolean[] isLongClick = {false};
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity) context).setCommand(COMMAND_SHOW_FRAGMENT_ADD);
-                Bundle b = new Bundle();
-                b.putSerializable(FRAGMENT_ADD_KEY_LOADPAGE, p);
-                ((MainActivity) context).getFragmentAdd().setArguments(b);
+                if (isLongClick[0] == false) {
+                    ((MainActivity) context).setCommand(COMMAND_SHOW_FRAGMENT_ADD);
+                    Bundle b = new Bundle();
+                    b.putSerializable(FRAGMENT_ADD_KEY_LOADPAGE, p);
+                    ((MainActivity) context).getFragmentAdd().setArguments(b);
+                }
+                isLongClick[0] = false;
+            }
+        });
+        holder.relativeLayout.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                isLongClick[0] = true;
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("Thông báo");
+                builder.setMessage("Bạn chắc chắn muốn xóa?");
+                builder.setIcon(context.getResources().getIdentifier("pic1", "drawable", context.getPackageName()));
+                builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        MainActivity.getDiaryDatabase().xoaPageDiary(p.getId());
+
+                        Intent i = new Intent(context, MainActivity.class);
+                        context.startActivity(i);
+                        ((Activity) context).finish();
+                    }
+                });
+                builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                return false;
             }
         });
 

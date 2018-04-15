@@ -168,9 +168,16 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
 
     private void AddPageDiary() {
         mPagaDiaryTam.setContent(mContent.getText().toString());
-        MainActivity.getDiaryDatabase().addDiary(mPagaDiaryTam);
+        if (mPagaDiaryTam.getId() == 0) {
+            MainActivity.getDiaryDatabase().addDiary(mPagaDiaryTam);
+            Toast.makeText(getContext(), "Page Added", Toast.LENGTH_SHORT).show();
+        } else {
+            MainActivity.getDiaryDatabase().updateDiary(mPagaDiaryTam);
+            Toast.makeText(getContext(), "Page Edited", Toast.LENGTH_SHORT).show();
+        }
+
         Log.e("Fragment Add haha", "AddPage: " + mPagaDiaryTam);
-        Toast.makeText(getContext(), "Page Added", Toast.LENGTH_SHORT).show();
+
         clearEditText();
         getActivity().onBackPressed();
     }
@@ -232,8 +239,8 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
 
         mPagaDiaryTam = new PageDiary();
         mPagaDiaryTam.setEmotion("if_sleepy_2");
-        mPagaDiaryTam.setBackground(R.color.colorTrang + "");
-        mPagaDiaryTam.setEditTextBackGround(Color.TRANSPARENT + "");
+        mPagaDiaryTam.setBackground(R.color.colorTransparent + "");
+        mPagaDiaryTam.setEditTextBackGround(R.color.colorTransparent + "");
         mPagaDiaryTam.setDateTime(mTextViewDateAndTime.getText().toString());
         mPagaDiaryTam.setFont("fonts/opensans_regular.ttf");
         mPagaDiaryTam.setStyle(Typeface.NORMAL + "");

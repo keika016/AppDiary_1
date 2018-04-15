@@ -21,6 +21,8 @@
         </activity>
         <activity android:name=".FirebaseActivity" />
         <activity android:name=".AboutActivity" />
+        <activity android:name=".AppLockActivity" />
+        <activity android:name=".AppLock_LoadActivity"></activity>
     </application>
 
 </manifest>

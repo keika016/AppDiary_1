@@ -1,6 +1,10 @@
 package com.example.son_auto.appdiary_1;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +17,7 @@ import android.widget.Toast;
 
 import java.io.File;
 
-public class AppLockActivity extends AppCompatActivity {
+public class AppLockActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button btnNhap, btnDelete;
     private EditText edtNhap;
@@ -26,37 +30,53 @@ public class AppLockActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app_lock);
+        if (checkPreferenceFileExist(APP_LOCK) == true) {
+            SharedPreferences shared = getSharedPreferences(APP_LOCK, Context.MODE_PRIVATE);
+            if (docDuLieu().compareTo("NULL") != 0) {
+                showDialog();
+            }
+        }
+        initView();
+        btnNhap.setOnClickListener(this);
+        btnDelete.setOnClickListener(this);
+    }
+
+    private void showDialog() {
+        final Dialog dialog = new Dialog(AppLockActivity.this);
+        dialog.setTitle(this.getResources().getString(R.string.fragment_listpage_delete_attention));
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.dialog_check_lock_layout);
+        Button btnOK = (Button) dialog.findViewById(R.id.dialog_app_lock_check_buttonenter);
+        Button btnCancel = (Button) dialog.findViewById(R.id.dialog_app_lock_check_buttoncancel);
+        final EditText edtNhap = (EditText) dialog.findViewById(R.id.dialog_app_lock_check_editText);
+        btnOK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String s = edtNhap.getText().toString().trim();
+                if (s.compareToIgnoreCase(docDuLieu()) == 0) {
+                    dialog.dismiss();
+                } else
+                    Toast.makeText(AppLockActivity.this, "" + getResources().getString(R.string.activity_load_app_lock_toast), Toast.LENGTH_SHORT).show();
+            }
+        });
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(AppLockActivity.this, MainActivity.class);
+                startActivity(i);
+                dialog.dismiss();
+                finish();
+            }
+        });
+        dialog.show();
+    }
+
+    private void initView() {
         btnNhap = (Button) findViewById(R.id.activity_applock_button);
         btnDelete = (Button) findViewById(R.id.activity_applock_button_delete);
         edtNhap = (EditText) findViewById(R.id.activity_applock_editText);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-        btnNhap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String s = edtNhap.getText().toString().trim();
-                if (checkPreferenceFileExist(APP_LOCK) == true) {
-                    //file tồn tại
-                    xoaTatCaDuLieu();
-                    themAppLock(s);
-                } else {
-                    //file chưa tồn tại
-                    themAppLock(s);
-                }
-                Intent i = new Intent(AppLockActivity.this, MainActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
-        btnDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                xoaTatCaDuLieu();
-                Intent i = new Intent(AppLockActivity.this, MainActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
     }
 
     @Override
@@ -106,4 +126,29 @@ public class AppLockActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.activity_applock_button:
+                String s = edtNhap.getText().toString().trim();
+                if (checkPreferenceFileExist(APP_LOCK) == true) {
+                    //file tồn tại
+                    xoaTatCaDuLieu();
+                    themAppLock(s);
+                } else {
+                    //file chưa tồn tại
+                    themAppLock(s);
+                }
+                Intent i = new Intent(AppLockActivity.this, MainActivity.class);
+                startActivity(i);
+                finish();
+                break;
+            case R.id.activity_applock_button_delete:
+                xoaTatCaDuLieu();
+                i = new Intent(AppLockActivity.this, MainActivity.class);
+                startActivity(i);
+                finish();
+                break;
+        }
+    }
 }

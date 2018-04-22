@@ -58,4 +58,6 @@
     <string name="activity_load_app_lock_title">Please Enter Key</string>
     <string name="activity_load_app_lock_hint">Enter key here</string>
     <string name="activity_load_app_lock_enter">Enter</string>
+    <string name="activity_load_app_lock_toast">Wrong Password</string>
+
 </resources>

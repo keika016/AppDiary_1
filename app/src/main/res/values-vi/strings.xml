@@ -56,4 +56,5 @@
     <string name="activity_load_app_lock_title">Hãy Nhập Key</string>
     <string name="activity_load_app_lock_hint">Nhập key ở đây</string>
     <string name="activity_load_app_lock_enter">Nhập</string>
+    <string name="activity_load_app_lock_toast">Sai mật khẩu</string>
 </resources>

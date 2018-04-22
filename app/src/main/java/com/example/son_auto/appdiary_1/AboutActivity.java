@@ -1,6 +1,5 @@
 package com.example.son_auto.appdiary_1;
 
-import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,7 +12,6 @@ import android.widget.TextView;
 
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
-import com.squareup.moshi.Types;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -21,9 +19,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.io.Serializable;
-import java.lang.reflect.Type;
-import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -85,9 +80,9 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            textView.setText(s+"");
+                            textView.setText(s + "");
                             textView.setTextSize(20f);
-                            textView.setTextColor(ContextCompat.getColor(AboutActivity.this,R.color.colorAccent));
+                            textView.setTextColor(ContextCompat.getColor(AboutActivity.this, R.color.colorAccent));
                         }
                     });
 

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.io.File;
 
@@ -42,7 +43,9 @@ public class AppLock_LoadActivity extends AppCompatActivity {
                         startActivity(i);
                         finish();
                     }
-                }
+                } else
+                    Toast.makeText(AppLock_LoadActivity.this, "" + getResources().getString(R.string.activity_load_app_lock_toast), Toast.LENGTH_SHORT).show();
+
             }
         });
     }

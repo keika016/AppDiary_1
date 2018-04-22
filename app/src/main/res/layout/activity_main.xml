@@ -20,7 +20,7 @@
             android:layout_alignParentEnd="true"
             android:layout_margin="16dp"
             android:src="@drawable/ic_fab_add2"
-            app:backgroundTint="@color/colorPrimary"
+            app:backgroundTint="@color/color_mt_BluePrimary"
             app:fabSize="normal" />
     </RelativeLayout>
     <android.support.design.widget.NavigationView

@@ -45,6 +45,7 @@ public class AppLockActivity extends AppCompatActivity {
                 }
                 Intent i = new Intent(AppLockActivity.this, MainActivity.class);
                 startActivity(i);
+                finish();
             }
         });
         btnDelete.setOnClickListener(new View.OnClickListener() {
@@ -53,6 +54,7 @@ public class AppLockActivity extends AppCompatActivity {
                 xoaTatCaDuLieu();
                 Intent i = new Intent(AppLockActivity.this, MainActivity.class);
                 startActivity(i);
+                finish();
             }
         });
     }
@@ -67,6 +69,14 @@ public class AppLockActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        Intent i = new Intent(AppLockActivity.this, MainActivity.class);
+        startActivity(i);
     }
 
     private void themAppLock(String key) {

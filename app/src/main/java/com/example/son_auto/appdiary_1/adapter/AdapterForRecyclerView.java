@@ -79,10 +79,10 @@ public class AdapterForRecyclerView extends RecyclerView.Adapter<AdapterForRecyc
             public boolean onLongClick(View v) {
                 isLongClick[0] = true;
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("Thông báo");
-                builder.setMessage("Bạn chắc chắn muốn xóa?");
-                builder.setIcon(context.getResources().getIdentifier("pic1", "drawable", context.getPackageName()));
-                builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                builder.setTitle(context.getResources().getString(R.string.fragment_listpage_delete_attention));
+                builder.setMessage(context.getResources().getString(R.string.fragment_listpage_delete_content));
+                builder.setIcon(context.getResources().getIdentifier("em_androidmood_1_size32", "drawable", context.getPackageName()));
+                builder.setPositiveButton(context.getResources().getString(R.string.fragment_listpage_delete_yes), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         MainActivity.getDiaryDatabase().xoaPageDiary(p.getId());
@@ -92,7 +92,7 @@ public class AdapterForRecyclerView extends RecyclerView.Adapter<AdapterForRecyc
                         ((Activity) context).finish();
                     }
                 });
-                builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton(context.getResources().getString(R.string.fragment_listpage_delete_cancel), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();

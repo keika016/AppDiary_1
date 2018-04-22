@@ -34,7 +34,8 @@
                     <ImageView
                         android:id="@+id/fragment_add_pagediary_imageBackground"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:background="@drawable/side_nav_bar_2"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -108,7 +109,7 @@
                         android:layout_height="match_parent"
                         android:layout_margin="4dp"
                         android:layout_weight="2.75"
-                        android:src="@drawable/if_sleepy_2" />
+                        android:src="@drawable/em_yellowface_1" />
 
                     <TextView
                         android:id="@+id/fragment_add_textView"

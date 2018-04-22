@@ -6,16 +6,16 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_applock"
-            android:icon="@drawable/ic_menu_send"
+            android:icon="@drawable/ic_menu_lock_black_24dp"
             android:title="@string/navigation_drawer_applock" />
         <item
             android:id="@+id/nav_about"
-            android:icon="@drawable/ic_menu_share"
+            android:icon="@drawable/ic_menu_info_black_24dp"
             android:title="@string/navigation_drawer_about" />
-        <item
-            android:id="@+id/nav_firebase"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Firebase" />
+        <!--<item-->
+            <!--android:id="@+id/nav_firebase"-->
+            <!--android:icon="@drawable/ic_menu_manage"-->
+            <!--android:title="Firebase" />-->
     </group>
 
 </menu>

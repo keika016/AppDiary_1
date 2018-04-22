@@ -6,7 +6,7 @@
     <string name="navigation_drawer_open_thunghiem">open</string>
     <string name="navigation_drawer_close_thunghiem">close</string>
     <string name="navigation_drawer_title">Nhật Ký Của Tôi</string>
-    <string name="navigation_drawer_email">keika016@gmail.com</string>
+    <string name="navigation_drawer_email">Nguyễn Đông Hải@gmail.com</string>
     <string name="navigation_drawer_applock">Đặt mã khóa</string>
     <string name="navigation_drawer_about">Về chúng tôi</string>
 
@@ -30,6 +30,12 @@
     <string name="fragment_add_textoption_position_right_bottom">Phải-Dưới</string>
     <string name="fragment_add_adding">Đã thêm nhật ký</string>
     <string name="fragment_add_edting">Đã sửa nhật ký</string>
+
+    <!--cho Thông báo xóa Diary-->
+    <string name="fragment_listpage_delete_attention">Chú ý</string>
+    <string name="fragment_listpage_delete_content">Bạn có chắc chắn muốn xóa nhật ký này ?</string>
+    <string name="fragment_listpage_delete_cancel">Hủy bỏ</string>
+    <string name="fragment_listpage_delete_yes">Đồng ý</string>
 
 
     <string name="firebase_account_weakpass">Tối thiểu 6 ký tự</string>

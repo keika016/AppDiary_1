@@ -348,11 +348,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.nav_firebase) {
+       /* if (id == R.id.nav_firebase) {
             // Handle the camera action
             Intent i = new Intent(MainActivity.this, FirebaseActivity.class);
             startActivity(i);
-        } else if (id == R.id.nav_about) {
+        } else */
+        if (id == R.id.nav_about) {
             Intent i = new Intent(MainActivity.this, AboutActivity.class);
             startActivity(i);
         } else if (id == R.id.nav_applock) {

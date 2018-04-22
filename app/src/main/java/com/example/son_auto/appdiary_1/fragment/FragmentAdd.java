@@ -238,8 +238,8 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         mImgViewBackGround = (ImageView) mRootView.findViewById(R.id.fragment_add_pagediary_imageBackground);
 
         mPagaDiaryTam = new PageDiary();
-        mPagaDiaryTam.setEmotion("if_sleepy_2");
-        mPagaDiaryTam.setBackground(R.color.colorTransparent + "");
+        mPagaDiaryTam.setEmotion("em_yellowface_1");
+        mPagaDiaryTam.setBackground(R.color.color_mt_YellowLight_1 + "");
         mPagaDiaryTam.setEditTextBackGround(R.color.colorTransparent + "");
         mPagaDiaryTam.setDateTime(mTextViewDateAndTime.getText().toString());
         mPagaDiaryTam.setFont("fonts/opensans_regular.ttf");
@@ -280,13 +280,21 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
             mContainListEmotion_LnLayout.setEnabled(true);
             mContainListEmotion_LnLayout.setVisibility(View.VISIBLE);
             initListEmotion();
+            int id = getContext().getResources().getIdentifier("side_nav_bar_5", "drawable", getContext().getPackageName());
+            imgView_ShowListEmotion.setBackgroundResource(id);
 
             //ẩn các List Khác đi
             hideListConfig(mContainListBackGround_LnLayout);
             hideListConfig(mContainListEditTextBackGround_LnLayout);
             hideListConfig(mContainListTextOption_LnLayout);
+            int id2 = getContext().getResources().getIdentifier("side_nav_bar", "drawable", getContext().getPackageName());
+            imgView_ShowListImageBackGround.setBackgroundResource(id2);
+            imgView_ShowListTextOption.setBackgroundResource(id2);
+            imgView_ShowListEditTextBackGround.setBackgroundResource(id2);
         } else {
             hideListConfig(mContainListEmotion_LnLayout);
+            int id = getContext().getResources().getIdentifier("side_nav_bar", "drawable", getContext().getPackageName());
+            imgView_ShowListEmotion.setBackgroundResource(id);
         }
     }
 
@@ -295,13 +303,21 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
             mContainListBackGround_LnLayout.setEnabled(true);
             mContainListBackGround_LnLayout.setVisibility(View.VISIBLE);
             initListImageBackGround();
+            int id = getContext().getResources().getIdentifier("side_nav_bar_5", "drawable", getContext().getPackageName());
+            imgView_ShowListImageBackGround.setBackgroundResource(id);
 
             //ẩn các List Khác đi
             hideListConfig(mContainListEmotion_LnLayout);
             hideListConfig(mContainListEditTextBackGround_LnLayout);
             hideListConfig(mContainListTextOption_LnLayout);
+            int id2 = getContext().getResources().getIdentifier("side_nav_bar", "drawable", getContext().getPackageName());
+            imgView_ShowListEmotion.setBackgroundResource(id2);
+            imgView_ShowListTextOption.setBackgroundResource(id2);
+            imgView_ShowListEditTextBackGround.setBackgroundResource(id2);
         } else {
             hideListConfig(mContainListBackGround_LnLayout);
+            int id = getContext().getResources().getIdentifier("side_nav_bar", "drawable", getContext().getPackageName());
+            imgView_ShowListImageBackGround.setBackgroundResource(id);
         }
     }
 
@@ -310,13 +326,21 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
             mContainListEditTextBackGround_LnLayout.setEnabled(true);
             mContainListEditTextBackGround_LnLayout.setVisibility(View.VISIBLE);
             initListEditTextBackGround();
+            int id = getContext().getResources().getIdentifier("side_nav_bar_5", "drawable", getContext().getPackageName());
+            imgView_ShowListEditTextBackGround.setBackgroundResource(id);
 
             //ẩn các List Khác đi
             hideListConfig(mContainListEmotion_LnLayout);
             hideListConfig(mContainListBackGround_LnLayout);
             hideListConfig(mContainListTextOption_LnLayout);
+            int id2 = getContext().getResources().getIdentifier("side_nav_bar", "drawable", getContext().getPackageName());
+            imgView_ShowListEmotion.setBackgroundResource(id2);
+            imgView_ShowListTextOption.setBackgroundResource(id2);
+            imgView_ShowListImageBackGround.setBackgroundResource(id2);
         } else {
             hideListConfig(mContainListEditTextBackGround_LnLayout);
+            int id2 = getContext().getResources().getIdentifier("side_nav_bar", "drawable", getContext().getPackageName());
+            imgView_ShowListEditTextBackGround.setBackgroundResource(id2);
         }
     }
 
@@ -324,6 +348,8 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         if (mContainListTextOption_LnLayout.isEnabled() == false) {
             mContainListTextOption_LnLayout.setEnabled(true);
             mContainListTextOption_LnLayout.setVisibility(View.VISIBLE);
+            int id = getContext().getResources().getIdentifier("side_nav_bar_5", "drawable", getContext().getPackageName());
+            imgView_ShowListTextOption.setBackgroundResource(id);
 
             //các list text option
             initListTextFont();
@@ -337,6 +363,10 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
             hideListConfig(mContainListEmotion_LnLayout);
             hideListConfig(mContainListBackGround_LnLayout);
             hideListConfig(mContainListEditTextBackGround_LnLayout);
+            int id2 = getContext().getResources().getIdentifier("side_nav_bar", "drawable", getContext().getPackageName());
+            imgView_ShowListEmotion.setBackgroundResource(id2);
+            imgView_ShowListEditTextBackGround.setBackgroundResource(id2);
+            imgView_ShowListImageBackGround.setBackgroundResource(id2);
         } else {
             hideListConfig(mContainListTextOption_LnLayout);
             hideListConfig(lv_ListTextFonts);
@@ -344,6 +374,8 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
             hideListConfig(rv_ListTextColor);
             hideListConfig(lv_ListTextSizes);
             hideListConfig(lv_ListTextPositions);
+            int id2 = getContext().getResources().getIdentifier("side_nav_bar", "drawable", getContext().getPackageName());
+            imgView_ShowListTextOption.setBackgroundResource(id2);
         }
     }
 
@@ -383,7 +415,13 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         hideListConfig(rv_ListTextColor);
         hideListConfig(lv_ListTextSizes);
         hideListConfig(lv_ListTextPositions);
+        imgView_ShowListTextStyles.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorTransparent));
+        imgView_ShowListTextColors.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorTransparent));
+        imgView_ShowListTextSizes.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorTransparent));
+        imgView_ShowListTextPostions.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorTransparent));
+
         if (lv_ListTextFonts.isEnabled() == false) {
+            imgView_ShowListTextFonts.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorAccent));
             ArrayList<String> listTextFonts = new ArrayList<String>();
             ArrayList<String> listTextName = new ArrayList<String>();
             listTextFonts.add("fonts/opensans_regular.ttf");
@@ -433,8 +471,7 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
             lv_ListTextFonts.setVisibility(View.VISIBLE);
             Adapter_LV_ListTextFont adapter = new Adapter_LV_ListTextFont(getActivity(), listTextFonts, listTextName);
             lv_ListTextFonts.setAdapter(adapter);
-        } else
-            hideListConfig(lv_ListTextFonts);
+        }
     }
 
     private void showListTextStyle() {
@@ -442,7 +479,12 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         hideListConfig(rv_ListTextColor);
         hideListConfig(lv_ListTextSizes);
         hideListConfig(lv_ListTextPositions);
+        imgView_ShowListTextFonts.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorTransparent));
+        imgView_ShowListTextColors.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorTransparent));
+        imgView_ShowListTextSizes.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorTransparent));
+        imgView_ShowListTextPostions.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorTransparent));
         if (lv_ListTextStyles.isEnabled() == false) {
+            imgView_ShowListTextStyles.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorAccent));
             ArrayList<Integer> listTextStyles = new ArrayList<Integer>();
             ArrayList<String> listTextName = new ArrayList<String>();
             listTextStyles.add(Typeface.NORMAL);
@@ -457,8 +499,7 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
             lv_ListTextStyles.setVisibility(View.VISIBLE);
             Adapter_LV_ListTextStyle adapter = new Adapter_LV_ListTextStyle(getActivity(), listTextStyles, listTextName);
             lv_ListTextStyles.setAdapter(adapter);
-        } else
-            hideListConfig(lv_ListTextStyles);
+        }
     }
 
     private void showListTextColor() {
@@ -466,22 +507,32 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         hideListConfig(lv_ListTextStyles);
         hideListConfig(lv_ListTextSizes);
         hideListConfig(lv_ListTextPositions);
+        imgView_ShowListTextFonts.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorTransparent));
+        imgView_ShowListTextStyles.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorTransparent));
+        imgView_ShowListTextSizes.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorTransparent));
+        imgView_ShowListTextPostions.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorTransparent));
         if (rv_ListTextColor.isEnabled() == false) {
+            imgView_ShowListTextColors.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorAccent));
             ArrayList<String> listIcon = new ArrayList<>();
-            listIcon.add(R.color.colorAccent + "");
-            listIcon.add(R.color.colorDen + "");
             listIcon.add(R.color.colorTrang + "");
-            listIcon.add(R.color.colorTim + "");
-            listIcon.add(R.color.colorPrimaryDark + "");
-            listIcon.add(R.color.colorXanh + "");
-            listIcon.add(R.color.colorXanhLa + "");
-            listIcon.add(R.color.colorAccent + "");
             listIcon.add(R.color.colorDen + "");
-            listIcon.add(R.color.colorTrang + "");
-            listIcon.add(R.color.colorTim + "");
-            listIcon.add(R.color.colorPrimaryDark + "");
-            listIcon.add(R.color.colorXanh + "");
+            listIcon.add(R.color.color_mt_YellowLight_1 + "");
+            listIcon.add(R.color.color_mt_YellowPrimary_1 + "");
+            listIcon.add(R.color.color_mt_YellowDark_1 + "");
             listIcon.add(R.color.colorXanhLa + "");
+            listIcon.add(R.color.color_mt_GreenLight_1 + "");
+            listIcon.add(R.color.color_mt_GreenPrimary_1 + "");
+            listIcon.add(R.color.color_mt_GreenDark_1 + "");
+            listIcon.add(R.color.colorXanh + "");
+            listIcon.add(R.color.color_mt_BlueLight + "");
+            listIcon.add(R.color.color_mt_BluePrimary + "");
+            listIcon.add(R.color.color_mt_BlueDark + "");
+            listIcon.add(R.color.colorPrimaryDark + "");
+            listIcon.add(R.color.colorAccent + "");
+            listIcon.add(R.color.colorTim + "");
+            listIcon.add(R.color.color_mt_PurpleLight_1 + "");
+            listIcon.add(R.color.color_mt_PurplePrimary_1 + "");
+            listIcon.add(R.color.color_mt_PurpleDark_1 + "");
 
             rv_ListTextColor.setEnabled(true);
             rv_ListTextColor.setVisibility(View.VISIBLE);
@@ -490,8 +541,7 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
             Adapter_RV_ListTextColor adapter = new Adapter_RV_ListTextColor(getContext(), listIcon);
             rv_ListTextColor.setAdapter(adapter);
 
-        } else
-            hideListConfig(rv_ListTextColor);
+        }
     }
 
     private void showListTextSize() {
@@ -499,7 +549,12 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         hideListConfig(rv_ListTextColor);
         hideListConfig(lv_ListTextStyles);
         hideListConfig(lv_ListTextPositions);
+        imgView_ShowListTextFonts.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorTransparent));
+        imgView_ShowListTextStyles.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorTransparent));
+        imgView_ShowListTextColors.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorTransparent));
+        imgView_ShowListTextPostions.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorTransparent));
         if (lv_ListTextSizes.isEnabled() == false) {
+            imgView_ShowListTextSizes.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorAccent));
             ArrayList<Integer> listTextStyles = new ArrayList<Integer>();
             ArrayList<String> listTextName = new ArrayList<String>();
             for (int i = 15; i <= 51; i += 2) {
@@ -510,8 +565,7 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
             lv_ListTextSizes.setVisibility(View.VISIBLE);
             Adapter_LV_ListTextSize adapter = new Adapter_LV_ListTextSize(getActivity(), listTextStyles, listTextName);
             lv_ListTextSizes.setAdapter(adapter);
-        } else
-            hideListConfig(lv_ListTextSizes);
+        }
     }
 
     private void showListTextPosition() {
@@ -519,7 +573,12 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         hideListConfig(rv_ListTextColor);
         hideListConfig(lv_ListTextStyles);
         hideListConfig(lv_ListTextSizes);
+        imgView_ShowListTextFonts.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorTransparent));
+        imgView_ShowListTextStyles.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorTransparent));
+        imgView_ShowListTextColors.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorTransparent));
+        imgView_ShowListTextSizes.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorTransparent));
         if (lv_ListTextPositions.isEnabled() == false) {
+            imgView_ShowListTextPostions.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorAccent));
             ArrayList<String> listTextStyles = new ArrayList<String>();
             ArrayList<String> listTextName = new ArrayList<String>();
             listTextStyles.add("Left");
@@ -551,8 +610,7 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
             lv_ListTextPositions.setVisibility(View.VISIBLE);
             Adapter_LV_ListTestPostion adapter = new Adapter_LV_ListTestPostion(getActivity(), listTextStyles, listTextName);
             lv_ListTextPositions.setAdapter(adapter);
-        } else
-            hideListConfig(lv_ListTextPositions);
+        }
     }
 
     private void hideListConfig(View ln) {
@@ -563,8 +621,24 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
     private void initListEmotion() {
         mRecyclerViewEmotion1 = (RecyclerView) mRootView.findViewById(R.id.fragment_add_recyclerviewListEmotion);
         ArrayList<String> listIcon = new ArrayList<>();
-        listIcon.add("if_sleepy_2");
-        listIcon.add("ic_sad");
+        for (int i = 1; i <= 12; i++) {
+            listIcon.add("em_yellowface_" + i);
+        }
+        for (int i = 1; i <= 3; i++) {
+            listIcon.add("em_smileyforfun_" + i);
+        }
+        for (int i = 1; i <= 3; i++) {
+            listIcon.add("em_streamline_emoji_" + i);
+        }
+        for (int i = 1; i <= 3; i++) {
+            listIcon.add("em_hero_" + i);
+        }
+
+        for (int i = 1; i <= 4; i++) {
+            listIcon.add("em_starwar_" + i);
+        }
+
+
         mRecyclerViewEmotion1.setLayoutManager(new GridLayoutManager(getContext(), 4, GridLayoutManager.VERTICAL, false));
         mRecyclerViewEmotion1.setHasFixedSize(true);
         mRecyclerViewEmotion1.setAdapter(new AdapterForListEmotion(getContext(), listIcon));
@@ -573,17 +647,34 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
     private void initListImageBackGround() {
         mRecyclerViewImageBackground = (RecyclerView) mRootView.findViewById(R.id.fragment_add_recyclerviewListImageBackground);
         ArrayList<String> listIcon = new ArrayList<>();
-        listIcon.add(R.color.colorAccent + "");
-        listIcon.add(R.color.colorDen + "");
+        listIcon.add(R.color.colorTransparent + "");
         listIcon.add(R.color.colorTrang + "");
-        listIcon.add(R.color.colorTim + "");
-        listIcon.add(R.color.colorPrimaryDark + "");
-        listIcon.add(R.color.colorXanh + "");
+        listIcon.add(R.color.colorDen + "");
+        listIcon.add(R.color.color_mt_YellowLight_1 + "");
+        listIcon.add(R.color.color_mt_YellowPrimary_1 + "");
+        listIcon.add(R.color.color_mt_YellowDark_1 + "");
+        listIcon.add("side_nav_bar_2");
         listIcon.add(R.color.colorXanhLa + "");
+        listIcon.add(R.color.color_mt_GreenLight_1 + "");
+        listIcon.add(R.color.color_mt_GreenPrimary_1 + "");
+        listIcon.add(R.color.color_mt_GreenDark_1 + "");
+        listIcon.add("side_nav_bar_3");
+        listIcon.add(R.color.colorXanh + "");
+        listIcon.add(R.color.color_mt_BlueLight + "");
+        listIcon.add(R.color.color_mt_BluePrimary + "");
+        listIcon.add(R.color.color_mt_BlueDark + "");
+        listIcon.add(R.color.colorPrimaryDark + "");
         listIcon.add("side_nav_bar");
-        listIcon.add("pic1");
-        listIcon.add("pic2");
-        listIcon.add("pic3");
+        listIcon.add(R.color.colorAccent + "");
+        listIcon.add(R.color.colorTim + "");
+        listIcon.add(R.color.color_mt_PurpleLight_1 + "");
+        listIcon.add(R.color.color_mt_PurplePrimary_1 + "");
+        listIcon.add(R.color.color_mt_PurpleDark_1 + "");
+        listIcon.add("side_nav_bar_4");
+
+        for (int i = 1; i <= 3; i++) {
+            listIcon.add("imgbackground_" + i);
+        }
         mRecyclerViewImageBackground.setLayoutManager(new GridLayoutManager(getContext(), 4, GridLayoutManager.VERTICAL, false));
         mRecyclerViewImageBackground.setHasFixedSize(true);
         mRecyclerViewImageBackground.setAdapter(new AdapterForListImageBackground(getContext(), listIcon));
@@ -593,16 +684,29 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         mRecyclerViewEditTextBackground = (RecyclerView) mRootView.findViewById(R.id.fragment_add_recyclerviewLisEditTextBackground);
         ArrayList<String> listIcon = new ArrayList<>();
         listIcon.add(R.color.colorTransparent + "");
-        listIcon.add(R.color.colorAccent + "");
-        listIcon.add(R.color.colorDen + "");
         listIcon.add(R.color.colorTrang + "");
-        listIcon.add(R.color.colorTim + "");
-        listIcon.add(R.color.colorPrimaryDark + "");
-        listIcon.add(R.color.colorXanh + "");
+        listIcon.add(R.color.colorDen + "");
+        listIcon.add(R.color.color_mt_YellowLight_1 + "");
+        listIcon.add(R.color.color_mt_YellowPrimary_1 + "");
+        listIcon.add(R.color.color_mt_YellowDark_1 + "");
+        listIcon.add("side_nav_bar_2");
         listIcon.add(R.color.colorXanhLa + "");
-
+        listIcon.add(R.color.color_mt_GreenLight_1 + "");
+        listIcon.add(R.color.color_mt_GreenPrimary_1 + "");
+        listIcon.add(R.color.color_mt_GreenDark_1 + "");
+        listIcon.add("side_nav_bar_3");
+        listIcon.add(R.color.colorXanh + "");
+        listIcon.add(R.color.color_mt_BlueLight + "");
+        listIcon.add(R.color.color_mt_BluePrimary + "");
+        listIcon.add(R.color.color_mt_BlueDark + "");
+        listIcon.add(R.color.colorPrimaryDark + "");
         listIcon.add("side_nav_bar");
-
+        listIcon.add(R.color.colorAccent + "");
+        listIcon.add(R.color.colorTim + "");
+        listIcon.add(R.color.color_mt_PurpleLight_1 + "");
+        listIcon.add(R.color.color_mt_PurplePrimary_1 + "");
+        listIcon.add(R.color.color_mt_PurpleDark_1 + "");
+        listIcon.add("side_nav_bar_4");
         mRecyclerViewEditTextBackground.setLayoutManager(new GridLayoutManager(getContext(), 4, GridLayoutManager.VERTICAL, false));
         mRecyclerViewEditTextBackground.setHasFixedSize(true);
         mRecyclerViewEditTextBackground.setAdapter(new AdapterForListEditTextBackground(getContext(), listIcon));

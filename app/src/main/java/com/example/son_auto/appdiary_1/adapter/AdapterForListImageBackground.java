@@ -31,7 +31,7 @@ public class AdapterForListImageBackground extends RecyclerView.Adapter<AdapterF
 
     @Override
     public void onBindViewHolder(DataViewHolder holder, final int position) {
-        int id = context.getResources().getIdentifier(listImageBackground.get(position), "drawable", context.getPackageName());
+        int id = context.getResources().getIdentifier(listImageBackground.get(position).toString(), "drawable", context.getPackageName());
         holder.imageViewEmotion.setImageResource(id);
         holder.imageViewEmotion.setOnClickListener(new View.OnClickListener() {
             @Override

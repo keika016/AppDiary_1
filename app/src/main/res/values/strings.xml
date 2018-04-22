@@ -6,7 +6,7 @@
     <string name="navigation_drawer_open_thunghiem">open</string>
     <string name="navigation_drawer_close_thunghiem">close</string>
     <string name="navigation_drawer_title">My Diary</string>
-    <string name="navigation_drawer_email">keika016@gmail.com</string>
+    <string name="navigation_drawer_email">Nguyễn Đông Hải@gmail.com</string>
     <string name="navigation_drawer_applock">Set lock code</string>
     <string name="navigation_drawer_about">About</string>
 
@@ -31,6 +31,11 @@
     <string name="fragment_add_adding">Page Diary Added</string>
     <string name="fragment_add_edting">Page Diary Edited</string>
 
+    <!--cho Thông báo xóa Diary-->
+    <string name="fragment_listpage_delete_attention">Attention</string>
+    <string name="fragment_listpage_delete_content">Are you sure you want to delete this diary ?</string>
+    <string name="fragment_listpage_delete_cancel">Cancel</string>
+    <string name="fragment_listpage_delete_yes">Yes</string>
 
     <string name="firebase_account_weakpass">At least 6 characters</string>
     <string name="aboue_forfun">Above content is loading from a JSON google sheet. \n

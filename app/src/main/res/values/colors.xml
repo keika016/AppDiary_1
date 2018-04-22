@@ -9,4 +9,31 @@
     <color name="colorDen">#000000</color>
     <color name="colorTrang">#ffffff</color>
     <color name="colorTransparent">#00ffffff</color>
+
+    <!--Material Color-->
+    <color name="color_mt_BlueDark">#0064b7</color>
+    <color name="color_mt_BluePrimary">#0091ea</color>
+    <color name="color_mt_BlueLight">#64c1ff</color>
+
+    <color name="color_mt_YellowDark_1">#c9bc1f</color>
+    <color name="color_mt_YellowPrimary_1">#ffee58</color>
+    <color name="color_mt_YellowLight_1">#ffff8b</color>
+
+    <color name="color_mt_IdigoDark_1">#b6b8c3</color>
+    <color name="color_mt_IdigoPrimary_1">#e8eaf6</color>
+    <color name="color_mt_IdigoLight_1">#ffffff</color>
+
+    <color name="color_mt_GreenDark_1">#00b686</color>
+    <color name="color_mt_GreenPrimary_1">#1de9b6</color>
+    <color name="color_mt_GreenLight_1">#6effe8</color>
+
+    <color name="color_mt_PurpleDark_1">#7200ca</color>
+    <color name="color_mt_PurplePrimary_1">#aa00ff</color>
+    <color name="color_mt_PurpleLight_1">#e254ff</color>
+
+    <color name="color_mt_OrangeDark_1">#c66900</color>
+    <color name="color_mt_OrangePrimary_1">#ff9800</color>
+    <color name="color_mt_OrangeLight_1">#ffc947</color>
+
+
 </resources>

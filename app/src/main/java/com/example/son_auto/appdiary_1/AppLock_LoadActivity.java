@@ -40,6 +40,7 @@ public class AppLock_LoadActivity extends AppCompatActivity {
                         editor.apply();
                         Intent i = new Intent(AppLock_LoadActivity.this, MainActivity.class);
                         startActivity(i);
+                        finish();
                     }
                 }
             }

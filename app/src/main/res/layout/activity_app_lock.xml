@@ -7,28 +7,103 @@
     android:orientation="vertical"
     tools:context="com.example.son_auto.appdiary_1.AppLockActivity">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/ic_about_key_256" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Set App Lock" />
+        android:gravity="center"
+        android:text="@string/activity_app_lock_setapplock"
+        android:textColor="@color/colorDen"
+        android:textSize="55sp"
+        android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/activity_applock_editText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name" />
-
-    <Button
-        android:id="@+id/activity_applock_button"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Set App Lock" />
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/activity_applock_button_delete"
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.25" />
+
+        <EditText
+            android:id="@+id/activity_applock_editText"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="7.5"
+            android:ems="10"
+            android:hint="@string/activity_app_lock_hint"
+            android:inputType="textPersonName" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.25" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/colorTransparent" />
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Delete App Lock" />
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5" />
+
+        <Button
+            android:id="@+id/activity_applock_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/side_nav_bar_6"
+            android:text="@string/activity_app_lock_set_key"
+            android:textStyle="bold"
+            android:layout_weight="9"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5" />
+    </LinearLayout>
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/colorTransparent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5" />
+        <Button
+            android:id="@+id/activity_applock_button_delete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/side_nav_bar_6"
+            android:text="@string/activity_app_lock_delete_key"
+            android:textStyle="bold"
+            android:layout_weight="9"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5" />
+    </LinearLayout>
+
 </LinearLayout>

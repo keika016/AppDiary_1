@@ -44,5 +44,18 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
+    <!--cho About Activity-->
+    <string name="activity_about2_title">App Diary</string>
+    <string name="activity_about2_content">This App is made by Nguyen Dong Hai</string>
 
+    <!--cho Activity Set App Lock-->
+    <string name="activity_app_lock_setapplock">App Lock</string>
+    <string name="activity_app_lock_hint">Set key</string>
+    <string name="activity_app_lock_set_key">Set Key</string>
+    <string name="activity_app_lock_delete_key">Delete Key</string>
+
+    <!--cho Activity Load App Lock-->
+    <string name="activity_load_app_lock_title">Please Enter Key</string>
+    <string name="activity_load_app_lock_hint">Enter key here</string>
+    <string name="activity_load_app_lock_enter">Enter</string>
 </resources>

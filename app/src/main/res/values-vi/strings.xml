@@ -42,4 +42,18 @@
     <string name="aboue_forfun">Nội dung ở trên là được load bằng JSON google sheet. \n
                                 Just for fun :)).</string>
 
+    <!--cho About Activity-->
+    <string name="activity_about2_title">App Nhật Ký</string>
+    <string name="activity_about2_content">App này được viết bởi Nguyễn Đông Hải</string>
+
+    <!--cho Activity Set App Lock-->
+    <string name="activity_app_lock_setapplock">Đặt Mã Khóa</string>
+    <string name="activity_app_lock_hint">Đặt mã</string>
+    <string name="activity_app_lock_set_key">Đặt Mã Khóa</string>
+    <string name="activity_app_lock_delete_key">Xóa Mã Khóa</string>
+
+    <!--cho Activity Load App Lock-->
+    <string name="activity_load_app_lock_title">Hãy Nhập Key</string>
+    <string name="activity_load_app_lock_hint">Nhập key ở đây</string>
+    <string name="activity_load_app_lock_enter">Nhập</string>
 </resources>

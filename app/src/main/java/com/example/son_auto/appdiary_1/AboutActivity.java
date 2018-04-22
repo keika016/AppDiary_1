@@ -39,7 +39,7 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about);
+        setContentView(R.layout.activity_about_2);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -47,7 +47,7 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void init() {
-        initView();
+        //initView();
     }
 
     private void initView() {

@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -62,6 +63,7 @@ public class AppLockActivity extends AppCompatActivity implements View.OnClickLi
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                setLockStatus();
                 Intent i = new Intent(AppLockActivity.this, MainActivity.class);
                 startActivity(i);
                 dialog.dismiss();
@@ -69,6 +71,18 @@ public class AppLockActivity extends AppCompatActivity implements View.OnClickLi
             }
         });
         dialog.show();
+    }
+
+    private void setLockStatus() {
+        if (checkPreferenceFileExist(APP_LOCK) == true) {
+            SharedPreferences shared = getSharedPreferences(APP_LOCK, Context.MODE_PRIVATE);
+            String s = shared.getString(APP_LOCK_STATUS, "NULL");
+            SharedPreferences.Editor editor = shared.edit();
+            editor.remove(APP_LOCK_STATUS);
+            editor.putString(APP_LOCK_STATUS, APP_LOCK_UNLOCKED);
+            editor.apply();
+            Log.e("Main Activity", "App Lock in");
+        }
     }
 
     private void initView() {

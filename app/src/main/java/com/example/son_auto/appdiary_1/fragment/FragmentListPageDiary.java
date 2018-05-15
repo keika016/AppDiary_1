@@ -19,6 +19,8 @@ import com.example.son_auto.appdiary_1.model.PageDiary;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 
 /**
@@ -91,11 +93,27 @@ public class FragmentListPageDiary extends Fragment {
             listPage.addAll(MainActivity.getDiaryDatabase().getAllPageDiary());
         }
     }
-    public  void refeshListForFind(){
+
+    public void refeshListForFind() {
         if (MainActivity.getDiaryDatabase().checkDBHaveItem() == true) {
             listPage.clear();
             listPage.addAll(MainActivity.getDiaryDatabase().getAllPageDiary());
             adapterForRecyclerView.notifyDataSetChanged();
+        }
+    }
+
+    public void sort(int sapxep) {
+        switch (sapxep) {
+            case 1:
+                Collections.sort(listPage, new Comparator<PageDiary>() {
+                    @Override
+                    public int compare(PageDiary o1, PageDiary o2) {
+                        return o1.getDateTime().compareToIgnoreCase(o2.getDateTime());
+                    }
+                });
+                adapterForRecyclerView.notifyDataSetChanged();
+                break;
+
         }
     }
 

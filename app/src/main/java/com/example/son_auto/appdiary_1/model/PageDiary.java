@@ -48,7 +48,18 @@ public class PageDiary implements Serializable {
         this.size = size;
         this.position = position;
     }
-
+    public PageDiary(String emotion, String background, String dateTime, String content, String font, String style, String color, String size, String position, String editTextBackGround) {
+        this.emotion = emotion;
+        this.background = background;
+        this.editTextBackGround = editTextBackGround;
+        this.dateTime = dateTime;
+        this.content = content;
+        this.font = font;
+        this.style = style;
+        this.color = color;
+        this.size = size;
+        this.position = position;
+    }
     public String getContent() {
         return content;
     }

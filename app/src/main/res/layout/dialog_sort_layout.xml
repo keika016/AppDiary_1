@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorTrang"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Chọn cách sắp xếp"
+        android:textColor="@color/colorDen"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/dialog_sort_buttonDay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/side_nav_bar_6"
+        android:text="Theo ngày"
+        android:textStyle="bold" />
+    <Button
+        android:id="@+id/dialog_sort_buttonMacDinh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/side_nav_bar_6"
+        android:text="Mặc định"
+        android:textStyle="bold" />
+    <Button
+        android:id="@+id/dialog_sort_buttoncancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/side_nav_bar_6"
+        android:text="Cancel"
+        android:textStyle="bold" />
+
+</LinearLayout>

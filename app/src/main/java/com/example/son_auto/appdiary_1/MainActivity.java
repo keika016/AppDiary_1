@@ -157,6 +157,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    public void setBackButton(boolean b) {
+        drawerToggle.setDrawerIndicatorEnabled(b);
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (drawerToggle.onOptionsItemSelected(item)) {
@@ -167,9 +171,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if (flagFind == false)
                     onBackPressed();
                 else {
-                    fragmentListPageDiary.refeshListForFind();
-                    drawerToggle.setDrawerIndicatorEnabled(true);
-                    flagFind = false;
+                    if (flagFind == true) {
+                        drawerToggle.setDrawerIndicatorEnabled(true);
+                        fragmentListPageDiary.refeshListForFind();
+                        flagFind = false;
+                    }
                 }
                 return true;
             case R.id.menu_add_edit_diray_done:
@@ -180,7 +186,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 showDialogFind();
                 break;
             case R.id.menu_sort:
-                Log.e("Main Activity", "Sort");
+                showDialogSort();
                 break;
             default:
                 return super.onOptionsItemSelected(item);
@@ -188,7 +194,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
-    private boolean flagFind = false;
+    public boolean flagFind = false;
 
     private void showDialogFind() {
         final Dialog dialog = new Dialog(MainActivity.this);
@@ -263,6 +269,38 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         calendar.set(year, month, day);
 
         return calendar.getTime();
+    }
+
+    private void showDialogSort() {
+        final Dialog dialog = new Dialog(MainActivity.this);
+        dialog.setTitle("Sort");
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.dialog_sort_layout);
+        DatePicker datePicker1;
+
+        Button btnDay = (Button) dialog.findViewById(R.id.dialog_sort_buttonDay);
+        Button btnMacDinh = (Button) dialog.findViewById(R.id.dialog_sort_buttonMacDinh);
+        Button btnCancel = (Button) dialog.findViewById(R.id.dialog_sort_buttoncancel);
+        btnDay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fragmentListPageDiary.sort(1);
+                dialog.dismiss();
+            }
+        });
+        btnMacDinh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 
     public static boolean kiemtraSoNguyenDuong(String str) {

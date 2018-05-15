@@ -66,10 +66,13 @@ public class AdapterForRecyclerView extends RecyclerView.Adapter<AdapterForRecyc
             @Override
             public void onClick(View v) {
                 if (isLongClick[0] == false) {
+                    ((MainActivity) context).setBackButton(true);
+                    ((MainActivity) context).flagFind = false;
                     ((MainActivity) context).setCommand(COMMAND_SHOW_FRAGMENT_ADD);
                     Bundle b = new Bundle();
                     b.putSerializable(FRAGMENT_ADD_KEY_LOADPAGE, p);
                     ((MainActivity) context).getFragmentAdd().setArguments(b);
+
                 }
                 isLongClick[0] = false;
             }

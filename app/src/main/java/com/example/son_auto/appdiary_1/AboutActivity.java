@@ -1,5 +1,6 @@
 package com.example.son_auto.appdiary_1;
 
+import android.graphics.Typeface;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,7 +10,10 @@ import android.view.View;
 
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.son_auto.appdiary_1.database.DiaryDatabase;
+import com.example.son_auto.appdiary_1.model.PageDiary;
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
 import com.squareup.picasso.Picasso;
@@ -30,6 +34,7 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
 
     private ImageView imageView;
     private TextView textView;
+    private int soLan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +44,44 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         init();
+        init2();
+    }
+
+    private void init2() {
+        imageView = (ImageView) findViewById(R.id.activity_about_2_imageView);
+        soLan = 0;
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                soLan += 1;
+                if (soLan == 8) {
+                    DiaryDatabase diaryDatabase = new DiaryDatabase(getApplicationContext());
+                    PageDiary pageDiary_1 = new PageDiary("em_yellowface_1", R.color.color_mt_YellowLight_1 + "", "20 thg 4 2018, 08:45 SA", " 1 This is page Diary ", "fonts/opensans_regular.ttf", Typeface.NORMAL + "", R.color.colorDen + "", 20 + "", "Left Top", "2131034156");
+                    PageDiary pageDiary_2 = new PageDiary("em_smileyforfun_15", R.color.colorTrang + "", "20 thg 4 2018, 08:46 SA", " 2 This is page Diary ", "fonts/opensans_regular.ttf", Typeface.NORMAL + "", R.color.colorDen + "", 20 + "", "Left Top", "2131034156");
+                    PageDiary pageDiary_3 = new PageDiary("em_smileyforfun_14", R.color.colorXanhLa + "", "20 thg 4 2018, 08:47 SA", " 3 This is page Diary", "fonts/opensans_regular.ttf", Typeface.NORMAL + "", R.color.colorDen + "", 20 + "", "Left Top", "2131034156");
+                    PageDiary pageDiary_4 = new PageDiary("em_smileyforfun_11", R.color.color_mt_IdigoLight_1 + "", "15 thg 4 2018, 08:45 SA", " 4 This is page Diary", "fonts/opensans_regular.ttf", Typeface.NORMAL + "", R.color.colorDen + "", 20 + "", "Left Top", "2131034156");
+                    PageDiary pageDiary_5 = new PageDiary("em_streamline_emoji_6", R.color.color_mt_PurpleLight_1 + "", "15 thg 4 2018, 08:46 SA", " 5 This is page Diary", "fonts/opensans_regular.ttf", Typeface.NORMAL + "", R.color.colorDen + "", 20 + "", "Left Top", "2131034156");
+                    PageDiary pageDiary_6 = new PageDiary("em_streamline_emoji_10", R.color.color_mt_BlueLight + "", "18 thg 4 2018, 08:47 SA", " 6 This is page Diary", "fonts/opensans_regular.ttf", Typeface.NORMAL + "", R.color.colorDen + "", 20 + "", "Left Top", "2131034156");
+                    PageDiary pageDiary_7 = new PageDiary("em_streamline_emoji_8", R.color.color_mt_GreenLight_1 + "", "18 thg 4 2018, 08:48 SA", " 7 This is page Diary", "fonts/opensans_regular.ttf", Typeface.NORMAL + "", R.color.colorDen + "", 20 + "", "Left Top", "2131034156");
+                    PageDiary pageDiary_8 = new PageDiary("em_smileyforfun_8", R.color.colorTrang + "", "19 thg 4 2018, 09:45 SA", " 8 This is page Diary", "fonts/opensans_regular.ttf", Typeface.NORMAL + "", R.color.colorDen + "", 20 + "", "Left Top", "2131034156");
+                    PageDiary pageDiary_9 = new PageDiary("em_smileyforfun_11", R.color.colorAccent + "", "19 thg 4 2018, 09:49 SA", " 9 This is page Diary", "fonts/opensans_regular.ttf", Typeface.NORMAL + "", R.color.colorDen + "", 20 + "", "Left Top", "2131034156");
+                    PageDiary pageDiary_10 = new PageDiary("em_streamline_emoji_3", R.color.color_mt_YellowLight_1 + "", "25 thg 4 2018, 08:45 SA", " 10 This is page Diary", "fonts/opensans_regular.ttf", Typeface.NORMAL + "", R.color.colorDen + "", 20 + "", "Left Top", "2131034156");
+                    PageDiary pageDiary_11 = new PageDiary("em_streamline_emoji_7", R.color.color_mt_YellowLight_1 + "", "25 thg 4 2018, 09:45 SA", " 11 This is page Diary", "fonts/opensans_regular.ttf", Typeface.NORMAL + "", R.color.colorDen + "", 20 + "", "Left Top", "2131034156");
+                    diaryDatabase.addDiary(pageDiary_1);
+                    diaryDatabase.addDiary(pageDiary_2);
+                    diaryDatabase.addDiary(pageDiary_3);
+                    diaryDatabase.addDiary(pageDiary_4);
+                    diaryDatabase.addDiary(pageDiary_5);
+                    diaryDatabase.addDiary(pageDiary_6);
+                    diaryDatabase.addDiary(pageDiary_7);
+                    diaryDatabase.addDiary(pageDiary_8);
+                    diaryDatabase.addDiary(pageDiary_9);
+                    diaryDatabase.addDiary(pageDiary_10);
+                    diaryDatabase.addDiary(pageDiary_11);
+                    Toast.makeText(AboutActivity.this, "Đã khởi tạo", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     private void init() {

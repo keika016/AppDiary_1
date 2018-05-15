@@ -2,13 +2,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <group
-        android:id="@+id/activity_main_group1">
+    <group android:id="@+id/activity_main_group1">
         <item
             android:id="@+id/menu_add_edit_diray_done"
-            android:title="@string/menu_add"
             android:icon="@drawable/menu_check"
+            android:title="@string/menu_add"
             app:showAsAction="always" />
+    </group>
+
+    <group android:id="@+id/activity_main_group2">
+        <item
+            android:id="@+id/menu_find"
+            android:title="@string/menu_find"></item>
+        <item
+            android:id="@+id/menu_sort"
+            android:title="@string/menu_sort"></item>
     </group>
 
 </menu>

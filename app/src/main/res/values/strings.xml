@@ -11,6 +11,16 @@
     <string name="navigation_drawer_about">About</string>
 
     <string name="menu_add">Done</string>
+    <string name="menu_find">Find</string>
+    <string name="menu_sort">Sort</string>
+
+    <!--cho Dialog Find -->
+    <string name="menu_find_title">Please Enter</string>
+    <string name="menu_find_phainhapdu">Must Enter Enough</string>
+    <string name="menu_find_phainhapso">Must Enter Number</string>
+    <string name="menu_find_day">Day</string>
+    <string name="menu_find_month">Month</string>
+    <string name="menu_find_year">Year</string>
 
     <!--cho màn hìnhEditOrAdd Page -->
     <string name="fragment_add_textoption_style_normal">Normal</string>

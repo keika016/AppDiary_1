@@ -1,26 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:weightSum="10">
+
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/em_smileyforfun_15"/>
+        android:layout_height="0dp"
+        android:layout_weight="5.25"
+        android:src="@drawable/em_smileyforfun_15" />
+
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:gravity="center"
         android:text="@string/activity_about2_title"
+        android:textColor="@color/colorDen"
         android:textSize="50sp"
         android:textStyle="bold"
-        android:textColor="@color/colorDen"
-        android:gravity="center"/>
+        android:layout_weight="1"/>
+
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:gravity="center"
         android:text="@string/activity_about2_content"
+        android:textColor="@color/color_mt_BlueDark"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="@color/color_mt_BlueDark"
-        android:gravity="center"/>
+        android:layout_weight="1"/>
 </LinearLayout>

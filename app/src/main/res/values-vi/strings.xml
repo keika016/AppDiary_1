@@ -11,6 +11,16 @@
     <string name="navigation_drawer_about">Về chúng tôi</string>
 
     <string name="menu_add">Hoàn tất</string>
+    <string name="menu_find">Tìm kiếm</string>
+    <string name="menu_sort">Sắp xếp</string>
+
+    <!--cho Dialog Find -->
+    <string name="menu_find_title">Xin hãy nhập</string>
+    <string name="menu_find_phainhapdu">Phải nhập đủ</string>
+    <string name="menu_find_phainhapso">Phải nhập số</string>
+    <string name="menu_find_day">Ngày</string>
+    <string name="menu_find_month">Tháng</string>
+    <string name="menu_find_year">Năm</string>
 
     <!--cho màn hìnhEditOrAdd Page -->
     <string name="fragment_add_textoption_style_normal">Bình thường</string>

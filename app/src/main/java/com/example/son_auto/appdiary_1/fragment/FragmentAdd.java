@@ -205,7 +205,6 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         mTextViewDateAndTime.setText(getDateAndTime());
         // mBtnConfig.setOnClickListener(this);
         // mLnLayoutContainer_Config.setOnClickListener(this);
-
         //initViewLayoutConfig();
 
         //---Config---------------
@@ -869,6 +868,7 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
                 mContent.setTextSize(Float.parseFloat(mPagaDiaryTam.getSize()));
                 SwicthPosition(mPagaDiaryTam.getPosition());
                 mContent.setText(mPagaDiaryTam.getContent() + "");
+                mTextViewDateAndTime.setText(mPagaDiaryTam.getDateTime()+"");
                 Log.e("Fragment Load Page", "" + mPagaDiaryTam);
                 this.getArguments().remove(FRAGMENT_ADD_KEY_LOADPAGE);
             }

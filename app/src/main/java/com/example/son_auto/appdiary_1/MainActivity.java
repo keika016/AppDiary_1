@@ -1,10 +1,15 @@
 package com.example.son_auto.appdiary_1;
 
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -20,16 +25,23 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.son_auto.appdiary_1.database.DiaryDatabase;
 import com.example.son_auto.appdiary_1.fragment.FragmentAdd;
 import com.example.son_auto.appdiary_1.fragment.FragmentListPageDiary;
 
 import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, DatePickerDialog.OnDateSetListener {
 
     private FloatingActionButton fabAdd;
     private Button btnOpenFirebase, btnOpenAbout;
@@ -100,7 +112,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 editor.remove(APP_LOCK_STATUS);
                 editor.putString(APP_LOCK_STATUS, APP_LOCK_LOCKED);
                 editor.apply();
-                Log.e("Main Activity", "App Lock in");
             }
         }
 
@@ -153,17 +164,111 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         switch (item.getItemId()) {
             case android.R.id.home:
-                onBackPressed();
+                if (flagFind == false)
+                    onBackPressed();
+                else {
+                    fragmentListPageDiary.refeshListForFind();
+                    drawerToggle.setDrawerIndicatorEnabled(true);
+                    flagFind = false;
+                }
                 return true;
             case R.id.menu_add_edit_diray_done:
                 fragmentAdd.setCommand(FRAGMENT_ADD_COMMAND_SAVE_DIARY);
                 fragmentAdd.getCommand();
+                break;
+            case R.id.menu_find:
+                showDialogFind();
+                break;
+            case R.id.menu_sort:
+                Log.e("Main Activity", "Sort");
                 break;
             default:
                 return super.onOptionsItemSelected(item);
         }
         return super.onOptionsItemSelected(item);
     }
+
+    private boolean flagFind = false;
+
+    private void showDialogFind() {
+        final Dialog dialog = new Dialog(MainActivity.this);
+        dialog.setTitle(this.getResources().getString(R.string.menu_find));
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.dialog_find_layout);
+//        Calendar calendar = Calendar.getInstance();
+//        int year = calendar.get(Calendar.YEAR);
+//        int month = calendar.get(Calendar.MONTH);
+//        int day = calendar.get(Calendar.DAY_OF_MONTH);
+//        final DatePickerDialog dialogDate = new DatePickerDialog(MainActivity.this, AlertDialog.THEME_HOLO_LIGHT, this, year, month, day);
+//        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        DatePicker datePicker1;
+        datePicker1 = (DatePicker) dialog.findViewById(R.id.dialog_find_datepicker);
+        Calendar calendar = Calendar.getInstance();
+        final String[] getDate = {""};
+        datePicker1.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE)
+                , new DatePicker.OnDateChangedListener() {
+                    @Override
+                    public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        int day = dayOfMonth;
+                        int month = (monthOfYear + 1);
+                        String day2 = day + " thg " + month + " " + year;
+                        getDate[0] = day2;
+                    }
+                });
+        Button btnOK = (Button) dialog.findViewById(R.id.dialog_find_buttonenter);
+        Button btnCancel = (Button) dialog.findViewById(R.id.dialog_find_buttoncancel);
+        btnOK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (fragmentListPageDiary.findDiary(getDate[0] + "") == false) {
+                    Toast.makeText(MainActivity.this, "Không tìm thấy", Toast.LENGTH_SHORT).show();
+                    flagFind = false;
+                } else {
+                    dialog.dismiss();
+                    drawerToggle.setDrawerIndicatorEnabled(false);
+                    flagFind = true;
+                }
+//                int   day  = datePicker1.getDayOfMonth();
+//                int   month= datePicker1.getMonth();
+//                int   year = datePicker1.getYear();
+//                calendar.set(year, month, day);
+//                SimpleDateFormat sdf = new SimpleDateFormat("d MMM yyyy");
+//                String formatedDate = sdf.format(calendar.getTime());
+//                Toast.makeText(MainActivity.this, ""+formatedDate, Toast.LENGTH_SHORT).show();
+                //You can parse the String back to Date object by calling
+                /*try {
+                    Date date = sdf.parse(formatedDate);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }*/
+
+            }
+        });
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+
+    public static java.util.Date getDateFromDatePicker(DatePicker datePicker) {
+        int day = datePicker.getDayOfMonth();
+        int month = datePicker.getMonth();
+        int year = datePicker.getYear();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, day);
+
+        return calendar.getTime();
+    }
+
+    public static boolean kiemtraSoNguyenDuong(String str) {
+        return str.matches("[+]?\\d+");
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -174,7 +279,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if (showMenu == true)
                 showMenuDone(true);
         }
-        Log.e("MainActivitiy,", "Menu done:");
         return super.onCreateOptionsMenu(this.menu);
     }
 
@@ -184,6 +288,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 showFragmentAdd();
                 changeHamburgerToBackForAdd_EditPageDiary();
                 showMenuDone(true);
+                showMenuFindSort(false);
                 break;
 
         }
@@ -194,6 +299,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return;
         }
         this.menu.setGroupVisible(R.id.activity_main_group1, showMenu);
+    }
+
+    public void showMenuFindSort(boolean showMenu) {
+        if (this.menu == null) {
+            return;
+        }
+        this.menu.setGroupVisible(R.id.activity_main_group2, showMenu);
     }
 
     private void init() {
@@ -325,6 +437,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     fragmentAdd.setCommand(FRAGMENT_ADD_COMMAND_CONTENT_ZERO_BACK);
                     changeHamburgerToBackForAdd_EditPageDiary();
                     showMenuDone(false);
+                    showMenuFindSort(true);
                     showMenu = false;
                 }
                 break;
@@ -366,8 +479,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 showFragmentAdd();
                 changeHamburgerToBackForAdd_EditPageDiary();
                 showMenuDone(true);
+                showMenuFindSort(false);
                 break;
 
         }
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
     }
 }

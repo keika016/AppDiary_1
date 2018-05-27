@@ -335,7 +335,12 @@ public class AppLockActivity extends AppCompatActivity implements View.OnClickLi
                     updatePassword(email, pass);
                 } else {
                     //file chưa tồn tại
-                    dangKy(email, pass);
+                    if (email.compareToIgnoreCase("") == 0 || pass.compareToIgnoreCase("") == 0) {
+                        Toast.makeText(this, "Phai nhap Email và Ma Khoa", Toast.LENGTH_SHORT).show();
+                    } else {
+                        dangKy(email, pass);
+                    }
+
                 }
                 break;
             case R.id.activity_applock_button_delete:

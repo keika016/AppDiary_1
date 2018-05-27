@@ -344,7 +344,15 @@ public class AppLockActivity extends AppCompatActivity implements View.OnClickLi
                 }
                 break;
             case R.id.activity_applock_button_delete:
-                alertDialogXoaKey();
+                user = FirebaseAuth.getInstance().getCurrentUser();
+                if (user != null) {
+                    // User is signed in
+                    alertDialogXoaKey();
+                } else {
+                    // No user is signed in
+                    Toast.makeText(this, "Khong co ma khoa de delete", Toast.LENGTH_SHORT).show();
+                }
+
                 break;
         }
     }

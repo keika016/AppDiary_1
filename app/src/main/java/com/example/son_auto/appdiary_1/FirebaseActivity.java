@@ -94,7 +94,7 @@ public class FirebaseActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private boolean checkEdittextNotEmpty() {
-        if (mEdtPass.getText().toString().trim().compareTo("")!=0 && mEdtName.getText().toString().trim().compareTo("")!=0) {
+        if (mEdtPass.getText().toString().trim().compareTo("") != 0 && mEdtName.getText().toString().trim().compareTo("") != 0) {
             return true;
         }
         return false;

@@ -81,7 +81,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             SharedPreferences shared = getSharedPreferences(APP_LOCK, Context.MODE_PRIVATE);
             String s = shared.getString(APP_LOCK_STATUS, "NULL");
             if (s.compareTo(APP_LOCK_LOCKED) == 0) {
+
                 Intent i = new Intent(MainActivity.this, AppLock_LoadActivity.class);
+                i.putExtra("email_pass", shared.getString(APP_LOCK, "NULL"));
                 startActivity(i);
                 finish();
             }
@@ -273,7 +275,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void showDialogSort() {
         final Dialog dialog = new Dialog(MainActivity.this);
-        dialog.setTitle("Sort");
+        dialog.setTitle("Sắp xếp");
         dialog.setCancelable(false);
         dialog.setContentView(R.layout.dialog_sort_layout);
         DatePicker datePicker1;
@@ -291,6 +293,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         btnMacDinh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                fragmentListPageDiary.sort(2);
                 dialog.dismiss();
             }
         });
@@ -494,12 +497,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-       /* if (id == R.id.nav_firebase) {
+        if (id == R.id.nav_firebase) {
             // Handle the camera action
             Intent i = new Intent(MainActivity.this, FirebaseActivity.class);
             startActivity(i);
-        } else */
-        if (id == R.id.nav_about) {
+        } else if (id == R.id.nav_about) {
             Intent i = new Intent(MainActivity.this, AboutActivity.class);
             startActivity(i);
         } else if (id == R.id.nav_applock) {

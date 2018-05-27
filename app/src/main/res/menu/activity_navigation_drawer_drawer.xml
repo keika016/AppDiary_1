@@ -12,10 +12,10 @@
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_menu_info_black_24dp"
             android:title="@string/navigation_drawer_about" />
-        <!--<item-->
-            <!--android:id="@+id/nav_firebase"-->
-            <!--android:icon="@drawable/ic_menu_manage"-->
-            <!--android:title="Firebase" />-->
+        <item
+            android:id="@+id/nav_firebase"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Firebase" />
     </group>
 
 </menu>

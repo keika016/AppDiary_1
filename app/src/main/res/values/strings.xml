@@ -60,14 +60,21 @@
 
     <!--cho Activity Set App Lock-->
     <string name="activity_app_lock_setapplock">App Lock</string>
-    <string name="activity_app_lock_hint">Set key</string>
+    <string name="activity_app_lock_hint">Enter key</string>
+    <string name="activity_app_lock_hint_2">Enter Email (For forgotten key)</string>
     <string name="activity_app_lock_set_key">Set Key</string>
     <string name="activity_app_lock_delete_key">Delete Key</string>
+    <string name="activity_app_lock_sign_up_error">Set Key Error. Please connect to Internet, we have to sent your new info to our server</string>
+    <string name="activity_app_lock_sign_up_error_weakpass">Key is not strong enough (Atleast 6 characters)</string>
+    <string name="activity_app_lock_sign_up_error_emailwrong">Email address is malformed</string>
+    <string name="activity_app_lock_sign_up_error_emailexist">Email address exist</string>
+    <string name="activity_app_lock_sign_in_error">Error, please try again</string>
 
     <!--cho Activity Load App Lock-->
     <string name="activity_load_app_lock_title">Please Enter Key</string>
     <string name="activity_load_app_lock_hint">Enter key here</string>
     <string name="activity_load_app_lock_enter">Enter</string>
+    <string name="activity_load_app_lock_forgotpassword"><u>Forgot Key ?</u></string>
     <string name="activity_load_app_lock_toast">Wrong Password</string>
 
 </resources>

@@ -113,6 +113,11 @@ public class FragmentListPageDiary extends Fragment {
                 });
                 adapterForRecyclerView.notifyDataSetChanged();
                 break;
+            case 2:
+                listPage.clear();
+                listPage.addAll(MainActivity.getDiaryDatabase().getAllPageDiary());
+                adapterForRecyclerView.notifyDataSetChanged();
+                break;
 
         }
     }

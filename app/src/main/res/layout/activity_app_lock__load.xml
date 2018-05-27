@@ -49,7 +49,7 @@
             android:layout_weight="7.5"
             android:ems="10"
             android:hint="@string/activity_load_app_lock_hint"
-            android:inputType="textPersonName" />
+            android:inputType="textPassword" />
 
         <ImageView
             android:layout_width="0dp"
@@ -82,5 +82,31 @@
             android:layout_height="match_parent"
             android:layout_weight="0.5" />
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
 
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5" />
+
+        <TextView
+            android:id="@+id/activity_app_lock_load_textview_forgotpass"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="9"
+            android:text="@string/activity_load_app_lock_forgotpassword"
+            android:gravity="center"
+            android:textSize="15sp"
+            android:textColor="@color/color_mt_BlueLight"
+            android:textStyle="bold"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5" />
+    </LinearLayout>
 </LinearLayout>

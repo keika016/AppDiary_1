@@ -67,10 +67,19 @@
     <string name="activity_app_lock_sign_up_error_emailwrong">Email không đúng dịnh dạng</string>
     <string name="activity_app_lock_sign_up_error_emailexist">Email này đã tồn tại</string>
     <string name="activity_app_lock_sign_in_error">Lỗi, hãy thử lại</string>
+    <string name="activity_app_lock_success">Thành công</string>
+    <string name="activity_app_lock_no_key_delete">Bạn không có mã khóa để xóa</string>
+    <string name="activity_app_lock_must_enter">Phải nhập Email và Key</string>
+    <string name="activity_app_lock_delete_key_areyousure">Bạn có chắc chắn không ?</string>
+    <string name="yes">Có</string>
+    <string name="no">Không</string>
+
     <!--cho Activity Load App Lock-->
     <string name="activity_load_app_lock_title">Hãy Nhập Key</string>
     <string name="activity_load_app_lock_hint">Nhập key ở đây</string>
     <string name="activity_load_app_lock_enter">Nhập</string>
     <string name="activity_load_app_lock_forgotpassword"><u>Quên mã khóa ?</u></string>
     <string name="activity_load_app_lock_toast">Sai mã khóa</string>
+    <string name="activity_load_app_lock_emailsent">Đã gửi qua email. Ứng dụng sẽ đóng lại. Bạn nên đóng ứng dụng trong đa nhiệm</string>
+    <string name="activity_load_app_lock_connectwifi">Hãy kết nối wifi hoac 3G/4G cho lần reset mã khóa này</string>
 </resources>

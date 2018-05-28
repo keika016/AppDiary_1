@@ -69,6 +69,12 @@
     <string name="activity_app_lock_sign_up_error_emailwrong">Email address is malformed</string>
     <string name="activity_app_lock_sign_up_error_emailexist">Email address exist</string>
     <string name="activity_app_lock_sign_in_error">Error, please try again</string>
+    <string name="activity_app_lock_success">Success</string>
+    <string name="activity_app_lock_no_key_delete">You have no key to delete</string>
+    <string name="activity_app_lock_must_enter">Must enter Email and Key</string>
+    <string name="activity_app_lock_delete_key_areyousure">Are you sure ?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
     <!--cho Activity Load App Lock-->
     <string name="activity_load_app_lock_title">Please Enter Key</string>
@@ -76,5 +82,7 @@
     <string name="activity_load_app_lock_enter">Enter</string>
     <string name="activity_load_app_lock_forgotpassword"><u>Forgot Key ?</u></string>
     <string name="activity_load_app_lock_toast">Wrong Password</string>
+    <string name="activity_load_app_lock_emailsent">Email sent. This app will be closing. You should close this app in multitasking</string>
+    <string name="activity_load_app_lock_connectwifi">Please connect wifi or 3G/4G for this reset key</string>
 
 </resources>

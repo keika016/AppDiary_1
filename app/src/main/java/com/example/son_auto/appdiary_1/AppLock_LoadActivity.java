@@ -92,15 +92,15 @@ public class AppLock_LoadActivity extends AppCompatActivity {
 
     private void alertDialogResetKey() {
         AlertDialog.Builder builder = new AlertDialog.Builder(AppLock_LoadActivity.this);
-        builder.setTitle("Are you sure ?");
-        builder.setMessage("Are you sure");
-        builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+        builder.setTitle("" + getResources().getString(R.string.fragment_listpage_delete_attention));
+        builder.setMessage("" + getResources().getString(R.string.activity_app_lock_delete_key_areyousure));
+        builder.setPositiveButton("" + getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 resetKey();
             }
         });
-        builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("" + getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -133,7 +133,7 @@ public class AppLock_LoadActivity extends AppCompatActivity {
                                 Toast.makeText(AppLock_LoadActivity.this, "" + getResources().getString(R.string.activity_app_lock_sign_up_error), Toast.LENGTH_SHORT).show();
                             }
                         } else {
-                            Toast.makeText(AppLock_LoadActivity.this, "Đẫ gửi qua email, Bạn nên thoát app ở đa nhiệm", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AppLock_LoadActivity.this, "" + getResources().getString(R.string.activity_load_app_lock_emailsent), Toast.LENGTH_SHORT).show();
                             FirebaseAuth.getInstance().signOut();
                             xoaTatCaDuLieu();
                             String getEmail = emailAddress + ",1";
@@ -204,7 +204,7 @@ public class AppLock_LoadActivity extends AppCompatActivity {
                     if (!task.isSuccessful()) {
                         Toast.makeText(AppLock_LoadActivity.this, "" + getResources().getString(R.string.activity_app_lock_sign_in_error), Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(AppLock_LoadActivity.this, "Thanh cong", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AppLock_LoadActivity.this, ""+ getResources().getString(R.string.activity_app_lock_success), Toast.LENGTH_SHORT).show();
                         String s = email + "," + newPassword;
                         xoaTatCaDuLieu();
                         themAppLock(s);
@@ -215,7 +215,7 @@ public class AppLock_LoadActivity extends AppCompatActivity {
                 }
             });
         } else {
-            Toast.makeText(this, "Hãy kết nối wifi hoac 3G/4G cho lần reset password này", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "" + getResources().getString(R.string.activity_load_app_lock_connectwifi), Toast.LENGTH_SHORT).show();
         }
 
 

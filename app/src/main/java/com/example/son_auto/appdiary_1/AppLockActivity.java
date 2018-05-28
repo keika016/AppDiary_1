@@ -142,11 +142,10 @@ public class AppLockActivity extends AppCompatActivity implements View.OnClickLi
                         Toast.makeText(AppLockActivity.this, "" + getResources().getString(R.string.activity_app_lock_sign_up_error), Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(AppLockActivity.this, "Thanh cong", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AppLockActivity.this, "" + getResources().getString(R.string.activity_app_lock_success), Toast.LENGTH_SHORT).show();
                     dangNhap(email, password);
                     String s = email + "," + password;
                     themAppLock(s);
-                    Toast.makeText(AppLockActivity.this, "File chua ton tai thanh cong", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(AppLockActivity.this, MainActivity.class);
                     startActivity(i);
                     finish();
@@ -187,10 +186,9 @@ public class AppLockActivity extends AppCompatActivity implements View.OnClickLi
                                 Toast.makeText(AppLockActivity.this, "" + getResources().getString(R.string.activity_app_lock_sign_up_error), Toast.LENGTH_SHORT).show();
                             }
                         } else {
-                            Toast.makeText(AppLockActivity.this, "Thanh cong", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AppLockActivity.this, "" + getResources().getString(R.string.activity_app_lock_success), Toast.LENGTH_SHORT).show();
                             String s = email + "," + newPassword;
                             themAppLock(s);
-                            Toast.makeText(AppLockActivity.this, "File chua ton tai thanh cong", Toast.LENGTH_SHORT).show();
                             Intent i = new Intent(AppLockActivity.this, MainActivity.class);
                             startActivity(i);
                             finish();
@@ -282,20 +280,20 @@ public class AppLockActivity extends AppCompatActivity implements View.OnClickLi
 
     private void alertDialogXoaKey() {
         AlertDialog.Builder builder = new AlertDialog.Builder(AppLockActivity.this);
-        builder.setTitle("Are you sure ?");
-        builder.setMessage("Are you sure");
-        builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+        builder.setTitle("" + getResources().getString(R.string.fragment_listpage_delete_attention));
+        builder.setMessage("" + getResources().getString(R.string.activity_app_lock_delete_key_areyousure));
+        builder.setPositiveButton("" + getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 deleteUser();
                 clearSharedPreferences(getApplicationContext());
-                Toast.makeText(AppLockActivity.this, "Thanh cong", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AppLockActivity.this, "" + getResources().getString(R.string.activity_app_lock_success), Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(AppLockActivity.this, MainActivity.class);
                 startActivity(i);
                 finish();
             }
         });
-        builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("" + getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -336,7 +334,7 @@ public class AppLockActivity extends AppCompatActivity implements View.OnClickLi
                 } else {
                     //file chưa tồn tại
                     if (email.compareToIgnoreCase("") == 0 || pass.compareToIgnoreCase("") == 0) {
-                        Toast.makeText(this, "Phai nhap Email và Ma Khoa", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "" + getResources().getString(R.string.activity_app_lock_must_enter), Toast.LENGTH_SHORT).show();
                     } else {
                         dangKy(email, pass);
                     }
@@ -350,7 +348,7 @@ public class AppLockActivity extends AppCompatActivity implements View.OnClickLi
                     alertDialogXoaKey();
                 } else {
                     // No user is signed in
-                    Toast.makeText(this, "Khong co ma khoa de delete", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "" + getResources().getString(R.string.activity_app_lock_no_key_delete), Toast.LENGTH_SHORT).show();
                 }
 
                 break;
